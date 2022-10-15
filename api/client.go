@@ -5,8 +5,6 @@ import (
 	"flag"
 	"io/ioutil"
 	"log"
-	"strings"
-	"time"
 
 	"github.com/bluele/gcache"
 	"github.com/pkg/errors"
@@ -103,13 +101,4 @@ func readCreds(credsFile string) (creds Creds, ret error) {
 		return
 	}
 	return
-}
-
-var backoff = []time.Duration{1 * time.Second, 2 * time.Second, 5 * time.Second}
-
-func canRetry(err error) bool {
-	if strings.Contains(err.Error(), "status code: 403") {
-		return true
-	}
-	return false
 }
