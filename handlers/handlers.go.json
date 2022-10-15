@@ -1,12 +1,5 @@
 [
   {
-    "Handler": "PlaceRecommendations",
-    "Loc": {
-      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 19
-    }
-  },
-  {
     "Handler": "NearbyDrivers",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
@@ -18,6 +11,13 @@
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
       "line": 37
+    }
+  },
+  {
+    "Handler": "PlaceRecommendations",
+    "Loc": {
+      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
+      "line": 19
     }
   }
 ]
