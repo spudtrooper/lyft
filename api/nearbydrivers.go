@@ -4,6 +4,7 @@ import (
 	"log"
 	"strings"
 
+	"github.com/spudtrooper/goutil/json"
 	"github.com/spudtrooper/goutil/request"
 )
 
@@ -17,219 +18,69 @@ type nearbyDriversInfoPayloadNearbyDriver struct {
 	} `json:"locations"`
 }
 
+type nearbyDriversInfoPayloadNearbyDriverByStableOfferProductID struct {
+	MapMarkerImage struct {
+		Sources []struct {
+			Media struct {
+				UserInterfaceStyle int `json:"user_interface_style"`
+			} `json:"media"`
+			URL string `json:"url"`
+		} `json:"sources"`
+	} `json:"map_marker_image"`
+	NearbyDriverProducts []struct {
+		DriverID string `json:"driver_id"`
+	} `json:"nearby_driver_products"`
+}
+
 type nearbyDriversInfoPayload struct {
-	DefaultNearbyDrivers struct {
-		MapMarkerImage struct {
-			Sources []struct {
-				Media struct {
-					UserInterfaceStyle int `json:"user_interface_style"`
-				} `json:"media"`
-				URL string `json:"url"`
-			} `json:"sources"`
-		} `json:"map_marker_image"`
-		NearbyDriverProducts []struct {
-			DriverID string `json:"driver_id"`
-		} `json:"nearby_driver_products"`
-	} `json:"default_nearby_drivers"`
-	NearbyDrivers                       map[string]nearbyDriversInfoPayloadNearbyDriver `json:"nearby_drivers"`
-	NearbyDriversByStableOfferProductID struct {
-		Access struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int `json:"user_interface_style"`
-					} `json:"media"`
-					URL string `json:"url"`
-				} `json:"sources"`
-			} `json:"map_marker_image"`
-			NearbyDriverProducts []struct {
-				DriverID string `json:"driver_id"`
-			} `json:"nearby_driver_products"`
-		} `json:"access"`
-		Lux struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int `json:"user_interface_style"`
-					} `json:"media"`
-					URL string `json:"url"`
-				} `json:"sources"`
-			} `json:"map_marker_image"`
-			NearbyDriverProducts []struct {
-				DriverID string `json:"driver_id"`
-			} `json:"nearby_driver_products"`
-		} `json:"lux"`
-		Luxsuv struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int `json:"user_interface_style"`
-					} `json:"media"`
-					URL string `json:"url"`
-				} `json:"sources"`
-			} `json:"map_marker_image"`
-			NearbyDriverProducts []struct {
-				DriverID string `json:"driver_id"`
-			} `json:"nearby_driver_products"`
-		} `json:"luxsuv"`
-		Plus struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int `json:"user_interface_style"`
-					} `json:"media"`
-					URL string `json:"url"`
-				} `json:"sources"`
-			} `json:"map_marker_image"`
-			NearbyDriverProducts []struct {
-				DriverID string `json:"driver_id"`
-			} `json:"nearby_driver_products"`
-		} `json:"plus"`
-		Promo struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int `json:"user_interface_style"`
-					} `json:"media"`
-					URL string `json:"url"`
-				} `json:"sources"`
-			} `json:"map_marker_image"`
-			NearbyDriverProducts []interface{} `json:"nearby_driver_products"`
-		} `json:"promo"`
-		Standard struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int `json:"user_interface_style"`
-					} `json:"media"`
-					URL string `json:"url"`
-				} `json:"sources"`
-			} `json:"map_marker_image"`
-			NearbyDriverProducts []struct {
-				DriverID string `json:"driver_id"`
-			} `json:"nearby_driver_products"`
-		} `json:"standard"`
-		StandardSaver struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int `json:"user_interface_style"`
-					} `json:"media"`
-					URL string `json:"url"`
-				} `json:"sources"`
-			} `json:"map_marker_image"`
-			NearbyDriverProducts []struct {
-				DriverID string `json:"driver_id"`
-			} `json:"nearby_driver_products"`
-		} `json:"standard_saver"`
-	} `json:"nearby_drivers_by_stable_offer_product_id"`
+	DefaultNearbyDrivers                nearbyDriversInfoPayloadNearbyDriverByStableOfferProductID
+	NearbyDrivers                       map[string]nearbyDriversInfoPayloadNearbyDriver                       `json:"nearby_drivers"`
+	NearbyDriversByStableOfferProductID map[string]nearbyDriversInfoPayloadNearbyDriverByStableOfferProductID `json:"nearby_drivers_by_stable_offer_product_id"`
+}
+
+type NearbyDriversInfoPayloadNearbyDriver struct {
+	ID        string
+	Locations []struct {
+		Bearing      float64
+		Lat          float64
+		Lng          float64
+		RecordedAtMs int64
+	}
+}
+
+type NearbyDriversInfoPayloadNearbyDriverByStableOfferProductID struct {
+	MapMarkerImage struct {
+		Sources []struct {
+			Media struct {
+				UserInterfaceStyle int
+			}
+			URL string
+		}
+	}
+	NearbyDriverProducts []struct {
+		DriverID string
+	}
 }
 
 type NearbyDriversInfo struct {
-	DefaultNearbyDrivers struct {
-		MapMarkerImage struct {
-			Sources []struct {
-				Media struct {
-					UserInterfaceStyle int
-				}
-				URL string
-			}
-		}
-		NearbyDriverProducts []struct {
-			DriverID string
-		}
+	DefaultNearbyDrivers                NearbyDriversInfoPayloadNearbyDriverByStableOfferProductID
+	NearbyDrivers                       map[string]NearbyDriversInfoPayloadNearbyDriver
+	NearbyDriversByStableOfferProductID map[string]NearbyDriversInfoPayloadNearbyDriverByStableOfferProductID
+}
+
+func convertNearbyDriversInfo(payload nearbyDriversInfoPayload) *NearbyDriversInfo {
+	nearbyDrivers := map[string]NearbyDriversInfoPayloadNearbyDriver{}
+	for d, info := range payload.NearbyDrivers {
+		nearbyDrivers[d] = NearbyDriversInfoPayloadNearbyDriver(info)
 	}
-	NearbyDrivers                       map[string]nearbyDriversInfoPayloadNearbyDriver
-	NearbyDriversByStableOfferProductID struct {
-		Access struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int
-					}
-					URL string
-				}
-			}
-			NearbyDriverProducts []struct {
-				DriverID string
-			}
-		}
-		Lux struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int
-					}
-					URL string
-				}
-			}
-			NearbyDriverProducts []struct {
-				DriverID string
-			}
-		}
-		Luxsuv struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int
-					}
-					URL string
-				}
-			}
-			NearbyDriverProducts []struct {
-				DriverID string
-			}
-		}
-		Plus struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int
-					}
-					URL string
-				}
-			}
-			NearbyDriverProducts []struct {
-				DriverID string
-			}
-		}
-		Promo struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int
-					}
-					URL string
-				}
-			}
-			NearbyDriverProducts []interface{}
-		}
-		Standard struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int
-					}
-					URL string
-				}
-			}
-			NearbyDriverProducts []struct {
-				DriverID string
-			}
-		}
-		StandardSaver struct {
-			MapMarkerImage struct {
-				Sources []struct {
-					Media struct {
-						UserInterfaceStyle int
-					}
-					URL string
-				}
-			}
-			NearbyDriverProducts []struct {
-				DriverID string
-			}
-		}
+	nearbyDriversByStableOfferProductID := map[string]NearbyDriversInfoPayloadNearbyDriverByStableOfferProductID{}
+	for d, info := range payload.NearbyDriversByStableOfferProductID {
+		nearbyDriversByStableOfferProductID[d] = NearbyDriversInfoPayloadNearbyDriverByStableOfferProductID(info)
+	}
+	return &NearbyDriversInfo{
+		DefaultNearbyDrivers:                NearbyDriversInfoPayloadNearbyDriverByStableOfferProductID(payload.DefaultNearbyDrivers),
+		NearbyDrivers:                       nearbyDrivers,
+		NearbyDriversByStableOfferProductID: nearbyDriversByStableOfferProductID,
 	}
 }
 
@@ -237,7 +88,7 @@ type NearbyDriversInfo struct {
 func (c *Client) NearbyDrivers(optss ...NearbyDriversOption) (*NearbyDriversInfo, error) {
 	opts := MakeNearbyDriversOptions(optss...)
 
-	uri := request.MakeURL("https://ride.lyft.com/v1/nearby-drivers")
+	const uri = "https://ride.lyft.com/v1/nearby-drivers"
 
 	headers := c.makeHeaders(true, opts.ToBaseOptions()...)
 
@@ -270,9 +121,12 @@ func (c *Client) NearbyDrivers(optss ...NearbyDriversOption) (*NearbyDriversInfo
 	}
 
 	if opts.DebugPayload() {
-		log.Printf("payload: %+v", payload)
+		s, err := json.ColorMarshal(payload)
+		if err != nil {
+			return nil, err
+		}
+		log.Printf("NearbyDrivers payload: %+v", s)
 	}
 
-	res := NearbyDriversInfo(payload)
-	return &res, nil
+	return convertNearbyDriversInfo(payload), nil
 }
