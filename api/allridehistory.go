@@ -9,7 +9,7 @@ import (
 func (c *Client) AllRideHistory(optss ...AllRideHistoryOption) (chan rideHistoryInfo, chan error) {
 	opts := MakeAllRideHistoryOptions(optss...)
 
-	dataCh, errCh := make(chan rideHistoryInfo), make(chan error)
+	data, errs := make(chan rideHistoryInfo), make(chan error)
 	var startTimeMS int
 	go func() {
 		for {
@@ -23,30 +23,29 @@ func (c *Client) AllRideHistory(optss ...AllRideHistoryOption) (chan rideHistory
 			}
 			res, err := c.RideHistory(os...)
 			if err != nil {
-				errCh <- err
+				errs <- err
 				continue
 			}
 
-			d := *res
-			dataCh <- d
+			data <- *res
 
 			if opts.Debug() {
-				log.Printf("Got %d rides, hasMore:%t", len(d.Data), d.HasMore)
+				log.Printf("Got %d rides, hasMore:%t", len(res.Data), res.HasMore)
 			}
 
 			if !res.HasMore {
 				return
 			}
-			for _, t := range d.Data {
+			for _, t := range res.Data {
 				millis := t.RequestTimestamp * 1000
 				if startTimeMS == 0 || millis < startTimeMS {
 					startTimeMS = millis
 				}
 			}
 		}
-		close(dataCh)
-		close(errCh)
+		close(data)
+		close(errs)
 	}()
 
-	return dataCh, errCh
+	return data, errs
 }
