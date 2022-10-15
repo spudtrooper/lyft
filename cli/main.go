@@ -10,7 +10,6 @@ import (
 )
 
 func Main(ctx context.Context) error {
-	flag.Bool("debug_payload", false, "debug payload")
 	flag.Float64("lat", 0, "latitude")
 	flag.Float64("lng", 0, "longitude")
 	flag.Int("accuracy", 0, "accuracy")
