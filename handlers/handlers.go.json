@@ -1,19 +1,5 @@
 [
   {
-    "Handler": "RideHistory",
-    "Loc": {
-      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 37
-    }
-  },
-  {
-    "Handler": "AllRideHistory",
-    "Loc": {
-      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 46
-    }
-  },
-  {
     "Handler": "PlaceRecommendations",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
@@ -25,6 +11,20 @@
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
       "line": 28
+    }
+  },
+  {
+    "Handler": "RideHistory",
+    "Loc": {
+      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
+      "line": 37
+    }
+  },
+  {
+    "Handler": "AllRideHistory",
+    "Loc": {
+      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
+      "line": 46
     }
   }
 ]

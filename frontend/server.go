@@ -22,8 +22,10 @@ func ListenAndServe(ctx context.Context, client *api.Client, port int, host stri
 	locs := handlers.SourceLocations
 	handlers := handlers.CreateHandlers(client)
 	mux := http.NewServeMux()
+	handler.Init(mux)
 	if err := handler.AddHandlers(ctx, mux, handlers,
 		handler.AddHandlersPrefix("api"),
+		handler.AddHandlersKey("lyft"),
 		handler.AddHandlersIndexTitle("unofficial lyft API"),
 		handler.AddHandlersFooterHTML(`Details: <a target="_" href="//github.com/spudtrooper/lyft">github.com/spudtrooper/lyft</a>`),
 		handler.AddHandlersSourceLinks(true),
