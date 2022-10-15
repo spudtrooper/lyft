@@ -1,10 +1,8 @@
 package api
 
 import (
-	"log"
 	"strings"
 
-	"github.com/spudtrooper/goutil/json"
 	"github.com/spudtrooper/goutil/request"
 )
 
@@ -118,14 +116,6 @@ func (c *Client) NearbyDrivers(optss ...NearbyDriversOption) (*NearbyDriversInfo
 
 	if _, err := request.Post(uri, &payload, strings.NewReader(string(b)), request.RequestExtraHeaders(headers)); err != nil {
 		return nil, err
-	}
-
-	if opts.DebugPayload() {
-		s, err := json.ColorMarshal(payload)
-		if err != nil {
-			return nil, err
-		}
-		log.Printf("NearbyDrivers payload: %+v", s)
 	}
 
 	return convertNearbyDriversInfo(payload), nil

@@ -1,9 +1,6 @@
 package api
 
 import (
-	"log"
-
-	"github.com/spudtrooper/goutil/json"
 	"github.com/spudtrooper/goutil/request"
 )
 
@@ -247,14 +244,6 @@ func (c *Client) PlaceRecommendations(optss ...PlaceRecommendationsOption) (*Pla
 
 	if _, err := request.Get(uri, &payload, request.RequestExtraHeaders(headers)); err != nil {
 		return nil, err
-	}
-
-	if opts.DebugPayload() {
-		s, err := json.ColorMarshal(payload)
-		if err != nil {
-			return nil, err
-		}
-		log.Printf("PlaceRecommendations payload: %+v", s)
 	}
 
 	return convertPlaceRecommendationInfoPayload(payload), nil

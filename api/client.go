@@ -21,7 +21,7 @@ var (
 )
 
 // TODO: need to make genopts regex more flexible, need to have "--function Base" exactly here, which isn't great
-//go:generate genopts --function Base token:string debugBody debugPayload
+//go:generate genopts --function Base token:string
 
 // Client is a client for lyft.com
 type Client struct {

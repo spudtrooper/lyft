@@ -18,10 +18,6 @@ type RideHistoryOptions interface {
 	HasStartTime() bool
 	Token() string
 	HasToken() bool
-	DebugBody() bool
-	HasDebugBody() bool
-	DebugPayload() bool
-	HasDebugPayload() bool
 	ToBaseOptions() []BaseOption
 }
 
@@ -89,73 +85,31 @@ func RideHistoryTokenFlag(token *string) RideHistoryOption {
 	}
 }
 
-func RideHistoryDebugBody(debugBody bool) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
-		opts.has_debugBody = true
-		opts.debugBody = debugBody
-	}
-}
-func RideHistoryDebugBodyFlag(debugBody *bool) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
-		if debugBody == nil {
-			return
-		}
-		opts.has_debugBody = true
-		opts.debugBody = *debugBody
-	}
-}
-
-func RideHistoryDebugPayload(debugPayload bool) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
-		opts.has_debugPayload = true
-		opts.debugPayload = debugPayload
-	}
-}
-func RideHistoryDebugPayloadFlag(debugPayload *bool) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
-		if debugPayload == nil {
-			return
-		}
-		opts.has_debugPayload = true
-		opts.debugPayload = *debugPayload
-	}
-}
-
 type rideHistoryOptionImpl struct {
-	limit            int
-	has_limit        bool
-	source           string
-	has_source       bool
-	startTime        time.Time
-	has_startTime    bool
-	token            string
-	has_token        bool
-	debugBody        bool
-	has_debugBody    bool
-	debugPayload     bool
-	has_debugPayload bool
+	limit         int
+	has_limit     bool
+	source        string
+	has_source    bool
+	startTime     time.Time
+	has_startTime bool
+	token         string
+	has_token     bool
 }
 
-func (r *rideHistoryOptionImpl) Limit() int            { return or.Int(r.limit, 10) }
-func (r *rideHistoryOptionImpl) HasLimit() bool        { return r.has_limit }
-func (r *rideHistoryOptionImpl) Source() string        { return or.String(r.source, "ride_history_list") }
-func (r *rideHistoryOptionImpl) HasSource() bool       { return r.has_source }
-func (r *rideHistoryOptionImpl) StartTime() time.Time  { return r.startTime }
-func (r *rideHistoryOptionImpl) HasStartTime() bool    { return r.has_startTime }
-func (r *rideHistoryOptionImpl) Token() string         { return r.token }
-func (r *rideHistoryOptionImpl) HasToken() bool        { return r.has_token }
-func (r *rideHistoryOptionImpl) DebugBody() bool       { return r.debugBody }
-func (r *rideHistoryOptionImpl) HasDebugBody() bool    { return r.has_debugBody }
-func (r *rideHistoryOptionImpl) DebugPayload() bool    { return r.debugPayload }
-func (r *rideHistoryOptionImpl) HasDebugPayload() bool { return r.has_debugPayload }
+func (r *rideHistoryOptionImpl) Limit() int           { return or.Int(r.limit, 10) }
+func (r *rideHistoryOptionImpl) HasLimit() bool       { return r.has_limit }
+func (r *rideHistoryOptionImpl) Source() string       { return or.String(r.source, "ride_history_list") }
+func (r *rideHistoryOptionImpl) HasSource() bool      { return r.has_source }
+func (r *rideHistoryOptionImpl) StartTime() time.Time { return r.startTime }
+func (r *rideHistoryOptionImpl) HasStartTime() bool   { return r.has_startTime }
+func (r *rideHistoryOptionImpl) Token() string        { return r.token }
+func (r *rideHistoryOptionImpl) HasToken() bool       { return r.has_token }
 
 type RideHistoryParams struct {
-	Limit        int       `json:"limit" default:"10"`
-	Source       string    `json:"source" default:"\"ride_history_list\""`
-	StartTime    time.Time `json:"start_time"`
-	Token        string    `json:"token"`
-	DebugBody    bool      `json:"debug_body"`
-	DebugPayload bool      `json:"debug_payload"`
+	Limit     int       `json:"limit" default:"10"`
+	Source    string    `json:"source" default:"\"ride_history_list\""`
+	StartTime time.Time `json:"start_time"`
+	Token     string    `json:"token"`
 }
 
 func (o RideHistoryParams) Options() []RideHistoryOption {
@@ -164,8 +118,6 @@ func (o RideHistoryParams) Options() []RideHistoryOption {
 		RideHistorySource(o.Source),
 		RideHistoryStartTime(o.StartTime),
 		RideHistoryToken(o.Token),
-		RideHistoryDebugBody(o.DebugBody),
-		RideHistoryDebugPayload(o.DebugPayload),
 	}
 }
 
@@ -173,8 +125,6 @@ func (o RideHistoryParams) Options() []RideHistoryOption {
 func (o *rideHistoryOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
 		BaseToken(o.Token()),
-		BaseDebugBody(o.DebugBody()),
-		BaseDebugPayload(o.DebugPayload()),
 	}
 }
 

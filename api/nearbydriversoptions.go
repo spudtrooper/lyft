@@ -18,10 +18,6 @@ type NearbyDriversOptions interface {
 	HasUsingCommuterPayment() bool
 	Token() string
 	HasToken() bool
-	DebugBody() bool
-	HasDebugBody() bool
-	DebugPayload() bool
-	HasDebugPayload() bool
 	ToBaseOptions() []BaseOption
 }
 
@@ -105,38 +101,6 @@ func NearbyDriversTokenFlag(token *string) NearbyDriversOption {
 	}
 }
 
-func NearbyDriversDebugBody(debugBody bool) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
-		opts.has_debugBody = true
-		opts.debugBody = debugBody
-	}
-}
-func NearbyDriversDebugBodyFlag(debugBody *bool) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
-		if debugBody == nil {
-			return
-		}
-		opts.has_debugBody = true
-		opts.debugBody = *debugBody
-	}
-}
-
-func NearbyDriversDebugPayload(debugPayload bool) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
-		opts.has_debugPayload = true
-		opts.debugPayload = debugPayload
-	}
-}
-func NearbyDriversDebugPayloadFlag(debugPayload *bool) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
-		if debugPayload == nil {
-			return
-		}
-		opts.has_debugPayload = true
-		opts.debugPayload = *debugPayload
-	}
-}
-
 type nearbyDriversOptionImpl struct {
 	latitudeE6               int
 	has_latitudeE6           bool
@@ -148,10 +112,6 @@ type nearbyDriversOptionImpl struct {
 	has_usingCommuterPayment bool
 	token                    string
 	has_token                bool
-	debugBody                bool
-	has_debugBody            bool
-	debugPayload             bool
-	has_debugPayload         bool
 }
 
 func (n *nearbyDriversOptionImpl) LatitudeE6() int      { return or.Int(n.latitudeE6, 40770034) }
@@ -166,10 +126,6 @@ func (n *nearbyDriversOptionImpl) UsingCommuterPayment() bool    { return n.usin
 func (n *nearbyDriversOptionImpl) HasUsingCommuterPayment() bool { return n.has_usingCommuterPayment }
 func (n *nearbyDriversOptionImpl) Token() string                 { return n.token }
 func (n *nearbyDriversOptionImpl) HasToken() bool                { return n.has_token }
-func (n *nearbyDriversOptionImpl) DebugBody() bool               { return n.debugBody }
-func (n *nearbyDriversOptionImpl) HasDebugBody() bool            { return n.has_debugBody }
-func (n *nearbyDriversOptionImpl) DebugPayload() bool            { return n.debugPayload }
-func (n *nearbyDriversOptionImpl) HasDebugPayload() bool         { return n.has_debugPayload }
 
 type NearbyDriversParams struct {
 	LatitudeE6           int    `json:"latitude_e_6" default:"40770034"`
@@ -177,8 +133,6 @@ type NearbyDriversParams struct {
 	OrginPlaceID         string `json:"orgin_place_id" default:"\"lyft:address:3eaa5572-4d37-4a39-92ed-c61906139955\""`
 	UsingCommuterPayment bool   `json:"using_commuter_payment"`
 	Token                string `json:"token"`
-	DebugBody            bool   `json:"debug_body"`
-	DebugPayload         bool   `json:"debug_payload"`
 }
 
 func (o NearbyDriversParams) Options() []NearbyDriversOption {
@@ -188,8 +142,6 @@ func (o NearbyDriversParams) Options() []NearbyDriversOption {
 		NearbyDriversOrginPlaceID(o.OrginPlaceID),
 		NearbyDriversUsingCommuterPayment(o.UsingCommuterPayment),
 		NearbyDriversToken(o.Token),
-		NearbyDriversDebugBody(o.DebugBody),
-		NearbyDriversDebugPayload(o.DebugPayload),
 	}
 }
 
@@ -197,8 +149,6 @@ func (o NearbyDriversParams) Options() []NearbyDriversOption {
 func (o *nearbyDriversOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
 		BaseToken(o.Token()),
-		BaseDebugBody(o.DebugBody()),
-		BaseDebugPayload(o.DebugPayload()),
 	}
 }
 

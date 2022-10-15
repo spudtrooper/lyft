@@ -16,10 +16,6 @@ type PlaceRecommendationsOptions interface {
 	HasAccuracy() bool
 	Token() string
 	HasToken() bool
-	DebugBody() bool
-	HasDebugBody() bool
-	DebugPayload() bool
-	HasDebugPayload() bool
 	ToBaseOptions() []BaseOption
 }
 
@@ -87,73 +83,31 @@ func PlaceRecommendationsTokenFlag(token *string) PlaceRecommendationsOption {
 	}
 }
 
-func PlaceRecommendationsDebugBody(debugBody bool) PlaceRecommendationsOption {
-	return func(opts *placeRecommendationsOptionImpl) {
-		opts.has_debugBody = true
-		opts.debugBody = debugBody
-	}
-}
-func PlaceRecommendationsDebugBodyFlag(debugBody *bool) PlaceRecommendationsOption {
-	return func(opts *placeRecommendationsOptionImpl) {
-		if debugBody == nil {
-			return
-		}
-		opts.has_debugBody = true
-		opts.debugBody = *debugBody
-	}
-}
-
-func PlaceRecommendationsDebugPayload(debugPayload bool) PlaceRecommendationsOption {
-	return func(opts *placeRecommendationsOptionImpl) {
-		opts.has_debugPayload = true
-		opts.debugPayload = debugPayload
-	}
-}
-func PlaceRecommendationsDebugPayloadFlag(debugPayload *bool) PlaceRecommendationsOption {
-	return func(opts *placeRecommendationsOptionImpl) {
-		if debugPayload == nil {
-			return
-		}
-		opts.has_debugPayload = true
-		opts.debugPayload = *debugPayload
-	}
-}
-
 type placeRecommendationsOptionImpl struct {
-	lat              float64
-	has_lat          bool
-	lng              float64
-	has_lng          bool
-	accuracy         int
-	has_accuracy     bool
-	token            string
-	has_token        bool
-	debugBody        bool
-	has_debugBody    bool
-	debugPayload     bool
-	has_debugPayload bool
+	lat          float64
+	has_lat      bool
+	lng          float64
+	has_lng      bool
+	accuracy     int
+	has_accuracy bool
+	token        string
+	has_token    bool
 }
 
-func (p *placeRecommendationsOptionImpl) Lat() float64          { return or.Float64(p.lat, 40.7683) }
-func (p *placeRecommendationsOptionImpl) HasLat() bool          { return p.has_lat }
-func (p *placeRecommendationsOptionImpl) Lng() float64          { return or.Float64(p.lng, -73.9802) }
-func (p *placeRecommendationsOptionImpl) HasLng() bool          { return p.has_lng }
-func (p *placeRecommendationsOptionImpl) Accuracy() int         { return p.accuracy }
-func (p *placeRecommendationsOptionImpl) HasAccuracy() bool     { return p.has_accuracy }
-func (p *placeRecommendationsOptionImpl) Token() string         { return p.token }
-func (p *placeRecommendationsOptionImpl) HasToken() bool        { return p.has_token }
-func (p *placeRecommendationsOptionImpl) DebugBody() bool       { return p.debugBody }
-func (p *placeRecommendationsOptionImpl) HasDebugBody() bool    { return p.has_debugBody }
-func (p *placeRecommendationsOptionImpl) DebugPayload() bool    { return p.debugPayload }
-func (p *placeRecommendationsOptionImpl) HasDebugPayload() bool { return p.has_debugPayload }
+func (p *placeRecommendationsOptionImpl) Lat() float64      { return or.Float64(p.lat, 40.7683) }
+func (p *placeRecommendationsOptionImpl) HasLat() bool      { return p.has_lat }
+func (p *placeRecommendationsOptionImpl) Lng() float64      { return or.Float64(p.lng, -73.9802) }
+func (p *placeRecommendationsOptionImpl) HasLng() bool      { return p.has_lng }
+func (p *placeRecommendationsOptionImpl) Accuracy() int     { return p.accuracy }
+func (p *placeRecommendationsOptionImpl) HasAccuracy() bool { return p.has_accuracy }
+func (p *placeRecommendationsOptionImpl) Token() string     { return p.token }
+func (p *placeRecommendationsOptionImpl) HasToken() bool    { return p.has_token }
 
 type PlaceRecommendationsParams struct {
-	Lat          float64 `json:"lat" default:"40.7683"`
-	Lng          float64 `json:"lng" default:"-73.9802"`
-	Accuracy     int     `json:"accuracy"`
-	Token        string  `json:"token"`
-	DebugBody    bool    `json:"debug_body"`
-	DebugPayload bool    `json:"debug_payload"`
+	Lat      float64 `json:"lat" default:"40.7683"`
+	Lng      float64 `json:"lng" default:"-73.9802"`
+	Accuracy int     `json:"accuracy"`
+	Token    string  `json:"token"`
 }
 
 func (o PlaceRecommendationsParams) Options() []PlaceRecommendationsOption {
@@ -162,8 +116,6 @@ func (o PlaceRecommendationsParams) Options() []PlaceRecommendationsOption {
 		PlaceRecommendationsLng(o.Lng),
 		PlaceRecommendationsAccuracy(o.Accuracy),
 		PlaceRecommendationsToken(o.Token),
-		PlaceRecommendationsDebugBody(o.DebugBody),
-		PlaceRecommendationsDebugPayload(o.DebugPayload),
 	}
 }
 
@@ -171,8 +123,6 @@ func (o PlaceRecommendationsParams) Options() []PlaceRecommendationsOption {
 func (o *placeRecommendationsOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
 		BaseToken(o.Token()),
-		BaseDebugBody(o.DebugBody()),
-		BaseDebugPayload(o.DebugPayload()),
 	}
 }
 

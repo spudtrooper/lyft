@@ -6,10 +6,6 @@ type BaseOption func(*baseOptionImpl)
 type BaseOptions interface {
 	Token() string
 	HasToken() bool
-	DebugBody() bool
-	HasDebugBody() bool
-	DebugPayload() bool
-	HasDebugPayload() bool
 }
 
 func BaseToken(token string) BaseOption {
@@ -28,53 +24,13 @@ func BaseTokenFlag(token *string) BaseOption {
 	}
 }
 
-func BaseDebugBody(debugBody bool) BaseOption {
-	return func(opts *baseOptionImpl) {
-		opts.has_debugBody = true
-		opts.debugBody = debugBody
-	}
-}
-func BaseDebugBodyFlag(debugBody *bool) BaseOption {
-	return func(opts *baseOptionImpl) {
-		if debugBody == nil {
-			return
-		}
-		opts.has_debugBody = true
-		opts.debugBody = *debugBody
-	}
-}
-
-func BaseDebugPayload(debugPayload bool) BaseOption {
-	return func(opts *baseOptionImpl) {
-		opts.has_debugPayload = true
-		opts.debugPayload = debugPayload
-	}
-}
-func BaseDebugPayloadFlag(debugPayload *bool) BaseOption {
-	return func(opts *baseOptionImpl) {
-		if debugPayload == nil {
-			return
-		}
-		opts.has_debugPayload = true
-		opts.debugPayload = *debugPayload
-	}
-}
-
 type baseOptionImpl struct {
-	token            string
-	has_token        bool
-	debugBody        bool
-	has_debugBody    bool
-	debugPayload     bool
-	has_debugPayload bool
+	token     string
+	has_token bool
 }
 
-func (b *baseOptionImpl) Token() string         { return b.token }
-func (b *baseOptionImpl) HasToken() bool        { return b.has_token }
-func (b *baseOptionImpl) DebugBody() bool       { return b.debugBody }
-func (b *baseOptionImpl) HasDebugBody() bool    { return b.has_debugBody }
-func (b *baseOptionImpl) DebugPayload() bool    { return b.debugPayload }
-func (b *baseOptionImpl) HasDebugPayload() bool { return b.has_debugPayload }
+func (b *baseOptionImpl) Token() string  { return b.token }
+func (b *baseOptionImpl) HasToken() bool { return b.has_token }
 
 func makeBaseOptionImpl(opts ...BaseOption) *baseOptionImpl {
 	res := &baseOptionImpl{}

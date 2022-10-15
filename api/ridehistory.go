@@ -1,10 +1,8 @@
 package api
 
 import (
-	"log"
 	"time"
 
-	"github.com/spudtrooper/goutil/json"
 	"github.com/spudtrooper/goutil/or"
 	"github.com/spudtrooper/goutil/request"
 )
@@ -111,14 +109,6 @@ func (c *Client) RideHistory(optss ...RideHistoryOption) (*RideHistoryInfo, erro
 
 	if _, err := request.Get(uri, &payload, request.RequestExtraHeaders(headers)); err != nil {
 		return nil, err
-	}
-
-	if opts.DebugPayload() {
-		s, err := json.ColorMarshal(payload)
-		if err != nil {
-			return nil, err
-		}
-		log.Printf("RideHistory payload: %+v", s)
 	}
 
 	return convertRideHistoryInfo(payload), nil
