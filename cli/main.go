@@ -15,6 +15,7 @@ func Main(ctx context.Context) error {
 	flag.Int("accuracy", 0, "accuracy")
 	flag.Int("limit", 0, "limit")
 	flag.Duration("timeout", 0, "timeout")
+	flag.Bool("debug", false, "debug")
 
 	client, err := api.NewClientFromFlags()
 	if err != nil {

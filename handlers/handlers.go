@@ -5,6 +5,8 @@ import (
 	"context"
 	_ "embed"
 
+	goutilerrors "github.com/spudtrooper/goutil/errors"
+	"github.com/spudtrooper/goutil/parallel"
 	"github.com/spudtrooper/lyft/api"
 	"github.com/spudtrooper/minimalcli/handler"
 )
@@ -40,6 +42,31 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 			return client.RideHistory(p.Options()...)
 		},
 		api.RideHistoryParams{},
+		handler.NewHandlerExtraRequiredFields([]string{"token"}),
+	)
+
+	b.NewHandler("AllRideHistory",
+		func(ctx context.Context, ip any) (any, error) {
+			p := ip.(api.AllRideHistoryParams)
+			data, errs := client.AllRideHistory(p.Options()...)
+			var res []any
+			errBuilder := goutilerrors.MakeErrorCollector()
+			parallel.WaitFor(func() {
+				for d := range data {
+					res = append(res, d)
+				}
+			}, func() {
+				for e := range errs {
+					errBuilder.Add(e)
+				}
+			})
+
+			if err := errBuilder.Build(); err != nil {
+				return nil, err
+			}
+			return res, nil
+		},
+		api.AllRideHistoryParams{},
 		handler.NewHandlerExtraRequiredFields([]string{"token"}),
 	)
 
