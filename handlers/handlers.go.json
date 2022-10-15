@@ -1,0 +1,9 @@
+[
+  {
+    "Handler": "PlaceRecommendations",
+    "Loc": {
+      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
+      "line": 19
+    }
+  }
+]
