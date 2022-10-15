@@ -7,7 +7,7 @@ import (
 	"github.com/spudtrooper/goutil/request"
 )
 
-type rideHistoryInfoPayloadData struct {
+type rideHistoryInfoData struct {
 	CancelRole              int    `json:"cancel_role"`
 	Distance                int    `json:"distance,omitempty"`
 	DriverFirstName         string `json:"driver_first_name"`
@@ -34,65 +34,16 @@ type rideHistoryInfoPayloadData struct {
 	VehicleImageURL string `json:"vehicle_image_url"`
 }
 
-type rideHistoryInfoPayload struct {
-	Data        []rideHistoryInfoPayloadData `json:"data"`
-	HasMore     bool                         `json:"has_more"`
-	Limit       int                          `json:"limit"`
-	Skip        int                          `json:"skip"`
-	StartTimeMs int64                        `json:"start_time_ms"`
-}
-
-type RideHistoryInfoPayloadData struct {
-	CancelRole              int
-	Distance                int
-	DriverFirstName         string
-	DriverPhotoURL          string
-	DropoffTimestamp        int
-	IsBusinessRide          bool
-	IsSharedUserPaymentRide bool
-	PickupTimestamp         int
-	RequestTimestamp        int
-	RideDistance            struct {
-		Unit  string
-		Value float64
-	}
-	RideID        string
-	RideState     string
-	RideType      string
-	RideTypeLabel string
-	Timezone      string
-	TotalMoney    struct {
-		Amount   int
-		Currency string
-		Exponent int
-	}
-	VehicleImageURL string
-}
-
-type RideHistoryInfo struct {
-	Data        []RideHistoryInfoPayloadData
-	HasMore     bool
-	Limit       int
-	Skip        int
-	StartTimeMs int64
-}
-
-func convertRideHistoryInfo(p rideHistoryInfoPayload) *RideHistoryInfo {
-	var data []RideHistoryInfoPayloadData
-	for _, d := range p.Data {
-		data = append(data, RideHistoryInfoPayloadData(d))
-	}
-	return &RideHistoryInfo{
-		Data:        data,
-		HasMore:     p.HasMore,
-		Limit:       p.Limit,
-		Skip:        p.Skip,
-		StartTimeMs: p.StartTimeMs,
-	}
+type rideHistoryInfo struct {
+	Data        []rideHistoryInfoData `json:"data"`
+	HasMore     bool                  `json:"has_more"`
+	Limit       int                   `json:"limit"`
+	Skip        int                   `json:"skip"`
+	StartTimeMs int64                 `json:"start_time_ms"`
 }
 
 //go:generate genopts --params --function RideHistory --extends Base limit:int:10 source:string:ride_history_list startTime:time.Time
-func (c *Client) RideHistory(optss ...RideHistoryOption) (*RideHistoryInfo, error) {
+func (c *Client) RideHistory(optss ...RideHistoryOption) (*rideHistoryInfo, error) {
 	opts := MakeRideHistoryOptions(optss...)
 
 	startTime := or.Time(opts.StartTime(), time.Now())
@@ -105,11 +56,9 @@ func (c *Client) RideHistory(optss ...RideHistoryOption) (*RideHistoryInfo, erro
 
 	headers := c.makeHeaders(true, opts.ToBaseOptions()...)
 
-	var payload rideHistoryInfoPayload
-
-	if _, err := request.Get(uri, &payload, request.RequestExtraHeaders(headers)); err != nil {
+	var res rideHistoryInfo
+	if _, err := request.Get(uri, &res, request.RequestExtraHeaders(headers)); err != nil {
 		return nil, err
 	}
-
-	return convertRideHistoryInfo(payload), nil
+	return &res, nil
 }

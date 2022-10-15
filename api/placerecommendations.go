@@ -4,7 +4,7 @@ import (
 	"github.com/spudtrooper/goutil/request"
 )
 
-type placeRecommendationInfoPayload struct {
+type placeRecommendationInfo struct {
 	RecommendedPlaces []struct {
 		ConversionScore              float64 `json:"conversion_score"`
 		DisplayName                  string  `json:"display_name"`
@@ -119,118 +119,8 @@ type placeRecommendationInfoPlace struct {
 	SpotPlaceProvider   int     `json:"spot_place_provider,omitempty"`
 }
 
-type PlaceRecommendationInfoLocationV2 struct {
-	LocationID       string
-	LocationMetadata struct {
-		StaticMetadata struct {
-			IsUnencumbered bool
-			Spot           struct {
-				Name       string
-				Navigation struct {
-					GmapsExternalNavigation struct {
-						Location struct {
-							LatMicrodegrees int
-							LngMicrodegrees int
-						}
-					}
-					NavigationMethod struct {
-						Location struct {
-							LatMicrodegrees int
-							LngMicrodegrees int
-						}
-					}
-					WazeExternalNavigation struct {
-						Location struct {
-							LatMicrodegrees int
-							LngMicrodegrees int
-						}
-					}
-				}
-				Place struct {
-					ID       string
-					Provider int
-				}
-				RoutableAddress string
-			}
-		}
-	}
-	PortableLocationWithFeatures struct {
-		PortableLocation struct {
-			CompressedSegmentPosition struct {
-				Fraction float64
-				Segment  struct {
-					DirectionalSegmentID int64
-					FromNode             struct {
-						LatMicrodegrees int
-						LngMicrodegrees int
-						NodeID          int64
-					}
-					LengthMeters float64
-					MapProfile   struct {
-						MapProvider int
-						MapVersion  string
-					}
-					ToNode struct {
-						LatMicrodegrees int
-						LngMicrodegrees int
-						NodeID          int64
-					}
-				}
-			}
-			Location struct {
-				LatMicrodegrees int
-				LngMicrodegrees int
-			}
-		}
-	}
-	Source      string
-	TimestampMs int64
-}
-
-type PlaceRecommendationInfoPlace struct {
-	Address             string
-	IsVenue             bool
-	Lat                 float64
-	Lng                 float64
-	LocationInputSource string
-	PlaceID             string
-	PlaceName           string
-	RoutableAddress     string
-	SpotPlaceProvider   int
-}
-
-type PlaceRecommendationInfoRecommendedPlace struct {
-	ConversionScore              float64
-	DisplayName                  string
-	DistanceToSearchOriginMeters float64
-	Place                        PlaceRecommendationInfoPlace
-	RecommendationType           string
-	Location                     PlaceRecommendationInfoLocationV2
-}
-
-type PlaceRecommendationInfo struct {
-	RecommendedPlaces []PlaceRecommendationInfoRecommendedPlace
-}
-
-func convertPlaceRecommendationInfoPayload(p placeRecommendationInfoPayload) *PlaceRecommendationInfo {
-	var recommendedPlaces []PlaceRecommendationInfoRecommendedPlace
-	for _, rp := range p.RecommendedPlaces {
-		recommendedPlaces = append(recommendedPlaces, PlaceRecommendationInfoRecommendedPlace{
-			ConversionScore:              rp.ConversionScore,
-			DisplayName:                  rp.DisplayName,
-			DistanceToSearchOriginMeters: rp.DistanceToSearchOriginMeters,
-			Place:                        PlaceRecommendationInfoPlace(rp.Place),
-			RecommendationType:           rp.RecommendationType,
-			Location:                     PlaceRecommendationInfoLocationV2(rp.LocationV2),
-		})
-	}
-	return &PlaceRecommendationInfo{
-		RecommendedPlaces: recommendedPlaces,
-	}
-}
-
 //go:generate genopts --params --function PlaceRecommendations --extends Base lat:float64:40.7683 lng:float64:-73.9802 accuracy:int
-func (c *Client) PlaceRecommendations(optss ...PlaceRecommendationsOption) (*PlaceRecommendationInfo, error) {
+func (c *Client) PlaceRecommendations(optss ...PlaceRecommendationsOption) (*placeRecommendationInfo, error) {
 	opts := MakePlaceRecommendationsOptions(optss...)
 
 	uri := request.MakeURL("https://ride.lyft.com/v1/place-recommendations",
@@ -240,11 +130,9 @@ func (c *Client) PlaceRecommendations(optss ...PlaceRecommendationsOption) (*Pla
 	)
 	headers := c.makeHeaders(true, opts.ToBaseOptions()...)
 
-	var payload placeRecommendationInfoPayload
-
-	if _, err := request.Get(uri, &payload, request.RequestExtraHeaders(headers)); err != nil {
+	var res placeRecommendationInfo
+	if _, err := request.Get(uri, &res, request.RequestExtraHeaders(headers)); err != nil {
 		return nil, err
 	}
-
-	return convertPlaceRecommendationInfoPayload(payload), nil
+	return &res, nil
 }
