@@ -214,7 +214,7 @@ type PlaceRecommendationInfo struct {
 	RecommendedPlaces []PlaceRecommendationInfoRecommendedPlace
 }
 
-func PlaceRecommendationInfoPlaceRecommendationInfo(p placeRecommendationInfoPayload) *PlaceRecommendationInfo {
+func convertPlaceRecommendationInfoPayload(p placeRecommendationInfoPayload) *PlaceRecommendationInfo {
 	var recommendedPlaces []PlaceRecommendationInfoRecommendedPlace
 	for _, rp := range p.RecommendedPlaces {
 		recommendedPlaces = append(recommendedPlaces, PlaceRecommendationInfoRecommendedPlace{
@@ -252,5 +252,5 @@ func (c *Client) PlaceRecommendations(optss ...PlaceRecommendationsOption) (*Pla
 		log.Printf("payload: %+v", payload)
 	}
 
-	return PlaceRecommendationInfoPlaceRecommendationInfo(payload), nil
+	return convertPlaceRecommendationInfoPayload(payload), nil
 }

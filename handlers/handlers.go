@@ -24,5 +24,13 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		api.PlaceRecommendationsParams{},
 	)
 
+	b.NewHandler("NearbyDrivers",
+		func(ctx context.Context, ip any) (any, error) {
+			p := ip.(api.NearbyDriversParams)
+			return client.NearbyDrivers(p.Options()...)
+		},
+		api.NearbyDriversParams{},
+	)
+
 	return b.Build()
 }

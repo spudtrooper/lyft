@@ -15,6 +15,8 @@ func (c *Client) makeHeaders(auth bool, optss ...BaseOption) map[string]string {
 		"cache-control":      `no-cache`,
 		"dnt":                `1`,
 		"downlink":           `10`,
+		"content-type":       `application/json`,
+		"origin":             `https://ride.lyft.com`,
 		"dpr":                `2`,
 		"pragma":             `no-cache`,
 		"referer":            `https://ride.lyft.com/?origin=40.770034%2C-73.982912&originName=24+W+61st+St`,
