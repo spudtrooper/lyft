@@ -42,7 +42,7 @@ type rideHistoryInfo struct {
 	StartTimeMs int64                 `json:"start_time_ms"`
 }
 
-//go:generate genopts --params --function RideHistory --extends Base limit:int:10 source:string:ride_history_list startTime:time.Time
+//go:generate genopts --params --function RideHistory --extends Base limit:int:10 source:string:ride_history_list startTime:time.Time timeout:time.Duration
 func (c *Client) RideHistory(optss ...RideHistoryOption) (*rideHistoryInfo, error) {
 	opts := MakeRideHistoryOptions(optss...)
 
@@ -57,7 +57,9 @@ func (c *Client) RideHistory(optss ...RideHistoryOption) (*rideHistoryInfo, erro
 	headers := c.makeHeaders(true, opts.ToBaseOptions()...)
 
 	var res rideHistoryInfo
-	if _, err := request.Get(uri, &res, request.RequestExtraHeaders(headers)); err != nil {
+	if _, err := request.Get(uri, &res,
+		request.RequestExtraHeaders(headers),
+		request.RequestTimeout(opts.Timeout())); err != nil {
 		return nil, err
 	}
 	return &res, nil

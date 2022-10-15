@@ -16,6 +16,8 @@ type RideHistoryOptions interface {
 	HasSource() bool
 	StartTime() time.Time
 	HasStartTime() bool
+	Timeout() time.Duration
+	HasTimeout() bool
 	Token() string
 	HasToken() bool
 	ToBaseOptions() []BaseOption
@@ -69,6 +71,22 @@ func RideHistoryStartTimeFlag(startTime *time.Time) RideHistoryOption {
 	}
 }
 
+func RideHistoryTimeout(timeout time.Duration) RideHistoryOption {
+	return func(opts *rideHistoryOptionImpl) {
+		opts.has_timeout = true
+		opts.timeout = timeout
+	}
+}
+func RideHistoryTimeoutFlag(timeout *time.Duration) RideHistoryOption {
+	return func(opts *rideHistoryOptionImpl) {
+		if timeout == nil {
+			return
+		}
+		opts.has_timeout = true
+		opts.timeout = *timeout
+	}
+}
+
 func RideHistoryToken(token string) RideHistoryOption {
 	return func(opts *rideHistoryOptionImpl) {
 		opts.has_token = true
@@ -92,24 +110,29 @@ type rideHistoryOptionImpl struct {
 	has_source    bool
 	startTime     time.Time
 	has_startTime bool
+	timeout       time.Duration
+	has_timeout   bool
 	token         string
 	has_token     bool
 }
 
-func (r *rideHistoryOptionImpl) Limit() int           { return or.Int(r.limit, 10) }
-func (r *rideHistoryOptionImpl) HasLimit() bool       { return r.has_limit }
-func (r *rideHistoryOptionImpl) Source() string       { return or.String(r.source, "ride_history_list") }
-func (r *rideHistoryOptionImpl) HasSource() bool      { return r.has_source }
-func (r *rideHistoryOptionImpl) StartTime() time.Time { return r.startTime }
-func (r *rideHistoryOptionImpl) HasStartTime() bool   { return r.has_startTime }
-func (r *rideHistoryOptionImpl) Token() string        { return r.token }
-func (r *rideHistoryOptionImpl) HasToken() bool       { return r.has_token }
+func (r *rideHistoryOptionImpl) Limit() int             { return or.Int(r.limit, 10) }
+func (r *rideHistoryOptionImpl) HasLimit() bool         { return r.has_limit }
+func (r *rideHistoryOptionImpl) Source() string         { return or.String(r.source, "ride_history_list") }
+func (r *rideHistoryOptionImpl) HasSource() bool        { return r.has_source }
+func (r *rideHistoryOptionImpl) StartTime() time.Time   { return r.startTime }
+func (r *rideHistoryOptionImpl) HasStartTime() bool     { return r.has_startTime }
+func (r *rideHistoryOptionImpl) Timeout() time.Duration { return r.timeout }
+func (r *rideHistoryOptionImpl) HasTimeout() bool       { return r.has_timeout }
+func (r *rideHistoryOptionImpl) Token() string          { return r.token }
+func (r *rideHistoryOptionImpl) HasToken() bool         { return r.has_token }
 
 type RideHistoryParams struct {
-	Limit     int       `json:"limit" default:"10"`
-	Source    string    `json:"source" default:"\"ride_history_list\""`
-	StartTime time.Time `json:"start_time"`
-	Token     string    `json:"token"`
+	Limit     int           `json:"limit" default:"10"`
+	Source    string        `json:"source" default:"\"ride_history_list\""`
+	StartTime time.Time     `json:"start_time"`
+	Timeout   time.Duration `json:"timeout"`
+	Token     string        `json:"token"`
 }
 
 func (o RideHistoryParams) Options() []RideHistoryOption {
@@ -117,6 +140,7 @@ func (o RideHistoryParams) Options() []RideHistoryOption {
 		RideHistoryLimit(o.Limit),
 		RideHistorySource(o.Source),
 		RideHistoryStartTime(o.StartTime),
+		RideHistoryTimeout(o.Timeout),
 		RideHistoryToken(o.Token),
 	}
 }
