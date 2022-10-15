@@ -22,6 +22,7 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 			return client.PlaceRecommendations(p.Options()...)
 		},
 		api.PlaceRecommendationsParams{},
+		handler.NewHandlerRequiredFields([]string{"token"}),
 	)
 
 	b.NewHandler("NearbyDrivers",
@@ -30,6 +31,7 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 			return client.NearbyDrivers(p.Options()...)
 		},
 		api.NearbyDriversParams{},
+		handler.NewHandlerRequiredFields([]string{"token"}),
 	)
 
 	b.NewHandler("RideHistory",
@@ -38,6 +40,7 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 			return client.RideHistory(p.Options()...)
 		},
 		api.RideHistoryParams{},
+		handler.NewHandlerRequiredFields([]string{"token"}),
 	)
 
 	return b.Build()
