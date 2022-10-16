@@ -49,24 +49,27 @@ func (c *Client) NearbyDrivers(optss ...NearbyDriversOption) (*NearbyDriversInfo
 		LongitudeE6 int `json:"longitude_e6"`
 	}
 	type body struct {
-		Origin               loc    `json:"origin"`
-		Destination          loc    `json:"destination"`
+		Origin               *loc   `json:"origin"`
+		Destination          *loc   `json:"destination,omitempty"`
 		OriginPlaceID        string `json:"origin_place_id"`
 		UsingCommuterPayment bool   `json:"using_commuter_payment"`
 	}
-
-	b, err := request.JSONMarshal(body{
-		Origin: loc{
+	params := body{
+		Origin: &loc{
 			LatitudeE6:  opts.OriginLatitudeE6(),
 			LongitudeE6: opts.OriginLongitudeE6(),
 		},
-		Destination: loc{
-			LatitudeE6:  opts.DestinationLatitudeE6(),
-			LongitudeE6: opts.DestinationLongitudeE6(),
-		},
 		OriginPlaceID:        opts.OrginPlaceID(),
 		UsingCommuterPayment: opts.UsingCommuterPayment(),
-	})
+	}
+	if opts.DestinationLatitudeE6() != 0 && opts.DestinationLongitudeE6() != 0 {
+		params.Destination = &loc{
+			LatitudeE6:  opts.DestinationLatitudeE6(),
+			LongitudeE6: opts.DestinationLongitudeE6(),
+		}
+	}
+
+	b, err := request.JSONMarshal(params)
 	if err != nil {
 		return nil, err
 	}
