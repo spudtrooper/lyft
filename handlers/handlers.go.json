@@ -1,9 +1,9 @@
 [
   {
-    "Handler": "PlaceRecommendations",
+    "Handler": "AllRideHistory",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 19
+      "line": 46
     }
   },
   {
@@ -14,24 +14,24 @@
     }
   },
   {
-    "Handler": "RideHistory",
-    "Loc": {
-      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 37
-    }
-  },
-  {
-    "Handler": "AllRideHistory",
-    "Loc": {
-      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 46
-    }
-  },
-  {
     "Handler": "Offerings",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
       "line": 55
+    }
+  },
+  {
+    "Handler": "PlaceRecommendations",
+    "Loc": {
+      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
+      "line": 19
+    }
+  },
+  {
+    "Handler": "RideHistory",
+    "Loc": {
+      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
+      "line": 37
     }
   }
 ]
