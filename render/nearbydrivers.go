@@ -3,6 +3,7 @@ package render
 import (
 	"bytes"
 	_ "embed"
+	"encoding/json"
 	"sort"
 
 	"github.com/spudtrooper/lyft/api"
@@ -19,17 +20,25 @@ func NearbyDrivers(input any) ([]byte, error) {
 		ImageURL string
 		Lat, Lng float64
 		IsNearby bool
+		JSON     string
 	}
 	var vehicleViews []vehicleView
 
 	for _, d := range params.NearbyDrivers {
 		id := d.ID
+		var jsonObj = struct {
+			NearbyDriver                       api.NearbyDriversInfoNearbyDriver                       `json:"nearby_drivers"`
+			NearbyDriverByStableOfferProductID api.NearbyDriversInfoNearbyDriverByStableOfferProductID `json:"nearby_drivers_by_stable_offer_product_id"`
+		}{
+			NearbyDriver: d,
+		}
 		var imageURL string
 		var isNearby bool
 		var lat, lng float64
 		for _, nb := range params.NearbyDriversByStableOfferProductID {
 			for _, p := range nb.NearbyDriverProducts {
 				if id == p.DriverID {
+					jsonObj.NearbyDriverByStableOfferProductID = nb
 					isNearby = true
 					if len(d.Locations) > 0 {
 						lat = d.Locations[0].Lat
@@ -41,12 +50,18 @@ func NearbyDrivers(input any) ([]byte, error) {
 				}
 			}
 		}
+		jsonBytes, err := json.Marshal(jsonObj)
+		if err != nil {
+			return nil, err
+		}
+		jsonStr := string(jsonBytes)
 		vehicleViews = append(vehicleViews, vehicleView{
 			ID:       id,
 			ImageURL: imageURL,
 			Lat:      lat,
 			Lng:      lng,
 			IsNearby: isNearby,
+			JSON:     jsonStr,
 		})
 	}
 

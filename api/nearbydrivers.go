@@ -6,7 +6,7 @@ import (
 	"github.com/spudtrooper/goutil/request"
 )
 
-type nearbyDriversInfoNearbyDriver struct {
+type NearbyDriversInfoNearbyDriver struct {
 	ID        string `json:"id"`
 	Locations []struct {
 		Bearing      float64 `json:"bearing"`
@@ -16,7 +16,7 @@ type nearbyDriversInfoNearbyDriver struct {
 	} `json:"locations"`
 }
 
-type nearbyDriversInfoNearbyDriverByStableOfferProductID struct {
+type NearbyDriversInfoNearbyDriverByStableOfferProductID struct {
 	MapMarkerImage struct {
 		Sources []struct {
 			Media struct {
@@ -31,9 +31,9 @@ type nearbyDriversInfoNearbyDriverByStableOfferProductID struct {
 }
 
 type NearbyDriversInfo struct {
-	DefaultNearbyDrivers                nearbyDriversInfoNearbyDriverByStableOfferProductID
-	NearbyDrivers                       map[string]nearbyDriversInfoNearbyDriver                       `json:"nearby_drivers"`
-	NearbyDriversByStableOfferProductID map[string]nearbyDriversInfoNearbyDriverByStableOfferProductID `json:"nearby_drivers_by_stable_offer_product_id"`
+	DefaultNearbyDrivers                NearbyDriversInfoNearbyDriverByStableOfferProductID
+	NearbyDrivers                       map[string]NearbyDriversInfoNearbyDriver                       `json:"nearby_drivers"`
+	NearbyDriversByStableOfferProductID map[string]NearbyDriversInfoNearbyDriverByStableOfferProductID `json:"nearby_drivers_by_stable_offer_product_id"`
 }
 
 //go:generate genopts --params --function NearbyDrivers --extends Base originLatitudeE6:int:40770034 originLongitudeE6:int:-73982912 destinationLatitudeE6:int destinationLongitudeE6:int orginPlaceID:string:lyft:address:3eaa5572-4d37-4a39-92ed-c61906139955 usingCommuterPayment

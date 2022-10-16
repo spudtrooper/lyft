@@ -25,6 +25,7 @@
           <th>Nearby?</th>
           <th>Latitude</th>
           <th>Longitude</th>
+          <th>JSON</th>
         </tr>
       </thead>
       <tbody>
@@ -35,6 +36,15 @@
           <td>{{.IsNearby}}</td>
           <td>{{.Lat}}</td>
           <td>{{.Lng}}</td>
+          <td id="json_{{.ID}}"></td>
+          <script>
+            {
+              const formatter = new JSONFormatter(JSON.parse('{{.JSON}}'), 0, {
+                hoverPreviewEnabled: true,
+              });
+              document.getElementById("json_{{.ID}}").appendChild(formatter.render());
+            }
+          </script>          
         </tr>
         {{- end }}
       </tbody>
