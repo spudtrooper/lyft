@@ -34,7 +34,7 @@ func (c *Client) AllRideHistory(optss ...AllRideHistoryOption) (chan rideHistory
 			}
 
 			if !res.HasMore {
-				return
+				break
 			}
 			for _, t := range res.Data {
 				millis := t.RequestTimestamp * 1000
