@@ -33,7 +33,7 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		},
 		api.NearbyDriversParams{},
 		handler.NewHandlerExtraRequiredFields([]string{"token"}),
-		handler.NewHandlerRenderer(render.Status),
+		handler.NewHandlerRenderer(render.NearbyDrivers),
 	)
 
 	b.NewHandler("RideHistory",
