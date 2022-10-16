@@ -6,6 +6,7 @@ import (
 	_ "embed"
 
 	"github.com/spudtrooper/lyft/api"
+	"github.com/spudtrooper/lyft/render"
 	"github.com/spudtrooper/minimalcli/handler"
 )
 
@@ -32,6 +33,7 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		},
 		api.NearbyDriversParams{},
 		handler.NewHandlerExtraRequiredFields([]string{"token"}),
+		handler.NewHandlerRenderer(render.Status),
 	)
 
 	b.NewHandler("RideHistory",
