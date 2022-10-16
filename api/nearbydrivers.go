@@ -36,7 +36,7 @@ type NearbyDriversInfo struct {
 	NearbyDriversByStableOfferProductID map[string]nearbyDriversInfoNearbyDriverByStableOfferProductID `json:"nearby_drivers_by_stable_offer_product_id"`
 }
 
-//go:generate genopts --params --function NearbyDrivers --extends Base latitudeE6:int:40770034 longitudeE6:int:-73982912 orginPlaceID:string:lyft:address:3eaa5572-4d37-4a39-92ed-c61906139955 usingCommuterPayment
+//go:generate genopts --params --function NearbyDrivers --extends Base originLatitudeE6:int:40770034 originLongitudeE6:int:-73982912 destinationLatitudeE6:int destinationLongitudeE6:int orginPlaceID:string:lyft:address:3eaa5572-4d37-4a39-92ed-c61906139955 usingCommuterPayment
 func (c *Client) NearbyDrivers(optss ...NearbyDriversOption) (*NearbyDriversInfo, error) {
 	opts := MakeNearbyDriversOptions(optss...)
 
@@ -44,20 +44,25 @@ func (c *Client) NearbyDrivers(optss ...NearbyDriversOption) (*NearbyDriversInfo
 
 	headers := c.makeHeaders(true, opts.ToBaseOptions()...)
 
-	type origin struct {
+	type loc struct {
 		LatitudeE6  int `json:"latitude_e6"`
 		LongitudeE6 int `json:"longitude_e6"`
 	}
 	type body struct {
-		Origin               origin `json:"origin"`
+		Origin               loc    `json:"origin"`
+		Destination          loc    `json:"destination"`
 		OriginPlaceID        string `json:"origin_place_id"`
 		UsingCommuterPayment bool   `json:"using_commuter_payment"`
 	}
 
 	b, err := request.JSONMarshal(body{
-		Origin: origin{
-			LatitudeE6:  opts.LatitudeE6(),
-			LongitudeE6: opts.LongitudeE6(),
+		Origin: loc{
+			LatitudeE6:  opts.OriginLatitudeE6(),
+			LongitudeE6: opts.OriginLongitudeE6(),
+		},
+		Destination: loc{
+			LatitudeE6:  opts.DestinationLatitudeE6(),
+			LongitudeE6: opts.DestinationLongitudeE6(),
 		},
 		OriginPlaceID:        opts.OrginPlaceID(),
 		UsingCommuterPayment: opts.UsingCommuterPayment(),
