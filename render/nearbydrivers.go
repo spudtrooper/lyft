@@ -7,13 +7,18 @@ import (
 	"sort"
 
 	"github.com/spudtrooper/lyft/api"
+	"github.com/spudtrooper/minimalcli/handler"
 )
 
 //go:embed tmpl/nearbyDrivers.html
 var nearbyDriversTmpl string
 
-func NearbyDrivers(input any) ([]byte, error) {
+func NearbyDrivers(input any) ([]byte, handler.RendererConfig, error) {
 	params := input.(*api.NearbyDriversInfo)
+
+	config := handler.RendererConfig{
+		IsFragment: true,
+	}
 
 	type vehicleView struct {
 		ID       string
@@ -52,7 +57,7 @@ func NearbyDrivers(input any) ([]byte, error) {
 		}
 		jsonBytes, err := json.Marshal(jsonObj)
 		if err != nil {
-			return nil, err
+			return nil, config, err
 		}
 		jsonStr := string(jsonBytes)
 		vehicleViews = append(vehicleViews, vehicleView{
@@ -73,7 +78,7 @@ func NearbyDrivers(input any) ([]byte, error) {
 	}
 	var buf bytes.Buffer
 	if err := renderTemplate(&buf, nearbyDriversTmpl, "NearbyDrivers", data); err != nil {
-		return nil, err
+		return nil, config, err
 	}
-	return buf.Bytes(), nil
+	return buf.Bytes(), config, nil
 }
