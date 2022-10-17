@@ -1,10 +1,20 @@
 <script src="//azimi.me/json-formatter-js/dist/json-formatter.umd.js"></script>
 
-<table class="table">
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#tab').DataTable();
+  });
+</script>
+
+<table class="table table-striped" id="tab">
   <thead>
     <tr>
       <th>Image</th>
       <th>ID</th>
+      <th>Driver Type</th>
       <th>Nearby?</th>
       <th>Latitude</th>
       <th>Longitude</th>
@@ -16,16 +26,21 @@
     <tr>
       <td><img src="{{.ImageURL}}" alt="Image of {{.ID}}" width="50" height="50"></td>
       <td>{{.ID}}</td>
+      <td>{{.DriverType}}</td>
       <td>{{.IsNearby}}</td>
       <td>{{.Lat}}</td>
       <td>{{.Lng}}</td>
       <td id="json_{{.ID}}"></td>
       <script>
         {
-          const formatter = new JSONFormatter(JSON.parse('{{.JSON}}'), 0, {
-            hoverPreviewEnabled: true,
-          });
-          document.getElementById("json_{{.ID}}").appendChild(formatter.render());
+          try {
+            const formatter = new JSONFormatter(JSON.parse('{{.JSON}}'), 0, {
+              hoverPreviewEnabled: true,
+            });
+            document.getElementById("json_{{.ID}}").appendChild(formatter.render());
+          } catch (e) {
+            console.log('while formatting: ' + e);
+          }
         }
       </script>
     </tr>

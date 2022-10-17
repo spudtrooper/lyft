@@ -21,11 +21,12 @@ func NearbyDrivers(input any) ([]byte, handler.RendererConfig, error) {
 	}
 
 	type vehicleView struct {
-		ID       string
-		ImageURL string
-		Lat, Lng float64
-		IsNearby bool
-		JSON     string
+		ID         string
+		ImageURL   string
+		Lat, Lng   float64
+		IsNearby   bool
+		JSON       string
+		DriverType string
 	}
 	var vehicleViews []vehicleView
 
@@ -40,7 +41,8 @@ func NearbyDrivers(input any) ([]byte, handler.RendererConfig, error) {
 		var imageURL string
 		var isNearby bool
 		var lat, lng float64
-		for _, nb := range params.NearbyDriversByStableOfferProductID {
+		var driverType string
+		for typ, nb := range params.NearbyDriversByStableOfferProductID {
 			for _, p := range nb.NearbyDriverProducts {
 				if id == p.DriverID {
 					jsonObj.NearbyDriverByStableOfferProductID = nb
@@ -52,6 +54,7 @@ func NearbyDrivers(input any) ([]byte, handler.RendererConfig, error) {
 					if len(nb.MapMarkerImage.Sources) > 0 {
 						imageURL = nb.MapMarkerImage.Sources[0].URL
 					}
+					driverType = typ
 				}
 			}
 		}
@@ -61,12 +64,13 @@ func NearbyDrivers(input any) ([]byte, handler.RendererConfig, error) {
 		}
 		jsonStr := string(jsonBytes)
 		vehicleViews = append(vehicleViews, vehicleView{
-			ID:       id,
-			ImageURL: imageURL,
-			Lat:      lat,
-			Lng:      lng,
-			IsNearby: isNearby,
-			JSON:     jsonStr,
+			ID:         id,
+			ImageURL:   imageURL,
+			Lat:        lat,
+			Lng:        lng,
+			IsNearby:   isNearby,
+			JSON:       jsonStr,
+			DriverType: driverType,
 		})
 	}
 
