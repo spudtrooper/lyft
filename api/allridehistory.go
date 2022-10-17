@@ -6,10 +6,10 @@ import (
 )
 
 //go:generate genopts --params --function AllRideHistory --extends RideHistory,Base debug
-func (c *Client) AllRideHistory(optss ...AllRideHistoryOption) (chan rideHistoryInfo, chan error) {
+func (c *Client) AllRideHistory(optss ...AllRideHistoryOption) (chan RideHistoryInfo, chan error) {
 	opts := MakeAllRideHistoryOptions(optss...)
 
-	data, errs := make(chan rideHistoryInfo), make(chan error)
+	data, errs := make(chan RideHistoryInfo), make(chan error)
 	var startTimeMS int
 	go func() {
 		for {

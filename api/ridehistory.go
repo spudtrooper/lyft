@@ -7,7 +7,7 @@ import (
 	"github.com/spudtrooper/goutil/request"
 )
 
-type rideHistoryInfoData struct {
+type RideHistoryInfoData struct {
 	CancelRole              int    `json:"cancel_role"`
 	Distance                int    `json:"distance,omitempty"`
 	DriverFirstName         string `json:"driver_first_name"`
@@ -34,8 +34,8 @@ type rideHistoryInfoData struct {
 	VehicleImageURL string `json:"vehicle_image_url"`
 }
 
-type rideHistoryInfo struct {
-	Data        []rideHistoryInfoData `json:"data"`
+type RideHistoryInfo struct {
+	Data        []RideHistoryInfoData `json:"data"`
 	HasMore     bool                  `json:"has_more"`
 	Limit       int                   `json:"limit"`
 	Skip        int                   `json:"skip"`
@@ -43,7 +43,7 @@ type rideHistoryInfo struct {
 }
 
 //go:generate genopts --params --function RideHistory --extends Base limit:int:10 source:string:ride_history_list startTime:time.Time timeout:time.Duration
-func (c *Client) RideHistory(optss ...RideHistoryOption) (*rideHistoryInfo, error) {
+func (c *Client) RideHistory(optss ...RideHistoryOption) (*RideHistoryInfo, error) {
 	opts := MakeRideHistoryOptions(optss...)
 
 	startTime := or.Time(opts.StartTime(), time.Now())
@@ -56,7 +56,7 @@ func (c *Client) RideHistory(optss ...RideHistoryOption) (*rideHistoryInfo, erro
 
 	headers := c.makeHeaders(true, opts.ToBaseOptions()...)
 
-	var res rideHistoryInfo
+	var res RideHistoryInfo
 	if _, err := request.Get(uri, &res,
 		request.RequestExtraHeaders(headers),
 		request.RequestTimeout(opts.Timeout())); err != nil {

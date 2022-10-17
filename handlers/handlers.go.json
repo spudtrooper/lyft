@@ -3,7 +3,7 @@
     "Handler": "AllRideHistory",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 48
+      "line": 49
     }
   },
   {
@@ -17,7 +17,7 @@
     "Handler": "Offerings",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 57
+      "line": 58
     }
   },
   {

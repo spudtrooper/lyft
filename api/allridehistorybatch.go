@@ -6,7 +6,7 @@ import (
 )
 
 type AllRideHistoryBatchInfo struct {
-	Rides []rideHistoryInfo `json:"rides"`
+	Rides []RideHistoryInfo `json:"rides"`
 }
 
 // TODO: genopts should transitively extend options
@@ -15,7 +15,7 @@ func (c *Client) AllRideHistoryBatch(optss ...AllRideHistoryBatchOption) (*AllRi
 	opts := MakeAllRideHistoryBatchOptions(optss...)
 
 	data, errs := c.AllRideHistory(opts.ToAllRideHistoryOptions()...)
-	var rides []rideHistoryInfo
+	var rides []RideHistoryInfo
 	errBuilder := goutilerrors.MakeErrorCollector()
 	parallel.WaitFor(func() {
 		for d := range data {

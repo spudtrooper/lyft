@@ -43,6 +43,7 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		},
 		api.RideHistoryParams{},
 		handler.NewHandlerExtraRequiredFields([]string{"token"}),
+		handler.NewHandlerRenderer(render.RideHistory),
 	)
 
 	b.NewHandler("AllRideHistory",

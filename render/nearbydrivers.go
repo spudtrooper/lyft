@@ -10,7 +10,7 @@ import (
 	"github.com/spudtrooper/minimalcli/handler"
 )
 
-//go:embed tmpl/nearbyDrivers.html
+//go:embed tmpl/nearby-drivers.html
 var nearbyDriversTmpl string
 
 func NearbyDrivers(input any) ([]byte, handler.RendererConfig, error) {
