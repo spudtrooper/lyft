@@ -5,14 +5,20 @@ import (
 	"time"
 )
 
-//go:generate genopts --params --function AllRideHistory --extends RideHistory,Base debug
+//go:generate genopts --params --function AllRideHistory --extends RideHistory,Base debug totalLimit:int
 func (c *Client) AllRideHistory(optss ...AllRideHistoryOption) (chan RideHistoryInfo, chan error) {
 	opts := MakeAllRideHistoryOptions(optss...)
+
+	log.Printf("optss: %+v", optss)
 
 	data, errs := make(chan RideHistoryInfo), make(chan error)
 	var startTimeMS int
 	go func() {
-		for {
+		for i := 0; ; i++ {
+			if opts.TotalLimit() > 0 && i >= opts.TotalLimit() {
+				log.Printf("break because at limit")
+				break
+			}
 			os := opts.ToRideHistoryOptions()
 			if startTimeMS != 0 {
 				startTime := time.Unix(int64(startTimeMS/1000), 0)
@@ -20,11 +26,15 @@ func (c *Client) AllRideHistory(optss ...AllRideHistoryOption) (chan RideHistory
 					log.Printf("using start_time_ms: %d startTime:%+v", startTimeMS, startTime)
 				}
 				os = append(os, RideHistoryStartTime(startTime))
+			} else {
+				if opts.Debug() {
+					log.Printf("start_time_ms is 0")
+				}
 			}
 			res, err := c.RideHistory(os...)
 			if err != nil {
 				errs <- err
-				continue
+				break
 			}
 
 			data <- *res

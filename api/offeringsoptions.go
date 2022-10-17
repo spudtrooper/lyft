@@ -2,10 +2,17 @@
 package api
 
 import (
+	"fmt"
+
 	"github.com/spudtrooper/goutil/or"
 )
 
-type OfferingsOption func(*offeringsOptionImpl)
+type OfferingsOption struct {
+	f func(*offeringsOptionImpl)
+	s string
+}
+
+func (o OfferingsOption) String() string { return o.s }
 
 type OfferingsOptions interface {
 	OriginLatitudeE6() int
@@ -34,179 +41,179 @@ type OfferingsOptions interface {
 }
 
 func OfferingsOriginLatitudeE6(originLatitudeE6 int) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		opts.has_originLatitudeE6 = true
 		opts.originLatitudeE6 = originLatitudeE6
-	}
+	}, fmt.Sprintf("api.OfferingsOriginLatitudeE6(int %+v)}", originLatitudeE6)}
 }
 func OfferingsOriginLatitudeE6Flag(originLatitudeE6 *int) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		if originLatitudeE6 == nil {
 			return
 		}
 		opts.has_originLatitudeE6 = true
 		opts.originLatitudeE6 = *originLatitudeE6
-	}
+	}, fmt.Sprintf("api.OfferingsOriginLatitudeE6(int %+v)}", originLatitudeE6)}
 }
 
 func OfferingsOriginLongitudeE6(originLongitudeE6 int) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		opts.has_originLongitudeE6 = true
 		opts.originLongitudeE6 = originLongitudeE6
-	}
+	}, fmt.Sprintf("api.OfferingsOriginLongitudeE6(int %+v)}", originLongitudeE6)}
 }
 func OfferingsOriginLongitudeE6Flag(originLongitudeE6 *int) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		if originLongitudeE6 == nil {
 			return
 		}
 		opts.has_originLongitudeE6 = true
 		opts.originLongitudeE6 = *originLongitudeE6
-	}
+	}, fmt.Sprintf("api.OfferingsOriginLongitudeE6(int %+v)}", originLongitudeE6)}
 }
 
 func OfferingsDestinationLatitudeE6(destinationLatitudeE6 int) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		opts.has_destinationLatitudeE6 = true
 		opts.destinationLatitudeE6 = destinationLatitudeE6
-	}
+	}, fmt.Sprintf("api.OfferingsDestinationLatitudeE6(int %+v)}", destinationLatitudeE6)}
 }
 func OfferingsDestinationLatitudeE6Flag(destinationLatitudeE6 *int) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		if destinationLatitudeE6 == nil {
 			return
 		}
 		opts.has_destinationLatitudeE6 = true
 		opts.destinationLatitudeE6 = *destinationLatitudeE6
-	}
+	}, fmt.Sprintf("api.OfferingsDestinationLatitudeE6(int %+v)}", destinationLatitudeE6)}
 }
 
 func OfferingsDestinationLongitudeE6(destinationLongitudeE6 int) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		opts.has_destinationLongitudeE6 = true
 		opts.destinationLongitudeE6 = destinationLongitudeE6
-	}
+	}, fmt.Sprintf("api.OfferingsDestinationLongitudeE6(int %+v)}", destinationLongitudeE6)}
 }
 func OfferingsDestinationLongitudeE6Flag(destinationLongitudeE6 *int) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		if destinationLongitudeE6 == nil {
 			return
 		}
 		opts.has_destinationLongitudeE6 = true
 		opts.destinationLongitudeE6 = *destinationLongitudeE6
-	}
+	}, fmt.Sprintf("api.OfferingsDestinationLongitudeE6(int %+v)}", destinationLongitudeE6)}
 }
 
 func OfferingsSupportsSelectableOfferCell(supportsSelectableOfferCell bool) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		opts.has_supportsSelectableOfferCell = true
 		opts.supportsSelectableOfferCell = supportsSelectableOfferCell
-	}
+	}, fmt.Sprintf("api.OfferingsSupportsSelectableOfferCell(bool %+v)}", supportsSelectableOfferCell)}
 }
 func OfferingsSupportsSelectableOfferCellFlag(supportsSelectableOfferCell *bool) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		if supportsSelectableOfferCell == nil {
 			return
 		}
 		opts.has_supportsSelectableOfferCell = true
 		opts.supportsSelectableOfferCell = *supportsSelectableOfferCell
-	}
+	}, fmt.Sprintf("api.OfferingsSupportsSelectableOfferCell(bool %+v)}", supportsSelectableOfferCell)}
 }
 
 func OfferingsSupportsAccordionOfferCell(supportsAccordionOfferCell bool) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		opts.has_supportsAccordionOfferCell = true
 		opts.supportsAccordionOfferCell = supportsAccordionOfferCell
-	}
+	}, fmt.Sprintf("api.OfferingsSupportsAccordionOfferCell(bool %+v)}", supportsAccordionOfferCell)}
 }
 func OfferingsSupportsAccordionOfferCellFlag(supportsAccordionOfferCell *bool) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		if supportsAccordionOfferCell == nil {
 			return
 		}
 		opts.has_supportsAccordionOfferCell = true
 		opts.supportsAccordionOfferCell = *supportsAccordionOfferCell
-	}
+	}, fmt.Sprintf("api.OfferingsSupportsAccordionOfferCell(bool %+v)}", supportsAccordionOfferCell)}
 }
 
 func OfferingsSupportsOfferSelector(supportsOfferSelector bool) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		opts.has_supportsOfferSelector = true
 		opts.supportsOfferSelector = supportsOfferSelector
-	}
+	}, fmt.Sprintf("api.OfferingsSupportsOfferSelector(bool %+v)}", supportsOfferSelector)}
 }
 func OfferingsSupportsOfferSelectorFlag(supportsOfferSelector *bool) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		if supportsOfferSelector == nil {
 			return
 		}
 		opts.has_supportsOfferSelector = true
 		opts.supportsOfferSelector = *supportsOfferSelector
-	}
+	}, fmt.Sprintf("api.OfferingsSupportsOfferSelector(bool %+v)}", supportsOfferSelector)}
 }
 
 func OfferingsLastOffersID(lastOffersID string) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		opts.has_lastOffersID = true
 		opts.lastOffersID = lastOffersID
-	}
+	}, fmt.Sprintf("api.OfferingsLastOffersID(string %+v)}", lastOffersID)}
 }
 func OfferingsLastOffersIDFlag(lastOffersID *string) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		if lastOffersID == nil {
 			return
 		}
 		opts.has_lastOffersID = true
 		opts.lastOffersID = *lastOffersID
-	}
+	}, fmt.Sprintf("api.OfferingsLastOffersID(string %+v)}", lastOffersID)}
 }
 
 func OfferingsOfferSelectorSessionID(offerSelectorSessionID string) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		opts.has_offerSelectorSessionID = true
 		opts.offerSelectorSessionID = offerSelectorSessionID
-	}
+	}, fmt.Sprintf("api.OfferingsOfferSelectorSessionID(string %+v)}", offerSelectorSessionID)}
 }
 func OfferingsOfferSelectorSessionIDFlag(offerSelectorSessionID *string) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		if offerSelectorSessionID == nil {
 			return
 		}
 		opts.has_offerSelectorSessionID = true
 		opts.offerSelectorSessionID = *offerSelectorSessionID
-	}
+	}, fmt.Sprintf("api.OfferingsOfferSelectorSessionID(string %+v)}", offerSelectorSessionID)}
 }
 
 func OfferingsRequestSource(requestSource int) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		opts.has_requestSource = true
 		opts.requestSource = requestSource
-	}
+	}, fmt.Sprintf("api.OfferingsRequestSource(int %+v)}", requestSource)}
 }
 func OfferingsRequestSourceFlag(requestSource *int) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		if requestSource == nil {
 			return
 		}
 		opts.has_requestSource = true
 		opts.requestSource = *requestSource
-	}
+	}, fmt.Sprintf("api.OfferingsRequestSource(int %+v)}", requestSource)}
 }
 
 func OfferingsToken(token string) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		opts.has_token = true
 		opts.token = token
-	}
+	}, fmt.Sprintf("api.OfferingsToken(string %+v)}", token)}
 }
 func OfferingsTokenFlag(token *string) OfferingsOption {
-	return func(opts *offeringsOptionImpl) {
+	return OfferingsOption{func(opts *offeringsOptionImpl) {
 		if token == nil {
 			return
 		}
 		opts.has_token = true
 		opts.token = *token
-	}
+	}, fmt.Sprintf("api.OfferingsToken(string %+v)}", token)}
 }
 
 type offeringsOptionImpl struct {
@@ -324,7 +331,7 @@ func (o *offeringsOptionImpl) ToBaseOptions() []BaseOption {
 func makeOfferingsOptionImpl(opts ...OfferingsOption) *offeringsOptionImpl {
 	res := &offeringsOptionImpl{}
 	for _, opt := range opts {
-		opt(res)
+		opt.f(res)
 	}
 	return res
 }

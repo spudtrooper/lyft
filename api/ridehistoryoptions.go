@@ -2,12 +2,18 @@
 package api
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/spudtrooper/goutil/or"
 )
 
-type RideHistoryOption func(*rideHistoryOptionImpl)
+type RideHistoryOption struct {
+	f func(*rideHistoryOptionImpl)
+	s string
+}
+
+func (o RideHistoryOption) String() string { return o.s }
 
 type RideHistoryOptions interface {
 	Limit() int
@@ -24,83 +30,83 @@ type RideHistoryOptions interface {
 }
 
 func RideHistoryLimit(limit int) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
+	return RideHistoryOption{func(opts *rideHistoryOptionImpl) {
 		opts.has_limit = true
 		opts.limit = limit
-	}
+	}, fmt.Sprintf("api.RideHistoryLimit(int %+v)}", limit)}
 }
 func RideHistoryLimitFlag(limit *int) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
+	return RideHistoryOption{func(opts *rideHistoryOptionImpl) {
 		if limit == nil {
 			return
 		}
 		opts.has_limit = true
 		opts.limit = *limit
-	}
+	}, fmt.Sprintf("api.RideHistoryLimit(int %+v)}", limit)}
 }
 
 func RideHistorySource(source string) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
+	return RideHistoryOption{func(opts *rideHistoryOptionImpl) {
 		opts.has_source = true
 		opts.source = source
-	}
+	}, fmt.Sprintf("api.RideHistorySource(string %+v)}", source)}
 }
 func RideHistorySourceFlag(source *string) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
+	return RideHistoryOption{func(opts *rideHistoryOptionImpl) {
 		if source == nil {
 			return
 		}
 		opts.has_source = true
 		opts.source = *source
-	}
+	}, fmt.Sprintf("api.RideHistorySource(string %+v)}", source)}
 }
 
 func RideHistoryStartTime(startTime time.Time) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
+	return RideHistoryOption{func(opts *rideHistoryOptionImpl) {
 		opts.has_startTime = true
 		opts.startTime = startTime
-	}
+	}, fmt.Sprintf("api.RideHistoryStartTime(time.Time %+v)}", startTime)}
 }
 func RideHistoryStartTimeFlag(startTime *time.Time) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
+	return RideHistoryOption{func(opts *rideHistoryOptionImpl) {
 		if startTime == nil {
 			return
 		}
 		opts.has_startTime = true
 		opts.startTime = *startTime
-	}
+	}, fmt.Sprintf("api.RideHistoryStartTime(time.Time %+v)}", startTime)}
 }
 
 func RideHistoryTimeout(timeout time.Duration) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
+	return RideHistoryOption{func(opts *rideHistoryOptionImpl) {
 		opts.has_timeout = true
 		opts.timeout = timeout
-	}
+	}, fmt.Sprintf("api.RideHistoryTimeout(time.Duration %+v)}", timeout)}
 }
 func RideHistoryTimeoutFlag(timeout *time.Duration) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
+	return RideHistoryOption{func(opts *rideHistoryOptionImpl) {
 		if timeout == nil {
 			return
 		}
 		opts.has_timeout = true
 		opts.timeout = *timeout
-	}
+	}, fmt.Sprintf("api.RideHistoryTimeout(time.Duration %+v)}", timeout)}
 }
 
 func RideHistoryToken(token string) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
+	return RideHistoryOption{func(opts *rideHistoryOptionImpl) {
 		opts.has_token = true
 		opts.token = token
-	}
+	}, fmt.Sprintf("api.RideHistoryToken(string %+v)}", token)}
 }
 func RideHistoryTokenFlag(token *string) RideHistoryOption {
-	return func(opts *rideHistoryOptionImpl) {
+	return RideHistoryOption{func(opts *rideHistoryOptionImpl) {
 		if token == nil {
 			return
 		}
 		opts.has_token = true
 		opts.token = *token
-	}
+	}, fmt.Sprintf("api.RideHistoryToken(string %+v)}", token)}
 }
 
 type rideHistoryOptionImpl struct {
@@ -155,7 +161,7 @@ func (o *rideHistoryOptionImpl) ToBaseOptions() []BaseOption {
 func makeRideHistoryOptionImpl(opts ...RideHistoryOption) *rideHistoryOptionImpl {
 	res := &rideHistoryOptionImpl{}
 	for _, opt := range opts {
-		opt(res)
+		opt.f(res)
 	}
 	return res
 }

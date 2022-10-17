@@ -2,10 +2,17 @@
 package api
 
 import (
+	"fmt"
+
 	"github.com/spudtrooper/goutil/or"
 )
 
-type NearbyDriversOption func(*nearbyDriversOptionImpl)
+type NearbyDriversOption struct {
+	f func(*nearbyDriversOptionImpl)
+	s string
+}
+
+func (o NearbyDriversOption) String() string { return o.s }
 
 type NearbyDriversOptions interface {
 	OriginLatitudeE6() int
@@ -26,115 +33,115 @@ type NearbyDriversOptions interface {
 }
 
 func NearbyDriversOriginLatitudeE6(originLatitudeE6 int) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		opts.has_originLatitudeE6 = true
 		opts.originLatitudeE6 = originLatitudeE6
-	}
+	}, fmt.Sprintf("api.NearbyDriversOriginLatitudeE6(int %+v)}", originLatitudeE6)}
 }
 func NearbyDriversOriginLatitudeE6Flag(originLatitudeE6 *int) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		if originLatitudeE6 == nil {
 			return
 		}
 		opts.has_originLatitudeE6 = true
 		opts.originLatitudeE6 = *originLatitudeE6
-	}
+	}, fmt.Sprintf("api.NearbyDriversOriginLatitudeE6(int %+v)}", originLatitudeE6)}
 }
 
 func NearbyDriversOriginLongitudeE6(originLongitudeE6 int) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		opts.has_originLongitudeE6 = true
 		opts.originLongitudeE6 = originLongitudeE6
-	}
+	}, fmt.Sprintf("api.NearbyDriversOriginLongitudeE6(int %+v)}", originLongitudeE6)}
 }
 func NearbyDriversOriginLongitudeE6Flag(originLongitudeE6 *int) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		if originLongitudeE6 == nil {
 			return
 		}
 		opts.has_originLongitudeE6 = true
 		opts.originLongitudeE6 = *originLongitudeE6
-	}
+	}, fmt.Sprintf("api.NearbyDriversOriginLongitudeE6(int %+v)}", originLongitudeE6)}
 }
 
 func NearbyDriversDestinationLatitudeE6(destinationLatitudeE6 int) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		opts.has_destinationLatitudeE6 = true
 		opts.destinationLatitudeE6 = destinationLatitudeE6
-	}
+	}, fmt.Sprintf("api.NearbyDriversDestinationLatitudeE6(int %+v)}", destinationLatitudeE6)}
 }
 func NearbyDriversDestinationLatitudeE6Flag(destinationLatitudeE6 *int) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		if destinationLatitudeE6 == nil {
 			return
 		}
 		opts.has_destinationLatitudeE6 = true
 		opts.destinationLatitudeE6 = *destinationLatitudeE6
-	}
+	}, fmt.Sprintf("api.NearbyDriversDestinationLatitudeE6(int %+v)}", destinationLatitudeE6)}
 }
 
 func NearbyDriversDestinationLongitudeE6(destinationLongitudeE6 int) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		opts.has_destinationLongitudeE6 = true
 		opts.destinationLongitudeE6 = destinationLongitudeE6
-	}
+	}, fmt.Sprintf("api.NearbyDriversDestinationLongitudeE6(int %+v)}", destinationLongitudeE6)}
 }
 func NearbyDriversDestinationLongitudeE6Flag(destinationLongitudeE6 *int) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		if destinationLongitudeE6 == nil {
 			return
 		}
 		opts.has_destinationLongitudeE6 = true
 		opts.destinationLongitudeE6 = *destinationLongitudeE6
-	}
+	}, fmt.Sprintf("api.NearbyDriversDestinationLongitudeE6(int %+v)}", destinationLongitudeE6)}
 }
 
 func NearbyDriversOrginPlaceID(orginPlaceID string) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		opts.has_orginPlaceID = true
 		opts.orginPlaceID = orginPlaceID
-	}
+	}, fmt.Sprintf("api.NearbyDriversOrginPlaceID(string %+v)}", orginPlaceID)}
 }
 func NearbyDriversOrginPlaceIDFlag(orginPlaceID *string) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		if orginPlaceID == nil {
 			return
 		}
 		opts.has_orginPlaceID = true
 		opts.orginPlaceID = *orginPlaceID
-	}
+	}, fmt.Sprintf("api.NearbyDriversOrginPlaceID(string %+v)}", orginPlaceID)}
 }
 
 func NearbyDriversUsingCommuterPayment(usingCommuterPayment bool) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		opts.has_usingCommuterPayment = true
 		opts.usingCommuterPayment = usingCommuterPayment
-	}
+	}, fmt.Sprintf("api.NearbyDriversUsingCommuterPayment(bool %+v)}", usingCommuterPayment)}
 }
 func NearbyDriversUsingCommuterPaymentFlag(usingCommuterPayment *bool) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		if usingCommuterPayment == nil {
 			return
 		}
 		opts.has_usingCommuterPayment = true
 		opts.usingCommuterPayment = *usingCommuterPayment
-	}
+	}, fmt.Sprintf("api.NearbyDriversUsingCommuterPayment(bool %+v)}", usingCommuterPayment)}
 }
 
 func NearbyDriversToken(token string) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		opts.has_token = true
 		opts.token = token
-	}
+	}, fmt.Sprintf("api.NearbyDriversToken(string %+v)}", token)}
 }
 func NearbyDriversTokenFlag(token *string) NearbyDriversOption {
-	return func(opts *nearbyDriversOptionImpl) {
+	return NearbyDriversOption{func(opts *nearbyDriversOptionImpl) {
 		if token == nil {
 			return
 		}
 		opts.has_token = true
 		opts.token = *token
-	}
+	}, fmt.Sprintf("api.NearbyDriversToken(string %+v)}", token)}
 }
 
 type nearbyDriversOptionImpl struct {
@@ -207,7 +214,7 @@ func (o *nearbyDriversOptionImpl) ToBaseOptions() []BaseOption {
 func makeNearbyDriversOptionImpl(opts ...NearbyDriversOption) *nearbyDriversOptionImpl {
 	res := &nearbyDriversOptionImpl{}
 	for _, opt := range opts {
-		opt(res)
+		opt.f(res)
 	}
 	return res
 }
