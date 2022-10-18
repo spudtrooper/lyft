@@ -15,8 +15,8 @@ func (c *Client) AllRideHistory(optss ...AllRideHistoryOption) (chan RideHistory
 	var startTimeMS int
 	go func() {
 		for i := 0; ; i++ {
-			if opts.TotalLimit() > 0 && i >= opts.TotalLimit() {
-				log.Printf("break because at limit")
+			if opts.TotalLimit() > 0 && i > opts.TotalLimit() {
+				log.Printf("break because at limit of %d", opts.TotalLimit())
 				break
 			}
 			os := opts.ToRideHistoryOptions()
