@@ -219,11 +219,11 @@ func (o *allRideHistoryBatchOptionImpl) ToAllRideHistoryOptions() []AllRideHisto
 // ToRideHistoryOptions converts AllRideHistoryBatchOption to an array of RideHistoryOption
 func (o *allRideHistoryBatchOptionImpl) ToRideHistoryOptions() []RideHistoryOption {
 	return []RideHistoryOption{
-		RideHistoryLimit(o.Limit()),
-		RideHistorySource(o.Source()),
 		RideHistoryStartTime(o.StartTime()),
 		RideHistoryTimeout(o.Timeout()),
 		RideHistoryToken(o.Token()),
+		RideHistoryLimit(o.Limit()),
+		RideHistorySource(o.Source()),
 	}
 }
 

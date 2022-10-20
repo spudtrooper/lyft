@@ -203,11 +203,11 @@ func (o AllRideHistoryParams) Options() []AllRideHistoryOption {
 // ToRideHistoryOptions converts AllRideHistoryOption to an array of RideHistoryOption
 func (o *allRideHistoryOptionImpl) ToRideHistoryOptions() []RideHistoryOption {
 	return []RideHistoryOption{
+		RideHistoryStartTime(o.StartTime()),
 		RideHistoryTimeout(o.Timeout()),
 		RideHistoryToken(o.Token()),
 		RideHistoryLimit(o.Limit()),
 		RideHistorySource(o.Source()),
-		RideHistoryStartTime(o.StartTime()),
 	}
 }
 
