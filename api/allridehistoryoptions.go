@@ -18,8 +18,6 @@ func (o AllRideHistoryOption) String() string { return o.s }
 type AllRideHistoryOptions interface {
 	Debug() bool
 	HasDebug() bool
-	TotalLimit() int
-	HasTotalLimit() bool
 	Limit() int
 	HasLimit() bool
 	Source() string
@@ -30,6 +28,8 @@ type AllRideHistoryOptions interface {
 	HasTimeout() bool
 	Token() string
 	HasToken() bool
+	TotalLimit() int
+	HasTotalLimit() bool
 	ToRideHistoryOptions() []RideHistoryOption
 	ToBaseOptions() []BaseOption
 }
@@ -48,22 +48,6 @@ func AllRideHistoryDebugFlag(debug *bool) AllRideHistoryOption {
 		opts.has_debug = true
 		opts.debug = *debug
 	}, fmt.Sprintf("api.AllRideHistoryDebug(bool %+v)}", debug)}
-}
-
-func AllRideHistoryTotalLimit(totalLimit int) AllRideHistoryOption {
-	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
-		opts.has_totalLimit = true
-		opts.totalLimit = totalLimit
-	}, fmt.Sprintf("api.AllRideHistoryTotalLimit(int %+v)}", totalLimit)}
-}
-func AllRideHistoryTotalLimitFlag(totalLimit *int) AllRideHistoryOption {
-	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
-		if totalLimit == nil {
-			return
-		}
-		opts.has_totalLimit = true
-		opts.totalLimit = *totalLimit
-	}, fmt.Sprintf("api.AllRideHistoryTotalLimit(int %+v)}", totalLimit)}
 }
 
 func AllRideHistoryLimit(limit int) AllRideHistoryOption {
@@ -146,6 +130,22 @@ func AllRideHistoryTokenFlag(token *string) AllRideHistoryOption {
 	}, fmt.Sprintf("api.AllRideHistoryToken(string %+v)}", token)}
 }
 
+func AllRideHistoryTotalLimit(totalLimit int) AllRideHistoryOption {
+	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
+		opts.has_totalLimit = true
+		opts.totalLimit = totalLimit
+	}, fmt.Sprintf("api.AllRideHistoryTotalLimit(int %+v)}", totalLimit)}
+}
+func AllRideHistoryTotalLimitFlag(totalLimit *int) AllRideHistoryOption {
+	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
+		if totalLimit == nil {
+			return
+		}
+		opts.has_totalLimit = true
+		opts.totalLimit = *totalLimit
+	}, fmt.Sprintf("api.AllRideHistoryTotalLimit(int %+v)}", totalLimit)}
+}
+
 type allRideHistoryOptionImpl struct {
 	debug          bool
 	has_debug      bool
@@ -165,8 +165,6 @@ type allRideHistoryOptionImpl struct {
 
 func (a *allRideHistoryOptionImpl) Debug() bool            { return a.debug }
 func (a *allRideHistoryOptionImpl) HasDebug() bool         { return a.has_debug }
-func (a *allRideHistoryOptionImpl) TotalLimit() int        { return a.totalLimit }
-func (a *allRideHistoryOptionImpl) HasTotalLimit() bool    { return a.has_totalLimit }
 func (a *allRideHistoryOptionImpl) Limit() int             { return or.Int(a.limit, 10) }
 func (a *allRideHistoryOptionImpl) HasLimit() bool         { return a.has_limit }
 func (a *allRideHistoryOptionImpl) Source() string         { return or.String(a.source, "ride_history_list") }
@@ -177,37 +175,39 @@ func (a *allRideHistoryOptionImpl) Timeout() time.Duration { return a.timeout }
 func (a *allRideHistoryOptionImpl) HasTimeout() bool       { return a.has_timeout }
 func (a *allRideHistoryOptionImpl) Token() string          { return a.token }
 func (a *allRideHistoryOptionImpl) HasToken() bool         { return a.has_token }
+func (a *allRideHistoryOptionImpl) TotalLimit() int        { return a.totalLimit }
+func (a *allRideHistoryOptionImpl) HasTotalLimit() bool    { return a.has_totalLimit }
 
 type AllRideHistoryParams struct {
 	Debug      bool          `json:"debug"`
-	TotalLimit int           `json:"total_limit"`
 	Limit      int           `json:"limit" default:"10"`
 	Source     string        `json:"source" default:"\"ride_history_list\""`
 	StartTime  time.Time     `json:"start_time"`
 	Timeout    time.Duration `json:"timeout"`
 	Token      string        `json:"token"`
+	TotalLimit int           `json:"total_limit"`
 }
 
 func (o AllRideHistoryParams) Options() []AllRideHistoryOption {
 	return []AllRideHistoryOption{
 		AllRideHistoryDebug(o.Debug),
-		AllRideHistoryTotalLimit(o.TotalLimit),
 		AllRideHistoryLimit(o.Limit),
 		AllRideHistorySource(o.Source),
 		AllRideHistoryStartTime(o.StartTime),
 		AllRideHistoryTimeout(o.Timeout),
 		AllRideHistoryToken(o.Token),
+		AllRideHistoryTotalLimit(o.TotalLimit),
 	}
 }
 
 // ToRideHistoryOptions converts AllRideHistoryOption to an array of RideHistoryOption
 func (o *allRideHistoryOptionImpl) ToRideHistoryOptions() []RideHistoryOption {
 	return []RideHistoryOption{
+		RideHistoryLimit(o.Limit()),
+		RideHistorySource(o.Source()),
 		RideHistoryStartTime(o.StartTime()),
 		RideHistoryTimeout(o.Timeout()),
 		RideHistoryToken(o.Token()),
-		RideHistoryLimit(o.Limit()),
-		RideHistorySource(o.Source()),
 	}
 }
 

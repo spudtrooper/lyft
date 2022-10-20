@@ -15,15 +15,31 @@ type PlaceRecommendationsOption struct {
 func (o PlaceRecommendationsOption) String() string { return o.s }
 
 type PlaceRecommendationsOptions interface {
+	Accuracy() int
+	HasAccuracy() bool
 	Lat() float64
 	HasLat() bool
 	Lng() float64
 	HasLng() bool
-	Accuracy() int
-	HasAccuracy() bool
 	Token() string
 	HasToken() bool
 	ToBaseOptions() []BaseOption
+}
+
+func PlaceRecommendationsAccuracy(accuracy int) PlaceRecommendationsOption {
+	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
+		opts.has_accuracy = true
+		opts.accuracy = accuracy
+	}, fmt.Sprintf("api.PlaceRecommendationsAccuracy(int %+v)}", accuracy)}
+}
+func PlaceRecommendationsAccuracyFlag(accuracy *int) PlaceRecommendationsOption {
+	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
+		if accuracy == nil {
+			return
+		}
+		opts.has_accuracy = true
+		opts.accuracy = *accuracy
+	}, fmt.Sprintf("api.PlaceRecommendationsAccuracy(int %+v)}", accuracy)}
 }
 
 func PlaceRecommendationsLat(lat float64) PlaceRecommendationsOption {
@@ -58,22 +74,6 @@ func PlaceRecommendationsLngFlag(lng *float64) PlaceRecommendationsOption {
 	}, fmt.Sprintf("api.PlaceRecommendationsLng(float64 %+v)}", lng)}
 }
 
-func PlaceRecommendationsAccuracy(accuracy int) PlaceRecommendationsOption {
-	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
-		opts.has_accuracy = true
-		opts.accuracy = accuracy
-	}, fmt.Sprintf("api.PlaceRecommendationsAccuracy(int %+v)}", accuracy)}
-}
-func PlaceRecommendationsAccuracyFlag(accuracy *int) PlaceRecommendationsOption {
-	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
-		if accuracy == nil {
-			return
-		}
-		opts.has_accuracy = true
-		opts.accuracy = *accuracy
-	}, fmt.Sprintf("api.PlaceRecommendationsAccuracy(int %+v)}", accuracy)}
-}
-
 func PlaceRecommendationsToken(token string) PlaceRecommendationsOption {
 	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
 		opts.has_token = true
@@ -101,27 +101,27 @@ type placeRecommendationsOptionImpl struct {
 	has_token    bool
 }
 
+func (p *placeRecommendationsOptionImpl) Accuracy() int     { return p.accuracy }
+func (p *placeRecommendationsOptionImpl) HasAccuracy() bool { return p.has_accuracy }
 func (p *placeRecommendationsOptionImpl) Lat() float64      { return or.Float64(p.lat, 40.7683) }
 func (p *placeRecommendationsOptionImpl) HasLat() bool      { return p.has_lat }
 func (p *placeRecommendationsOptionImpl) Lng() float64      { return or.Float64(p.lng, -73.9802) }
 func (p *placeRecommendationsOptionImpl) HasLng() bool      { return p.has_lng }
-func (p *placeRecommendationsOptionImpl) Accuracy() int     { return p.accuracy }
-func (p *placeRecommendationsOptionImpl) HasAccuracy() bool { return p.has_accuracy }
 func (p *placeRecommendationsOptionImpl) Token() string     { return p.token }
 func (p *placeRecommendationsOptionImpl) HasToken() bool    { return p.has_token }
 
 type PlaceRecommendationsParams struct {
+	Accuracy int     `json:"accuracy"`
 	Lat      float64 `json:"lat" default:"40.7683"`
 	Lng      float64 `json:"lng" default:"-73.9802"`
-	Accuracy int     `json:"accuracy"`
 	Token    string  `json:"token"`
 }
 
 func (o PlaceRecommendationsParams) Options() []PlaceRecommendationsOption {
 	return []PlaceRecommendationsOption{
+		PlaceRecommendationsAccuracy(o.Accuracy),
 		PlaceRecommendationsLat(o.Lat),
 		PlaceRecommendationsLng(o.Lng),
-		PlaceRecommendationsAccuracy(o.Accuracy),
 		PlaceRecommendationsToken(o.Token),
 	}
 }
