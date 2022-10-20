@@ -145,20 +145,20 @@ func NearbyDriversUsingCommuterPaymentFlag(usingCommuterPayment *bool) NearbyDri
 }
 
 type nearbyDriversOptionImpl struct {
-	originLatitudeE6           int
-	has_originLatitudeE6       bool
-	originLongitudeE6          int
-	has_originLongitudeE6      bool
 	destinationLatitudeE6      int
 	has_destinationLatitudeE6  bool
 	destinationLongitudeE6     int
 	has_destinationLongitudeE6 bool
 	orginPlaceID               string
 	has_orginPlaceID           bool
-	usingCommuterPayment       bool
-	has_usingCommuterPayment   bool
+	originLatitudeE6           int
+	has_originLatitudeE6       bool
+	originLongitudeE6          int
+	has_originLongitudeE6      bool
 	token                      string
 	has_token                  bool
+	usingCommuterPayment       bool
+	has_usingCommuterPayment   bool
 }
 
 func (n *nearbyDriversOptionImpl) DestinationLatitudeE6() int     { return n.destinationLatitudeE6 }

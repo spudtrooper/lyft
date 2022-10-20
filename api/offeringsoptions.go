@@ -217,26 +217,26 @@ func OfferingsTokenFlag(token *string) OfferingsOption {
 }
 
 type offeringsOptionImpl struct {
-	originLatitudeE6                int
-	has_originLatitudeE6            bool
-	originLongitudeE6               int
-	has_originLongitudeE6           bool
 	destinationLatitudeE6           int
 	has_destinationLatitudeE6       bool
 	destinationLongitudeE6          int
 	has_destinationLongitudeE6      bool
-	supportsSelectableOfferCell     bool
-	has_supportsSelectableOfferCell bool
-	supportsAccordionOfferCell      bool
-	has_supportsAccordionOfferCell  bool
-	supportsOfferSelector           bool
-	has_supportsOfferSelector       bool
 	lastOffersID                    string
 	has_lastOffersID                bool
 	offerSelectorSessionID          string
 	has_offerSelectorSessionID      bool
+	originLatitudeE6                int
+	has_originLatitudeE6            bool
+	originLongitudeE6               int
+	has_originLongitudeE6           bool
 	requestSource                   int
 	has_requestSource               bool
+	supportsAccordionOfferCell      bool
+	has_supportsAccordionOfferCell  bool
+	supportsOfferSelector           bool
+	has_supportsOfferSelector       bool
+	supportsSelectableOfferCell     bool
+	has_supportsSelectableOfferCell bool
 	token                           string
 	has_token                       bool
 }

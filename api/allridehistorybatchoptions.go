@@ -31,8 +31,8 @@ type AllRideHistoryBatchOptions interface {
 	TotalLimit() int
 	HasTotalLimit() bool
 	ToAllRideHistoryOptions() []AllRideHistoryOption
-	ToRideHistoryOptions() []RideHistoryOption
 	ToBaseOptions() []BaseOption
+	ToRideHistoryOptions() []RideHistoryOption
 }
 
 func AllRideHistoryBatchDebug(debug bool) AllRideHistoryBatchOption {
@@ -150,8 +150,6 @@ func AllRideHistoryBatchTotalLimitFlag(totalLimit *int) AllRideHistoryBatchOptio
 type allRideHistoryBatchOptionImpl struct {
 	debug          bool
 	has_debug      bool
-	totalLimit     int
-	has_totalLimit bool
 	limit          int
 	has_limit      bool
 	source         string
@@ -162,6 +160,8 @@ type allRideHistoryBatchOptionImpl struct {
 	has_timeout    bool
 	token          string
 	has_token      bool
+	totalLimit     int
+	has_totalLimit bool
 }
 
 func (a *allRideHistoryBatchOptionImpl) Debug() bool    { return a.debug }
@@ -206,24 +206,13 @@ func (o AllRideHistoryBatchParams) Options() []AllRideHistoryBatchOption {
 // ToAllRideHistoryOptions converts AllRideHistoryBatchOption to an array of AllRideHistoryOption
 func (o *allRideHistoryBatchOptionImpl) ToAllRideHistoryOptions() []AllRideHistoryOption {
 	return []AllRideHistoryOption{
-		AllRideHistoryDebug(o.Debug()),
-		AllRideHistoryTotalLimit(o.TotalLimit()),
 		AllRideHistoryLimit(o.Limit()),
 		AllRideHistorySource(o.Source()),
 		AllRideHistoryStartTime(o.StartTime()),
 		AllRideHistoryTimeout(o.Timeout()),
 		AllRideHistoryToken(o.Token()),
-	}
-}
-
-// ToRideHistoryOptions converts AllRideHistoryBatchOption to an array of RideHistoryOption
-func (o *allRideHistoryBatchOptionImpl) ToRideHistoryOptions() []RideHistoryOption {
-	return []RideHistoryOption{
-		RideHistoryLimit(o.Limit()),
-		RideHistorySource(o.Source()),
-		RideHistoryStartTime(o.StartTime()),
-		RideHistoryTimeout(o.Timeout()),
-		RideHistoryToken(o.Token()),
+		AllRideHistoryDebug(o.Debug()),
+		AllRideHistoryTotalLimit(o.TotalLimit()),
 	}
 }
 
@@ -231,6 +220,17 @@ func (o *allRideHistoryBatchOptionImpl) ToRideHistoryOptions() []RideHistoryOpti
 func (o *allRideHistoryBatchOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
 		BaseToken(o.Token()),
+	}
+}
+
+// ToRideHistoryOptions converts AllRideHistoryBatchOption to an array of RideHistoryOption
+func (o *allRideHistoryBatchOptionImpl) ToRideHistoryOptions() []RideHistoryOption {
+	return []RideHistoryOption{
+		RideHistoryToken(o.Token()),
+		RideHistoryLimit(o.Limit()),
+		RideHistorySource(o.Source()),
+		RideHistoryStartTime(o.StartTime()),
+		RideHistoryTimeout(o.Timeout()),
 	}
 }
 

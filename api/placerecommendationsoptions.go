@@ -91,12 +91,12 @@ func PlaceRecommendationsTokenFlag(token *string) PlaceRecommendationsOption {
 }
 
 type placeRecommendationsOptionImpl struct {
+	accuracy     int
+	has_accuracy bool
 	lat          float64
 	has_lat      bool
 	lng          float64
 	has_lng      bool
-	accuracy     int
-	has_accuracy bool
 	token        string
 	has_token    bool
 }
