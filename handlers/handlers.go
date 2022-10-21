@@ -36,6 +36,16 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		handler.NewHandlerRenderer(render.NearbyDrivers),
 	)
 
+	b.NewHandler("AllNearbyDrivers",
+		func(ctx context.Context, ip any) (any, error) {
+			p := ip.(api.AllNearbyDriversParams)
+			return client.AllNearbyDrivers(p.Options()...)
+		},
+		api.AllNearbyDriversParams{},
+		handler.NewHandlerExtraRequiredFields([]string{"token"}),
+		// handler.NewHandlerRenderer(render.NearbyDrivers),
+	)
+
 	b.NewHandler("RideHistory",
 		func(ctx context.Context, ip any) (any, error) {
 			p := ip.(api.RideHistoryParams)

@@ -2,33 +2,48 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"strings"
 
 	"github.com/spudtrooper/goutil/request"
 )
 
+type NearbyDriversInfoNearbyDriverLocation struct {
+	Bearing      float64 `json:"bearing"`
+	Lat          float64 `json:"lat"`
+	Lng          float64 `json:"lng"`
+	RecordedAtMs int64   `json:"recorded_at_ms"`
+}
+
+func (n NearbyDriversInfoNearbyDriverLocation) hash() string {
+	return fmt.Sprintf("%f:%f:%f:%d", n.Bearing, n.Lat, n.Lng, n.RecordedAtMs)
+}
+
 type NearbyDriversInfoNearbyDriver struct {
-	ID        string `json:"id"`
-	Locations []struct {
-		Bearing      float64 `json:"bearing"`
-		Lat          float64 `json:"lat"`
-		Lng          float64 `json:"lng"`
-		RecordedAtMs int64   `json:"recorded_at_ms"`
-	} `json:"locations"`
+	ID        string                                  `json:"id"`
+	Locations []NearbyDriversInfoNearbyDriverLocation `json:"locations"`
+}
+
+type NearbyDriversInfoNearbyDriverByStableOfferProductIDSourceMedia struct {
+	UserInterfaceStyle int `json:"user_interface_style"`
+}
+
+type NearbyDriversInfoNearbyDriverByStableOfferProductIDSource struct {
+	Media NearbyDriversInfoNearbyDriverByStableOfferProductIDSourceMedia `json:"media"`
+	URL   string                                                         `json:"url"`
+}
+
+type NearbyDriversInfoNearbyDriverByStableOfferProductIDNearbyDriverProduct struct {
+	DriverID string `json:"driver_id"`
+}
+
+type NearbyDriversInfoNearbyDriverByStableOfferProductIDMapMarkerImage struct {
+	Sources []NearbyDriversInfoNearbyDriverByStableOfferProductIDSource `json:"sources"`
 }
 
 type NearbyDriversInfoNearbyDriverByStableOfferProductID struct {
-	MapMarkerImage struct {
-		Sources []struct {
-			Media struct {
-				UserInterfaceStyle int `json:"user_interface_style"`
-			} `json:"media"`
-			URL string `json:"url"`
-		} `json:"sources"`
-	} `json:"map_marker_image"`
-	NearbyDriverProducts []struct {
-		DriverID string `json:"driver_id"`
-	} `json:"nearby_driver_products"`
+	MapMarkerImage       NearbyDriversInfoNearbyDriverByStableOfferProductIDMapMarkerImage        `json:"map_marker_image"`
+	NearbyDriverProducts []NearbyDriversInfoNearbyDriverByStableOfferProductIDNearbyDriverProduct `json:"nearby_driver_products"`
 }
 
 type NearbyDriversInfo struct {
