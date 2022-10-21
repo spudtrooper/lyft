@@ -19,6 +19,8 @@ type VehicleViewsMapOptions interface {
 	HasLatitude() bool
 	Longitude() float64
 	HasLongitude() bool
+	ShowCenters() bool
+	HasShowCenters() bool
 	SleepSecs() int
 	HasSleepSecs() bool
 	Zoom() int
@@ -57,6 +59,22 @@ func VehicleViewsMapLongitudeFlag(longitude *float64) VehicleViewsMapOption {
 	}, fmt.Sprintf("render.VehicleViewsMapLongitude(float64 %+v)}", longitude)}
 }
 
+func VehicleViewsMapShowCenters(showCenters bool) VehicleViewsMapOption {
+	return VehicleViewsMapOption{func(opts *vehicleViewsMapOptionImpl) {
+		opts.has_showCenters = true
+		opts.showCenters = showCenters
+	}, fmt.Sprintf("render.VehicleViewsMapShowCenters(bool %+v)}", showCenters)}
+}
+func VehicleViewsMapShowCentersFlag(showCenters *bool) VehicleViewsMapOption {
+	return VehicleViewsMapOption{func(opts *vehicleViewsMapOptionImpl) {
+		if showCenters == nil {
+			return
+		}
+		opts.has_showCenters = true
+		opts.showCenters = *showCenters
+	}, fmt.Sprintf("render.VehicleViewsMapShowCenters(bool %+v)}", showCenters)}
+}
+
 func VehicleViewsMapSleepSecs(sleepSecs int) VehicleViewsMapOption {
 	return VehicleViewsMapOption{func(opts *vehicleViewsMapOptionImpl) {
 		opts.has_sleepSecs = true
@@ -90,37 +108,43 @@ func VehicleViewsMapZoomFlag(zoom *int) VehicleViewsMapOption {
 }
 
 type vehicleViewsMapOptionImpl struct {
-	latitude      float64
-	has_latitude  bool
-	longitude     float64
-	has_longitude bool
-	sleepSecs     int
-	has_sleepSecs bool
-	zoom          int
-	has_zoom      bool
+	latitude        float64
+	has_latitude    bool
+	longitude       float64
+	has_longitude   bool
+	showCenters     bool
+	has_showCenters bool
+	sleepSecs       int
+	has_sleepSecs   bool
+	zoom            int
+	has_zoom        bool
 }
 
-func (v *vehicleViewsMapOptionImpl) Latitude() float64  { return or.Float64(v.latitude, 40.7701286) }
-func (v *vehicleViewsMapOptionImpl) HasLatitude() bool  { return v.has_latitude }
-func (v *vehicleViewsMapOptionImpl) Longitude() float64 { return or.Float64(v.longitude, -73.9829762) }
-func (v *vehicleViewsMapOptionImpl) HasLongitude() bool { return v.has_longitude }
-func (v *vehicleViewsMapOptionImpl) SleepSecs() int     { return or.Int(v.sleepSecs, 0) }
-func (v *vehicleViewsMapOptionImpl) HasSleepSecs() bool { return v.has_sleepSecs }
-func (v *vehicleViewsMapOptionImpl) Zoom() int          { return or.Int(v.zoom, 14) }
-func (v *vehicleViewsMapOptionImpl) HasZoom() bool      { return v.has_zoom }
+func (v *vehicleViewsMapOptionImpl) Latitude() float64    { return or.Float64(v.latitude, 40.7701286) }
+func (v *vehicleViewsMapOptionImpl) HasLatitude() bool    { return v.has_latitude }
+func (v *vehicleViewsMapOptionImpl) Longitude() float64   { return or.Float64(v.longitude, -73.9829762) }
+func (v *vehicleViewsMapOptionImpl) HasLongitude() bool   { return v.has_longitude }
+func (v *vehicleViewsMapOptionImpl) ShowCenters() bool    { return v.showCenters }
+func (v *vehicleViewsMapOptionImpl) HasShowCenters() bool { return v.has_showCenters }
+func (v *vehicleViewsMapOptionImpl) SleepSecs() int       { return or.Int(v.sleepSecs, 0) }
+func (v *vehicleViewsMapOptionImpl) HasSleepSecs() bool   { return v.has_sleepSecs }
+func (v *vehicleViewsMapOptionImpl) Zoom() int            { return or.Int(v.zoom, 14) }
+func (v *vehicleViewsMapOptionImpl) HasZoom() bool        { return v.has_zoom }
 
 type VehicleViewsMapParams struct {
-	Latitude  float64 `json:"latitude" default:"40.7701286"`
-	Longitude float64 `json:"longitude" default:"-73.9829762"`
-	SleepSecs int     `json:"sleep_secs" default:"0"`
-	Token     string  `json:"token" required:"true"`
-	Zoom      int     `json:"zoom" default:"14"`
+	Latitude    float64 `json:"latitude" default:"40.7701286"`
+	Longitude   float64 `json:"longitude" default:"-73.9829762"`
+	ShowCenters bool    `json:"show_centers"`
+	SleepSecs   int     `json:"sleep_secs" default:"0"`
+	Token       string  `json:"token" required:"true"`
+	Zoom        int     `json:"zoom" default:"14"`
 }
 
 func (o VehicleViewsMapParams) Options() []VehicleViewsMapOption {
 	return []VehicleViewsMapOption{
 		VehicleViewsMapLatitude(o.Latitude),
 		VehicleViewsMapLongitude(o.Longitude),
+		VehicleViewsMapShowCenters(o.ShowCenters),
 		VehicleViewsMapSleepSecs(o.SleepSecs),
 		VehicleViewsMapZoom(o.Zoom),
 	}

@@ -320,10 +320,10 @@ func (o *allNearbyDriversOptionImpl) ToNearbyDriversOptions() []NearbyDriversOpt
 		NearbyDriversDestinationLatitudeE6(o.DestinationLatitudeE6()),
 		NearbyDriversDestinationLongitudeE6(o.DestinationLongitudeE6()),
 		NearbyDriversOrginPlaceID(o.OrginPlaceID()),
-		NearbyDriversUsingCommuterPayment(o.UsingCommuterPayment()),
-		NearbyDriversToken(o.Token()),
 		NearbyDriversOriginLatitudeE6(o.OriginLatitudeE6()),
 		NearbyDriversOriginLongitudeE6(o.OriginLongitudeE6()),
+		NearbyDriversToken(o.Token()),
+		NearbyDriversUsingCommuterPayment(o.UsingCommuterPayment()),
 	}
 }
 

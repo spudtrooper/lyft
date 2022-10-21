@@ -48,6 +48,7 @@
       const sleepSecs = Number.parseInt(params.get('sleepSecs') || '0');
       const deltaE6 = Number.parseInt(params.get('delta_e_6') || '9000');
       const multiples = Number.parseInt(params.get('multiples') || '1');
+      const showCenters = params.get('showCenters') == true;
       let map = new google.maps.Map(document.getElementById("map"), {
         center: {
           lat: lat,
@@ -94,15 +95,17 @@
                 icon: icon,
               }));
             });
-            data.Centers.forEach(p => {
-              markers.push(new google.maps.Marker({
-                position: {
-                  lat: p.Latitude / 1e6,
-                  lng: p.Longitude / 1e6,
-                },
-                map: map,
-              }));
-            });
+            if (showCenters) {
+              data.Centers.forEach(p => {
+                markers.push(new google.maps.Marker({
+                  position: {
+                    lat: p.Latitude / 1e6,
+                    lng: p.Longitude / 1e6,
+                  },
+                  map: map,
+                }));
+              });
+            }
             $(`#overlay .num`).text(data.VehicleViews.length);
             $('#overlay .last-update').text(new Date().toLocaleString());
             $('#overlay .lat').text(map.getCenter().lat());

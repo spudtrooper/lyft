@@ -309,16 +309,16 @@ func (o AllVehicleViewsParams) Options() []AllVehicleViewsOption {
 // ToAllNearbyDriversOptions converts AllVehicleViewsOption to an array of AllNearbyDriversOption
 func (o *allVehicleViewsOptionImpl) ToAllNearbyDriversOptions() []AllNearbyDriversOption {
 	return []AllNearbyDriversOption{
-		AllNearbyDriversToken(o.Token()),
+		AllNearbyDriversDebug(o.Debug()),
+		AllNearbyDriversDeltaE6(o.DeltaE6()),
+		AllNearbyDriversDestinationLatitudeE6(o.DestinationLatitudeE6()),
 		AllNearbyDriversDestinationLongitudeE6(o.DestinationLongitudeE6()),
+		AllNearbyDriversMultiples(o.Multiples()),
+		AllNearbyDriversOrginPlaceID(o.OrginPlaceID()),
 		AllNearbyDriversOriginLatitudeE6(o.OriginLatitudeE6()),
 		AllNearbyDriversOriginLongitudeE6(o.OriginLongitudeE6()),
-		AllNearbyDriversDestinationLatitudeE6(o.DestinationLatitudeE6()),
-		AllNearbyDriversOrginPlaceID(o.OrginPlaceID()),
-		AllNearbyDriversDeltaE6(o.DeltaE6()),
-		AllNearbyDriversMultiples(o.Multiples()),
 		AllNearbyDriversThreads(o.Threads()),
-		AllNearbyDriversDebug(o.Debug()),
+		AllNearbyDriversToken(o.Token()),
 		AllNearbyDriversUsingCommuterPayment(o.UsingCommuterPayment()),
 	}
 }
@@ -333,13 +333,13 @@ func (o *allVehicleViewsOptionImpl) ToBaseOptions() []BaseOption {
 // ToNearbyDriversOptions converts AllVehicleViewsOption to an array of NearbyDriversOption
 func (o *allVehicleViewsOptionImpl) ToNearbyDriversOptions() []NearbyDriversOption {
 	return []NearbyDriversOption{
-		NearbyDriversOriginLongitudeE6(o.OriginLongitudeE6()),
 		NearbyDriversDestinationLatitudeE6(o.DestinationLatitudeE6()),
 		NearbyDriversDestinationLongitudeE6(o.DestinationLongitudeE6()),
 		NearbyDriversOrginPlaceID(o.OrginPlaceID()),
-		NearbyDriversUsingCommuterPayment(o.UsingCommuterPayment()),
-		NearbyDriversToken(o.Token()),
 		NearbyDriversOriginLatitudeE6(o.OriginLatitudeE6()),
+		NearbyDriversOriginLongitudeE6(o.OriginLongitudeE6()),
+		NearbyDriversToken(o.Token()),
+		NearbyDriversUsingCommuterPayment(o.UsingCommuterPayment()),
 	}
 }
 
