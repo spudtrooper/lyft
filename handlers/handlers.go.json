@@ -10,14 +10,14 @@
     "Handler": "AllRideHistory",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 116
+      "line": 120
     }
   },
   {
     "Handler": "AllVehicleViews",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 79
+      "line": 81
     }
   },
   {
@@ -31,7 +31,7 @@
     "Handler": "Offerings",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 126
+      "line": 130
     }
   },
   {
@@ -45,7 +45,7 @@
     "Handler": "RideHistory",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 106
+      "line": 110
     }
   },
   {

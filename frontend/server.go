@@ -20,7 +20,7 @@ func ListenAndServe(ctx context.Context, client *api.Client, port int, host stri
 	}
 
 	locs := handlers.SourceLocations
-	handlers := handlers.CreateHandlers(client)
+	handlers := handlers.CreateHandlers("api", client)
 	mux := http.NewServeMux()
 	handler.Init(mux)
 	if err := handler.AddHandlers(ctx, mux, handlers,

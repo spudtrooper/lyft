@@ -15,17 +15,35 @@ type AllVehicleViewsMapOption struct {
 func (o AllVehicleViewsMapOption) String() string { return o.s }
 
 type AllVehicleViewsMapOptions interface {
+	DeltaE6() int
+	HasDeltaE6() bool
 	Latitude() float64
 	HasLatitude() bool
 	Longitude() float64
 	HasLongitude() bool
-	Multiple() int
-	HasMultiple() bool
+	Multiples() int
+	HasMultiples() bool
 	SleepSecs() int
 	HasSleepSecs() bool
 	Zoom() int
 	HasZoom() bool
 	ToVehicleViewsMapOptions() []VehicleViewsMapOption
+}
+
+func AllVehicleViewsMapDeltaE6(deltaE6 int) AllVehicleViewsMapOption {
+	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
+		opts.has_deltaE6 = true
+		opts.deltaE6 = deltaE6
+	}, fmt.Sprintf("render.AllVehicleViewsMapDeltaE6(int %+v)}", deltaE6)}
+}
+func AllVehicleViewsMapDeltaE6Flag(deltaE6 *int) AllVehicleViewsMapOption {
+	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
+		if deltaE6 == nil {
+			return
+		}
+		opts.has_deltaE6 = true
+		opts.deltaE6 = *deltaE6
+	}, fmt.Sprintf("render.AllVehicleViewsMapDeltaE6(int %+v)}", deltaE6)}
 }
 
 func AllVehicleViewsMapLatitude(latitude float64) AllVehicleViewsMapOption {
@@ -60,20 +78,20 @@ func AllVehicleViewsMapLongitudeFlag(longitude *float64) AllVehicleViewsMapOptio
 	}, fmt.Sprintf("render.AllVehicleViewsMapLongitude(float64 %+v)}", longitude)}
 }
 
-func AllVehicleViewsMapMultiple(multiple int) AllVehicleViewsMapOption {
+func AllVehicleViewsMapMultiples(multiples int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
-		opts.has_multiple = true
-		opts.multiple = multiple
-	}, fmt.Sprintf("render.AllVehicleViewsMapMultiple(int %+v)}", multiple)}
+		opts.has_multiples = true
+		opts.multiples = multiples
+	}, fmt.Sprintf("render.AllVehicleViewsMapMultiples(int %+v)}", multiples)}
 }
-func AllVehicleViewsMapMultipleFlag(multiple *int) AllVehicleViewsMapOption {
+func AllVehicleViewsMapMultiplesFlag(multiples *int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
-		if multiple == nil {
+		if multiples == nil {
 			return
 		}
-		opts.has_multiple = true
-		opts.multiple = *multiple
-	}, fmt.Sprintf("render.AllVehicleViewsMapMultiple(int %+v)}", multiple)}
+		opts.has_multiples = true
+		opts.multiples = *multiples
+	}, fmt.Sprintf("render.AllVehicleViewsMapMultiples(int %+v)}", multiples)}
 }
 
 func AllVehicleViewsMapSleepSecs(sleepSecs int) AllVehicleViewsMapOption {
@@ -109,35 +127,40 @@ func AllVehicleViewsMapZoomFlag(zoom *int) AllVehicleViewsMapOption {
 }
 
 type allVehicleViewsMapOptionImpl struct {
+	deltaE6       int
+	has_deltaE6   bool
 	latitude      float64
 	has_latitude  bool
 	longitude     float64
 	has_longitude bool
-	multiple      int
-	has_multiple  bool
+	multiples     int
+	has_multiples bool
 	sleepSecs     int
 	has_sleepSecs bool
 	zoom          int
 	has_zoom      bool
 }
 
+func (a *allVehicleViewsMapOptionImpl) DeltaE6() int      { return or.Int(a.deltaE6, 130) }
+func (a *allVehicleViewsMapOptionImpl) HasDeltaE6() bool  { return a.has_deltaE6 }
 func (a *allVehicleViewsMapOptionImpl) Latitude() float64 { return or.Float64(a.latitude, 40.7701286) }
 func (a *allVehicleViewsMapOptionImpl) HasLatitude() bool { return a.has_latitude }
 func (a *allVehicleViewsMapOptionImpl) Longitude() float64 {
 	return or.Float64(a.longitude, -73.9829762)
 }
 func (a *allVehicleViewsMapOptionImpl) HasLongitude() bool { return a.has_longitude }
-func (a *allVehicleViewsMapOptionImpl) Multiple() int      { return or.Int(a.multiple, 1) }
-func (a *allVehicleViewsMapOptionImpl) HasMultiple() bool  { return a.has_multiple }
+func (a *allVehicleViewsMapOptionImpl) Multiples() int     { return or.Int(a.multiples, 1) }
+func (a *allVehicleViewsMapOptionImpl) HasMultiples() bool { return a.has_multiples }
 func (a *allVehicleViewsMapOptionImpl) SleepSecs() int     { return or.Int(a.sleepSecs, 0) }
 func (a *allVehicleViewsMapOptionImpl) HasSleepSecs() bool { return a.has_sleepSecs }
 func (a *allVehicleViewsMapOptionImpl) Zoom() int          { return or.Int(a.zoom, 14) }
 func (a *allVehicleViewsMapOptionImpl) HasZoom() bool      { return a.has_zoom }
 
 type AllVehicleViewsMapParams struct {
+	DeltaE6   int     `json:"delta_e_6" default:"130"`
 	Latitude  float64 `json:"latitude" default:"40.7701286"`
 	Longitude float64 `json:"longitude" default:"-73.9829762"`
-	Multiple  int     `json:"multiple" default:"1"`
+	Multiples int     `json:"multiples" default:"1"`
 	SleepSecs int     `json:"sleep_secs" default:"0"`
 	Token     string  `json:"token" required:"true"`
 	Zoom      int     `json:"zoom" default:"14"`
@@ -145,9 +168,10 @@ type AllVehicleViewsMapParams struct {
 
 func (o AllVehicleViewsMapParams) Options() []AllVehicleViewsMapOption {
 	return []AllVehicleViewsMapOption{
+		AllVehicleViewsMapDeltaE6(o.DeltaE6),
 		AllVehicleViewsMapLatitude(o.Latitude),
 		AllVehicleViewsMapLongitude(o.Longitude),
-		AllVehicleViewsMapMultiple(o.Multiple),
+		AllVehicleViewsMapMultiples(o.Multiples),
 		AllVehicleViewsMapSleepSecs(o.SleepSecs),
 		AllVehicleViewsMapZoom(o.Zoom),
 	}
@@ -156,10 +180,10 @@ func (o AllVehicleViewsMapParams) Options() []AllVehicleViewsMapOption {
 // ToVehicleViewsMapOptions converts AllVehicleViewsMapOption to an array of VehicleViewsMapOption
 func (o *allVehicleViewsMapOptionImpl) ToVehicleViewsMapOptions() []VehicleViewsMapOption {
 	return []VehicleViewsMapOption{
-		VehicleViewsMapLatitude(o.Latitude()),
-		VehicleViewsMapLongitude(o.Longitude()),
 		VehicleViewsMapZoom(o.Zoom()),
 		VehicleViewsMapSleepSecs(o.SleepSecs()),
+		VehicleViewsMapLatitude(o.Latitude()),
+		VehicleViewsMapLongitude(o.Longitude()),
 	}
 }
 

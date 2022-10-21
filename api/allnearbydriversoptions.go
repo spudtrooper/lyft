@@ -317,13 +317,13 @@ func (o *allNearbyDriversOptionImpl) ToBaseOptions() []BaseOption {
 // ToNearbyDriversOptions converts AllNearbyDriversOption to an array of NearbyDriversOption
 func (o *allNearbyDriversOptionImpl) ToNearbyDriversOptions() []NearbyDriversOption {
 	return []NearbyDriversOption{
-		NearbyDriversToken(o.Token()),
-		NearbyDriversOriginLatitudeE6(o.OriginLatitudeE6()),
 		NearbyDriversOriginLongitudeE6(o.OriginLongitudeE6()),
 		NearbyDriversDestinationLatitudeE6(o.DestinationLatitudeE6()),
 		NearbyDriversDestinationLongitudeE6(o.DestinationLongitudeE6()),
 		NearbyDriversOrginPlaceID(o.OrginPlaceID()),
 		NearbyDriversUsingCommuterPayment(o.UsingCommuterPayment()),
+		NearbyDriversToken(o.Token()),
+		NearbyDriversOriginLatitudeE6(o.OriginLatitudeE6()),
 	}
 }
 

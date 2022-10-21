@@ -46,6 +46,8 @@
       const lng = Number.parseFloat(params.get('longitude') || '-73.9829762');
       const zoom = Number.parseInt(params.get('zoom') || '14');
       const sleepSecs = Number.parseInt(params.get('sleepSecs') || '0');
+      const deltaE6 = Number.parseInt(params.get('delta_e_6') || '130');
+      const multiples = Number.parseInt(params.get('multiples') || '1');
       map = new google.maps.Map(document.getElementById("map"), {
         center: {
           lat: lat,
@@ -62,11 +64,13 @@
           lngE6 = Math.round(map.getCenter().lng() * 1e6);
           console.log('request', 'lat', latE6, 'lng', lngE6);
         $.ajax({
-          url: "/api/{{.Route}}",
+          url: "/{{.Prefix}}/{{.Route}}",
           data: {
             token: obj['token'],
             origin_latitude_e_6: latE6,
             origin_longitude_e_6: lngE6,
+            delta_e_6: deltaE6,
+            multiples: multiples,
           },
           error: function (xhr, status, error) {
             console.log('error', xhr, status, error);

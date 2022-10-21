@@ -19,7 +19,7 @@ import (
 //go:embed handlers.go.json
 var SourceLocations []byte
 
-func CreateHandlers(client *api.Client) []handler.Handler {
+func CreateHandlers(prefix string, client *api.Client) []handler.Handler {
 	b := handler.NewHandlerBuilder()
 
 	b.NewHandler("PlaceRecommendations",
@@ -60,14 +60,16 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 	)
 
 	var vehicleViewsData = struct {
-		Route string
+		Prefix string
+		Route  string
 	}{
-		Route: "vehicleviews",
+		Prefix: prefix,
+		Route:  "vehicleviews",
 	}
 	var vehicleViewsBuf bytes.Buffer
 	if err := renderTemplate(&vehicleViewsBuf, render.VehicleViewsMapTmpl, "VehicleViewsMap", vehicleViewsData); err != nil {
 		// TODO: return error instead
-		log.Fatalf("vehicleViews error: %v", err)
+		log.Fatalf("renderTemplate(vehicleViews error: %v", err)
 	}
 
 	b.NewStaticHandler("VehicleViewsMap",
@@ -87,14 +89,16 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 	)
 
 	var allVehicleViewsData = struct {
-		Route string
+		Prefix string
+		Route  string
 	}{
-		Route: "allvehicleviews",
+		Prefix: prefix,
+		Route:  "allvehicleviews",
 	}
 	var allVehicleViewsBuf bytes.Buffer
 	if err := renderTemplate(&allVehicleViewsBuf, render.VehicleViewsMapTmpl, "AllVehicleViewsMap", allVehicleViewsData); err != nil {
 		// TODO: return error instead
-		log.Fatalf("allVehicleViewsBuf error: %v", err)
+		log.Fatalf("renderTemplate(allVehicleViewsBuf) error: %v", err)
 	}
 
 	b.NewStaticHandler("AllVehicleViewsMap",

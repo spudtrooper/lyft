@@ -206,13 +206,13 @@ func (o AllRideHistoryBatchParams) Options() []AllRideHistoryBatchOption {
 // ToAllRideHistoryOptions converts AllRideHistoryBatchOption to an array of AllRideHistoryOption
 func (o *allRideHistoryBatchOptionImpl) ToAllRideHistoryOptions() []AllRideHistoryOption {
 	return []AllRideHistoryOption{
-		AllRideHistoryDebug(o.Debug()),
 		AllRideHistoryTotalLimit(o.TotalLimit()),
 		AllRideHistoryLimit(o.Limit()),
 		AllRideHistorySource(o.Source()),
 		AllRideHistoryStartTime(o.StartTime()),
 		AllRideHistoryTimeout(o.Timeout()),
 		AllRideHistoryToken(o.Token()),
+		AllRideHistoryDebug(o.Debug()),
 	}
 }
 
@@ -226,11 +226,11 @@ func (o *allRideHistoryBatchOptionImpl) ToBaseOptions() []BaseOption {
 // ToRideHistoryOptions converts AllRideHistoryBatchOption to an array of RideHistoryOption
 func (o *allRideHistoryBatchOptionImpl) ToRideHistoryOptions() []RideHistoryOption {
 	return []RideHistoryOption{
-		RideHistorySource(o.Source()),
-		RideHistoryStartTime(o.StartTime()),
 		RideHistoryTimeout(o.Timeout()),
 		RideHistoryToken(o.Token()),
 		RideHistoryLimit(o.Limit()),
+		RideHistorySource(o.Source()),
+		RideHistoryStartTime(o.StartTime()),
 	}
 }
 
