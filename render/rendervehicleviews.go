@@ -9,18 +9,12 @@ import (
 	"github.com/spudtrooper/minimalcli/handler"
 )
 
-//go:embed tmpl/nearby-drivers.html
-var nearbyDriversTmpl string
+//go:embed tmpl/vehicle-views.html
+var viewhicleViewsTmpl string
 
-func NearbyDrivers(input any) ([]byte, handler.RendererConfig, error) {
-	params := input.(*api.NearbyDriversInfo)
-
+func renderVehicleViews(vehicleViews []api.VehicleView) ([]byte, handler.RendererConfig, error) {
 	config := handler.RendererConfig{
 		IsFragment: true,
-	}
-	vehicleViews, err := params.VehicleViews()
-	if err != nil {
-		return nil, config, err
 	}
 	sort.Slice(vehicleViews, func(i, j int) bool { return vehicleViews[i].ID < vehicleViews[j].ID })
 	var data = struct {
@@ -29,7 +23,7 @@ func NearbyDrivers(input any) ([]byte, handler.RendererConfig, error) {
 		VehicleViews: vehicleViews,
 	}
 	var buf bytes.Buffer
-	if err := renderTemplate(&buf, nearbyDriversTmpl, "NearbyDrivers", data); err != nil {
+	if err := renderTemplate(&buf, viewhicleViewsTmpl, "VehicleViews", data); err != nil {
 		return nil, config, err
 	}
 	return buf.Bytes(), config, nil

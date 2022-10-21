@@ -14,6 +14,10 @@ type AllNearbyDriversInfo struct {
 	NearbyDriversByStableOfferProductID map[string]NearbyDriversInfoNearbyDriverByStableOfferProductID `json:"nearby_drivers_by_stable_offer_product_id"`
 }
 
+func (n AllNearbyDriversInfo) VehicleViews() ([]VehicleView, error) {
+	return toVehicleViews(n.NearbyDrivers, n.NearbyDriversByStableOfferProductID)
+}
+
 //go:generate genopts --params --function AllNearbyDrivers --extends Base,NearbyDrivers deltaE6:int:130 multiples:int:1 threads:int:5 debug
 func (c *Client) AllNearbyDrivers(optss ...AllNearbyDriversOption) (*AllNearbyDriversInfo, error) {
 	opts := MakeAllNearbyDriversOptions(optss...)
@@ -63,12 +67,8 @@ func (c *Client) AllNearbyDrivers(optss ...AllNearbyDriversOption) (*AllNearbyDr
 						errs <- err
 						continue
 					}
-					if debug {
-						log.Printf("info: %+v", info)
-					}
 					infosCh <- *info
 				}
-				log.Printf("done")
 			}()
 		}
 		wg.Wait()

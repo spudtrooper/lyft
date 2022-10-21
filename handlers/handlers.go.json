@@ -3,42 +3,56 @@
     "Handler": "AllNearbyDrivers",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 39
+      "line": 43
     }
   },
   {
     "Handler": "AllRideHistory",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 59
+      "line": 116
+    }
+  },
+  {
+    "Handler": "AllVehicleViews",
+    "Loc": {
+      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
+      "line": 79
     }
   },
   {
     "Handler": "NearbyDrivers",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 29
+      "line": 34
     }
   },
   {
     "Handler": "Offerings",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 69
+      "line": 126
     }
   },
   {
     "Handler": "PlaceRecommendations",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 20
+      "line": 25
     }
   },
   {
     "Handler": "RideHistory",
     "Loc": {
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
-      "line": 49
+      "line": 106
+    }
+  },
+  {
+    "Handler": "VehicleViews",
+    "Loc": {
+      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
+      "line": 52
     }
   }
 ]

@@ -1,0 +1,133 @@
+<html>
+
+<head>
+  <title>Simple Map</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <script src="//code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous"></script>
+  <style>
+    #map {
+      height: 100%;
+    }
+
+    #overlay {
+      z-index: 100000;
+      background-color: #fff;
+      border: 1px solid black;
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      padding: 10px;
+      min-width: 100px;
+      min-height: 100px;
+    }
+
+    .num {
+      font-weight: bold;
+    }
+
+    .show {
+      font-style: italic;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+  <script>
+    function initMap() {
+      const params = new URLSearchParams(document.location.search);
+      const lat = Number.parseFloat(params.get('latitude') || '40.7701286');
+      const lng = Number.parseFloat(params.get('longitude') || '-73.9829762');
+      const zoom = Number.parseInt(params.get('zoom') || '14');
+      const sleepSecs = Number.parseInt(params.get('sleepSecs') || '0');
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: {
+          lat: lat,
+          lng: lng,
+        },
+        zoom: zoom,
+      });
+      let obj = JSON.parse(localStorage['lyft_FieldManager'] || '{}');
+
+      let markers = [];
+
+      function request() {
+        let latE6 = Math.round(map.getCenter().lat() * 1e6),
+          lngE6 = Math.round(map.getCenter().lng() * 1e6);
+          console.log('request', 'lat', latE6, 'lng', lngE6);
+        $.ajax({
+          url: "/api/{{.Route}}",
+          data: {
+            token: obj['token'],
+            origin_latitude_e_6: latE6,
+            origin_longitude_e_6: lngE6,
+          },
+          error: function (xhr, status, error) {
+            console.log('error', xhr, status, error);
+          },
+          success: function (data) {
+            markers.forEach(m => m.setMap(null));
+            data.VehicleViews.forEach(d => {
+              const icon = {
+                url: d.ImageURL,
+                scaledSize: new google.maps.Size(33, 50),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 0),
+              };
+              let marker = new google.maps.Marker({
+                position: {
+                  lat: d.Lat,
+                  lng: d.Lng,
+                },
+                map: map,
+                title: d.id,
+                icon: icon,
+              });
+              markers.push(marker);
+            });
+            $(`#overlay .num`).text(data.VehicleViews.length);
+            $('#overlay .last-update').text(new Date().toLocaleString());
+            $('#overlay .lat').text(map.getCenter().lat());
+            $('#overlay .lng').text(map.getCenter().lng());
+            if (sleepSecs > 0) {
+              setTimeout(request, sleepSecs * 1000);
+            }
+          }
+        });
+      }
+      request();
+
+      $('#request-btn').click(request);
+    }
+  </script>
+</head>
+
+<body>
+  <div id="map"></div>
+  <div id="overlay">
+    <div>
+      Drivers: <span class="num show"></span>
+    </div>
+    <div>
+      Last updated: <span class="last-update show"></span>
+    </div>
+    <div>
+      Lat: <span class="lat show"></span>
+    </div>
+    <div>
+      Lng: <span class="lng show"></span>
+    </div>
+    <button id="request-btn">Request</button>
+  </div>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCguNA8j3ZOSruM6bVNcimcxNK-nIkWLaY&callback=initMap&v=weekly"
+    defer></script>
+</body>
+
+</html>

@@ -2,8 +2,13 @@
 package handlers
 
 import (
+	"bytes"
 	"context"
 	_ "embed"
+	"html/template"
+	"io"
+	"log"
+	"strings"
 
 	"github.com/spudtrooper/lyft/api"
 	"github.com/spudtrooper/lyft/render"
@@ -33,7 +38,6 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		},
 		api.NearbyDriversParams{},
 		handler.NewHandlerExtraRequiredFields([]string{"token"}),
-		handler.NewHandlerRenderer(render.NearbyDrivers),
 	)
 
 	b.NewHandler("AllNearbyDrivers",
@@ -43,7 +47,60 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		},
 		api.AllNearbyDriversParams{},
 		handler.NewHandlerExtraRequiredFields([]string{"token"}),
-		// handler.NewHandlerRenderer(render.NearbyDrivers),
+	)
+
+	b.NewHandler("VehicleViews",
+		func(ctx context.Context, ip any) (any, error) {
+			p := ip.(api.VehicleViewsParams)
+			return client.VehicleViews(p.Options()...)
+		},
+		api.VehicleViewsParams{},
+		handler.NewHandlerExtraRequiredFields([]string{"token"}),
+		handler.NewHandlerRenderer(render.VehicleViews),
+	)
+
+	var vehicleViewsData = struct {
+		Route string
+	}{
+		Route: "vehicleviews",
+	}
+	var vehicleViewsBuf bytes.Buffer
+	if err := renderTemplate(&vehicleViewsBuf, render.VehicleViewsMapTmpl, "VehicleViewsMap", vehicleViewsData); err != nil {
+		// TODO: return error instead
+		log.Fatalf("vehicleViews error: %v", err)
+	}
+
+	b.NewStaticHandler("VehicleViewsMap",
+		vehicleViewsBuf.Bytes(),
+		render.VehicleViewsMapParams{},
+		handler.NewHandlerRendererConfig(handler.RendererConfig{IsFragment: false}),
+	)
+
+	b.NewHandler("AllVehicleViews",
+		func(ctx context.Context, ip any) (any, error) {
+			p := ip.(api.AllVehicleViewsParams)
+			return client.AllVehicleViews(p.Options()...)
+		},
+		api.AllVehicleViewsParams{},
+		handler.NewHandlerExtraRequiredFields([]string{"token"}),
+		handler.NewHandlerRenderer(render.AllVehicleViews),
+	)
+
+	var allVehicleViewsData = struct {
+		Route string
+	}{
+		Route: "allvehicleviews",
+	}
+	var allVehicleViewsBuf bytes.Buffer
+	if err := renderTemplate(&allVehicleViewsBuf, render.VehicleViewsMapTmpl, "AllVehicleViewsMap", allVehicleViewsData); err != nil {
+		// TODO: return error instead
+		log.Fatalf("allVehicleViewsBuf error: %v", err)
+	}
+
+	b.NewStaticHandler("AllVehicleViewsMap",
+		allVehicleViewsBuf.Bytes(),
+		render.AllVehicleViewsMapParams{},
+		handler.NewHandlerRendererConfig(handler.RendererConfig{IsFragment: false}),
 	)
 
 	b.NewHandler("RideHistory",
@@ -76,4 +133,15 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 	)
 
 	return b.Build()
+}
+
+func renderTemplate(buf io.Writer, t string, name string, data interface{}) error {
+	tmpl, err := template.New(name).Parse(strings.TrimSpace(t))
+	if err != nil {
+		return err
+	}
+	if err := tmpl.Execute(buf, data); err != nil {
+		return err
+	}
+	return nil
 }
