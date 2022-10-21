@@ -49,6 +49,7 @@ type NearbyDriversInfo struct {
 	DefaultNearbyDrivers                NearbyDriversInfoNearbyDriverByStableOfferProductID
 	NearbyDrivers                       map[string]NearbyDriversInfoNearbyDriver                       `json:"nearby_drivers"`
 	NearbyDriversByStableOfferProductID map[string]NearbyDriversInfoNearbyDriverByStableOfferProductID `json:"nearby_drivers_by_stable_offer_product_id"`
+	Centers                             []PointE6
 }
 
 func (n NearbyDriversInfo) VehicleViews() ([]VehicleView, error) {
@@ -96,6 +97,12 @@ func (c *Client) NearbyDrivers(optss ...NearbyDriversOption) (*NearbyDriversInfo
 	var res NearbyDriversInfo
 	if _, err := request.Post(uri, &res, strings.NewReader(string(b)), request.RequestExtraHeaders(headers)); err != nil {
 		return nil, err
+	}
+	res.Centers = []PointE6{
+		{
+			Latitude:  opts.OriginLatitudeE6(),
+			Longitude: opts.OriginLongitudeE6(),
+		},
 	}
 	return &res, nil
 }

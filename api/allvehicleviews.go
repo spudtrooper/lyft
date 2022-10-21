@@ -3,6 +3,7 @@ package api
 type AllVehicleViewsInfo struct {
 	VehicleViews         []VehicleView
 	AllNearbyDriversInfo AllNearbyDriversInfo
+	Centers              []PointE6
 }
 
 //go:generate genopts --params --function AllVehicleViews --extends Base,NearbyDrivers,AllNearbyDrivers
@@ -22,6 +23,7 @@ func (c *Client) AllVehicleViews(optss ...AllVehicleViewsOption) (*AllVehicleVie
 	res := &AllVehicleViewsInfo{
 		VehicleViews:         vehicleViews,
 		AllNearbyDriversInfo: *info,
+		Centers:              info.Centers,
 	}
 
 	return res, nil

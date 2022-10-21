@@ -245,7 +245,7 @@ type allVehicleViewsOptionImpl struct {
 
 func (a *allVehicleViewsOptionImpl) Debug() bool                { return a.debug }
 func (a *allVehicleViewsOptionImpl) HasDebug() bool             { return a.has_debug }
-func (a *allVehicleViewsOptionImpl) DeltaE6() int               { return or.Int(a.deltaE6, 130) }
+func (a *allVehicleViewsOptionImpl) DeltaE6() int               { return or.Int(a.deltaE6, 9000) }
 func (a *allVehicleViewsOptionImpl) HasDeltaE6() bool           { return a.has_deltaE6 }
 func (a *allVehicleViewsOptionImpl) DestinationLatitudeE6() int { return a.destinationLatitudeE6 }
 func (a *allVehicleViewsOptionImpl) HasDestinationLatitudeE6() bool {
@@ -278,7 +278,7 @@ func (a *allVehicleViewsOptionImpl) HasUsingCommuterPayment() bool { return a.ha
 
 type AllVehicleViewsParams struct {
 	Debug                  bool   `json:"debug"`
-	DeltaE6                int    `json:"delta_e_6" default:"130"`
+	DeltaE6                int    `json:"delta_e_6" default:"9000"`
 	DestinationLatitudeE6  int    `json:"destination_latitude_e_6"`
 	DestinationLongitudeE6 int    `json:"destination_longitude_e_6"`
 	Multiples              int    `json:"multiples" default:"1"`
@@ -309,16 +309,16 @@ func (o AllVehicleViewsParams) Options() []AllVehicleViewsOption {
 // ToAllNearbyDriversOptions converts AllVehicleViewsOption to an array of AllNearbyDriversOption
 func (o *allVehicleViewsOptionImpl) ToAllNearbyDriversOptions() []AllNearbyDriversOption {
 	return []AllNearbyDriversOption{
+		AllNearbyDriversToken(o.Token()),
+		AllNearbyDriversDestinationLongitudeE6(o.DestinationLongitudeE6()),
+		AllNearbyDriversOriginLatitudeE6(o.OriginLatitudeE6()),
+		AllNearbyDriversOriginLongitudeE6(o.OriginLongitudeE6()),
+		AllNearbyDriversDestinationLatitudeE6(o.DestinationLatitudeE6()),
+		AllNearbyDriversOrginPlaceID(o.OrginPlaceID()),
 		AllNearbyDriversDeltaE6(o.DeltaE6()),
 		AllNearbyDriversMultiples(o.Multiples()),
 		AllNearbyDriversThreads(o.Threads()),
 		AllNearbyDriversDebug(o.Debug()),
-		AllNearbyDriversToken(o.Token()),
-		AllNearbyDriversOriginLatitudeE6(o.OriginLatitudeE6()),
-		AllNearbyDriversOriginLongitudeE6(o.OriginLongitudeE6()),
-		AllNearbyDriversDestinationLatitudeE6(o.DestinationLatitudeE6()),
-		AllNearbyDriversDestinationLongitudeE6(o.DestinationLongitudeE6()),
-		AllNearbyDriversOrginPlaceID(o.OrginPlaceID()),
 		AllNearbyDriversUsingCommuterPayment(o.UsingCommuterPayment()),
 	}
 }
@@ -333,13 +333,13 @@ func (o *allVehicleViewsOptionImpl) ToBaseOptions() []BaseOption {
 // ToNearbyDriversOptions converts AllVehicleViewsOption to an array of NearbyDriversOption
 func (o *allVehicleViewsOptionImpl) ToNearbyDriversOptions() []NearbyDriversOption {
 	return []NearbyDriversOption{
-		NearbyDriversUsingCommuterPayment(o.UsingCommuterPayment()),
-		NearbyDriversToken(o.Token()),
-		NearbyDriversOriginLatitudeE6(o.OriginLatitudeE6()),
 		NearbyDriversOriginLongitudeE6(o.OriginLongitudeE6()),
 		NearbyDriversDestinationLatitudeE6(o.DestinationLatitudeE6()),
 		NearbyDriversDestinationLongitudeE6(o.DestinationLongitudeE6()),
 		NearbyDriversOrginPlaceID(o.OrginPlaceID()),
+		NearbyDriversUsingCommuterPayment(o.UsingCommuterPayment()),
+		NearbyDriversToken(o.Token()),
+		NearbyDriversOriginLatitudeE6(o.OriginLatitudeE6()),
 	}
 }
 

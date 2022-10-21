@@ -46,9 +46,9 @@
       const lng = Number.parseFloat(params.get('longitude') || '-73.9829762');
       const zoom = Number.parseInt(params.get('zoom') || '14');
       const sleepSecs = Number.parseInt(params.get('sleepSecs') || '0');
-      const deltaE6 = Number.parseInt(params.get('delta_e_6') || '130');
+      const deltaE6 = Number.parseInt(params.get('delta_e_6') || '9000');
       const multiples = Number.parseInt(params.get('multiples') || '1');
-      map = new google.maps.Map(document.getElementById("map"), {
+      let map = new google.maps.Map(document.getElementById("map"), {
         center: {
           lat: lat,
           lng: lng,
@@ -62,7 +62,7 @@
       function request() {
         let latE6 = Math.round(map.getCenter().lat() * 1e6),
           lngE6 = Math.round(map.getCenter().lng() * 1e6);
-          console.log('request', 'lat', latE6, 'lng', lngE6);
+        console.log('request', 'lat', latE6, 'lng', lngE6);
         $.ajax({
           url: "/{{.Prefix}}/{{.Route}}",
           data: {
@@ -84,7 +84,7 @@
                 origin: new google.maps.Point(0, 0),
                 anchor: new google.maps.Point(0, 0),
               };
-              let marker = new google.maps.Marker({
+              markers.push(new google.maps.Marker({
                 position: {
                   lat: d.Lat,
                   lng: d.Lng,
@@ -92,8 +92,16 @@
                 map: map,
                 title: d.id,
                 icon: icon,
-              });
-              markers.push(marker);
+              }));
+            });
+            data.Centers.forEach(p => {
+              markers.push(new google.maps.Marker({
+                position: {
+                  lat: p.Latitude / 1e6,
+                  lng: p.Longitude / 1e6,
+                },
+                map: map,
+              }));
             });
             $(`#overlay .num`).text(data.VehicleViews.length);
             $('#overlay .last-update').text(new Date().toLocaleString());
@@ -105,6 +113,17 @@
           }
         });
       }
+
+      map.addListener("center_changed", () => {
+        let center = map.getCenter();
+        setTimeout(() => {
+          if (map.getCenter().lat() == center.lat() &&
+            map.getCenter().lng() == center.lng()) {
+            request();
+          }
+        }, 1000);
+      });
+
       request();
 
       $('#request-btn').click(request);

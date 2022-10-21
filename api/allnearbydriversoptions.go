@@ -244,7 +244,7 @@ type allNearbyDriversOptionImpl struct {
 
 func (a *allNearbyDriversOptionImpl) Debug() bool                { return a.debug }
 func (a *allNearbyDriversOptionImpl) HasDebug() bool             { return a.has_debug }
-func (a *allNearbyDriversOptionImpl) DeltaE6() int               { return or.Int(a.deltaE6, 130) }
+func (a *allNearbyDriversOptionImpl) DeltaE6() int               { return or.Int(a.deltaE6, 9000) }
 func (a *allNearbyDriversOptionImpl) HasDeltaE6() bool           { return a.has_deltaE6 }
 func (a *allNearbyDriversOptionImpl) DestinationLatitudeE6() int { return a.destinationLatitudeE6 }
 func (a *allNearbyDriversOptionImpl) HasDestinationLatitudeE6() bool {
@@ -279,7 +279,7 @@ func (a *allNearbyDriversOptionImpl) HasUsingCommuterPayment() bool {
 
 type AllNearbyDriversParams struct {
 	Debug                  bool   `json:"debug"`
-	DeltaE6                int    `json:"delta_e_6" default:"130"`
+	DeltaE6                int    `json:"delta_e_6" default:"9000"`
 	DestinationLatitudeE6  int    `json:"destination_latitude_e_6"`
 	DestinationLongitudeE6 int    `json:"destination_longitude_e_6"`
 	Multiples              int    `json:"multiples" default:"1"`
@@ -317,13 +317,13 @@ func (o *allNearbyDriversOptionImpl) ToBaseOptions() []BaseOption {
 // ToNearbyDriversOptions converts AllNearbyDriversOption to an array of NearbyDriversOption
 func (o *allNearbyDriversOptionImpl) ToNearbyDriversOptions() []NearbyDriversOption {
 	return []NearbyDriversOption{
-		NearbyDriversOriginLongitudeE6(o.OriginLongitudeE6()),
 		NearbyDriversDestinationLatitudeE6(o.DestinationLatitudeE6()),
 		NearbyDriversDestinationLongitudeE6(o.DestinationLongitudeE6()),
 		NearbyDriversOrginPlaceID(o.OrginPlaceID()),
 		NearbyDriversUsingCommuterPayment(o.UsingCommuterPayment()),
 		NearbyDriversToken(o.Token()),
 		NearbyDriversOriginLatitudeE6(o.OriginLatitudeE6()),
+		NearbyDriversOriginLongitudeE6(o.OriginLongitudeE6()),
 	}
 }
 

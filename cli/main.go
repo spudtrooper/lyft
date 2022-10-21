@@ -22,5 +22,5 @@ func Main(ctx context.Context) error {
 		return err
 	}
 
-	return handler.RunCLI(ctx, handlers.CreateHandlers(client)...)
+	return handler.RunCLI(ctx, handlers.CreateHandlers("api", client)...)
 }

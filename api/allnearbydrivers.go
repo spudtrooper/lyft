@@ -12,19 +12,21 @@ type AllNearbyDriversInfo struct {
 	DefaultNearbyDrivers                []NearbyDriversInfoNearbyDriverByStableOfferProductID
 	NearbyDrivers                       map[string]NearbyDriversInfoNearbyDriver                       `json:"nearby_drivers"`
 	NearbyDriversByStableOfferProductID map[string]NearbyDriversInfoNearbyDriverByStableOfferProductID `json:"nearby_drivers_by_stable_offer_product_id"`
+	Centers                             []PointE6
+}
+
+type PointE6 struct {
+	Latitude, Longitude int
 }
 
 func (n AllNearbyDriversInfo) VehicleViews() ([]VehicleView, error) {
 	return toVehicleViews(n.NearbyDrivers, n.NearbyDriversByStableOfferProductID)
 }
 
-//go:generate genopts --params --function AllNearbyDrivers --extends Base,NearbyDrivers deltaE6:int:130 multiples:int:1 threads:int:5 debug
+//go:generate genopts --params --function AllNearbyDrivers --extends Base,NearbyDrivers deltaE6:int:9000 multiples:int:1 threads:int:5 debug
 func (c *Client) AllNearbyDrivers(optss ...AllNearbyDriversOption) (*AllNearbyDriversInfo, error) {
 	opts := MakeAllNearbyDriversOptions(optss...)
 
-	type grid struct {
-		dlat, dlng int
-	}
 	mul := opts.Multiples()
 	lat := opts.OriginLatitudeE6()
 	lng := opts.OriginLongitudeE6()
@@ -32,21 +34,26 @@ func (c *Client) AllNearbyDrivers(optss ...AllNearbyDriversOption) (*AllNearbyDr
 	threads := opts.Threads()
 	debug := opts.Debug()
 
-	grids := make(chan grid)
+	points := make(chan PointE6)
 	go func() {
 		for i := -mul; i <= mul; i++ {
 			for j := -mul; j <= mul; j++ {
-				dlat, dlng := lat+i*del, lng+j*del
-				grids <- grid{
-					dlat: dlat,
-					dlng: dlng,
+				lat, lng := lat+i*del, lng+j*del
+				points <- PointE6{
+					Latitude:  lat,
+					Longitude: lng,
 				}
 			}
 		}
-		close(grids)
+		close(points)
 	}()
 
-	infosCh := make(chan NearbyDriversInfo)
+	type s struct {
+		info  NearbyDriversInfo
+		point PointE6
+	}
+
+	ss := make(chan s)
 	errs := make(chan error)
 
 	go func() {
@@ -55,11 +62,12 @@ func (c *Client) AllNearbyDrivers(optss ...AllNearbyDriversOption) (*AllNearbyDr
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				for g := range grids {
-					if debug {
-						log.Printf("grid: %+v", g)
-					}
-					info, err := c.NearbyDrivers(opts.ToNearbyDriversOptions()...)
+				for p := range points {
+					os := opts.ToNearbyDriversOptions()
+					os = append(os,
+						NearbyDriversOriginLatitudeE6(p.Latitude),
+						NearbyDriversOriginLongitudeE6(p.Longitude))
+					info, err := c.NearbyDrivers(os...)
 					if err != nil {
 						if debug {
 							log.Printf("err: %+v", err)
@@ -67,20 +75,25 @@ func (c *Client) AllNearbyDrivers(optss ...AllNearbyDriversOption) (*AllNearbyDr
 						errs <- err
 						continue
 					}
-					infosCh <- *info
+					ss <- s{
+						info:  *info,
+						point: p,
+					}
 				}
 			}()
 		}
 		wg.Wait()
-		close(infosCh)
+		close(ss)
 		close(errs)
 	}()
 
 	var infos []NearbyDriversInfo
+	var centers []PointE6
 	var err error
 	parallel.WaitFor(func() {
-		for info := range infosCh {
-			infos = append(infos, info)
+		for s := range ss {
+			infos = append(infos, s.info)
+			centers = append(centers, s.point)
 		}
 	}, func() {
 		err = errors.FromChannel(errs)
@@ -173,6 +186,7 @@ func (c *Client) AllNearbyDrivers(optss ...AllNearbyDriversOption) (*AllNearbyDr
 	res := &AllNearbyDriversInfo{
 		NearbyDrivers:                       resNearbyDrivers,
 		NearbyDriversByStableOfferProductID: resNearbyDriversByStableOfferProductID,
+		Centers:                             centers,
 	}
 
 	return res, nil
