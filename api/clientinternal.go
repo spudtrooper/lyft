@@ -19,7 +19,6 @@ func (c *Client) makeHeaders(auth bool, optss ...BaseOption) map[string]string {
 		"origin":             `https://ride.lyft.com`,
 		"dpr":                `2`,
 		"pragma":             `no-cache`,
-		"referer":            `https://ride.lyft.com/?origin=40.770034%2C-73.982912&originName=24+W+61st+St`,
 		"sec-ch-ua":          `"Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"`,
 		"sec-ch-ua-mobile":   `?0`,
 		"sec-ch-ua-platform": `"macOS"`,

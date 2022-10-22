@@ -54,5 +54,12 @@
       "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
       "line": 52
     }
+  },
+  {
+    "Handler": "Venues",
+    "Loc": {
+      "uri": "github.com/spudtrooper/lyft/blob/main/handlers/handlers.go",
+      "line": 139
+    }
   }
 ]

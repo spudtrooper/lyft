@@ -136,6 +136,15 @@ func CreateHandlers(prefix string, client *api.Client) []handler.Handler {
 		handler.NewHandlerExtraRequiredFields([]string{"token"}),
 	)
 
+	b.NewHandler("Venues",
+		func(ctx context.Context, ip any) (any, error) {
+			p := ip.(api.VenuesParams)
+			return client.Venues(p.Options()...)
+		},
+		api.VenuesParams{},
+		handler.NewHandlerExtraRequiredFields([]string{"token"}),
+	)
+
 	return b.Build()
 }
 
