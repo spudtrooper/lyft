@@ -27,6 +27,8 @@ type AllVehicleViewsMapOptions interface {
 	HasShowCenters() bool
 	SleepSecs() int
 	HasSleepSecs() bool
+	Threads() int
+	HasThreads() bool
 	Zoom() int
 	HasZoom() bool
 	ToVehicleViewsMapOptions() []VehicleViewsMapOption
@@ -128,6 +130,22 @@ func AllVehicleViewsMapSleepSecsFlag(sleepSecs *int) AllVehicleViewsMapOption {
 	}, fmt.Sprintf("render.AllVehicleViewsMapSleepSecs(int %+v)}", sleepSecs)}
 }
 
+func AllVehicleViewsMapThreads(threads int) AllVehicleViewsMapOption {
+	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
+		opts.has_threads = true
+		opts.threads = threads
+	}, fmt.Sprintf("render.AllVehicleViewsMapThreads(int %+v)}", threads)}
+}
+func AllVehicleViewsMapThreadsFlag(threads *int) AllVehicleViewsMapOption {
+	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
+		if threads == nil {
+			return
+		}
+		opts.has_threads = true
+		opts.threads = *threads
+	}, fmt.Sprintf("render.AllVehicleViewsMapThreads(int %+v)}", threads)}
+}
+
 func AllVehicleViewsMapZoom(zoom int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
 		opts.has_zoom = true
@@ -157,6 +175,8 @@ type allVehicleViewsMapOptionImpl struct {
 	has_showCenters bool
 	sleepSecs       int
 	has_sleepSecs   bool
+	threads         int
+	has_threads     bool
 	zoom            int
 	has_zoom        bool
 }
@@ -175,6 +195,8 @@ func (a *allVehicleViewsMapOptionImpl) ShowCenters() bool    { return a.showCent
 func (a *allVehicleViewsMapOptionImpl) HasShowCenters() bool { return a.has_showCenters }
 func (a *allVehicleViewsMapOptionImpl) SleepSecs() int       { return or.Int(a.sleepSecs, 0) }
 func (a *allVehicleViewsMapOptionImpl) HasSleepSecs() bool   { return a.has_sleepSecs }
+func (a *allVehicleViewsMapOptionImpl) Threads() int         { return or.Int(a.threads, 5) }
+func (a *allVehicleViewsMapOptionImpl) HasThreads() bool     { return a.has_threads }
 func (a *allVehicleViewsMapOptionImpl) Zoom() int            { return or.Int(a.zoom, 14) }
 func (a *allVehicleViewsMapOptionImpl) HasZoom() bool        { return a.has_zoom }
 
@@ -185,6 +207,7 @@ type AllVehicleViewsMapParams struct {
 	Multiples   int     `json:"multiples" default:"1"`
 	ShowCenters bool    `json:"show_centers"`
 	SleepSecs   int     `json:"sleep_secs" default:"0"`
+	Threads     int     `json:"threads" default:"5"`
 	Token       string  `json:"token" required:"true"`
 	Zoom        int     `json:"zoom" default:"14"`
 }
@@ -197,6 +220,7 @@ func (o AllVehicleViewsMapParams) Options() []AllVehicleViewsMapOption {
 		AllVehicleViewsMapMultiples(o.Multiples),
 		AllVehicleViewsMapShowCenters(o.ShowCenters),
 		AllVehicleViewsMapSleepSecs(o.SleepSecs),
+		AllVehicleViewsMapThreads(o.Threads),
 		AllVehicleViewsMapZoom(o.Zoom),
 	}
 }
