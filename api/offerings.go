@@ -22,25 +22,25 @@ type OfferingsInfoOffer struct {
 		PrimetimePercentage   string  `json:"primetime_percentage"`
 		PrimetimeMultiplier   float64 `json:"primetime_multiplier"`
 		PriceExplanationText  string  `json:"price_explanation_text"`
-		ApplicableCoupons     []struct {
-			ID                string `json:"id"`
-			Name              string `json:"name"`
-			DiscountType      string `json:"discount_type"`
-			Currency          string `json:"currency"`
-			DiscountAmountMin string `json:"discount_amount_min"`
-			DiscountAmountMax string `json:"discount_amount_max"`
-			ExplanationText   string `json:"explanation_text"`
-			IsMembership      bool   `json:"is_membership"`
-			DetailText        string `json:"detail_text"`
-			LineItems         []struct {
-				Name   string `json:"name"`
-				Amount struct {
-					Currency string `json:"currency"`
-					Amount   string `json:"amount"`
-					Exponent string `json:"exponent"`
-				} `json:"amount"`
-			} `json:"line_items"`
-		} `json:"applicable_coupons"`
+		// ApplicableCoupons     []struct {
+		// 	ID                string `json:"id"`
+		// 	Name              string `json:"name"`
+		// 	DiscountType      string `json:"discount_type"`
+		// 	Currency          string `json:"currency"`
+		// 	DiscountAmountMin string `json:"discount_amount_min"`
+		// 	DiscountAmountMax string `json:"discount_amount_max"`
+		// 	ExplanationText   string `json:"explanation_text"`
+		// 	IsMembership      bool   `json:"is_membership"`
+		// 	DetailText        string `json:"detail_text"`
+		// 	LineItems         []struct {
+		// 		Name   string `json:"name"`
+		// 		Amount struct {
+		// 			Currency string `json:"currency"`
+		// 			Amount   string `json:"amount"`
+		// 			Exponent string `json:"exponent"`
+		// 		} `json:"amount"`
+		// 	} `json:"line_items"`
+		// } `json:"applicable_coupons"`
 		IsScheduledRide          bool   `json:"is_scheduled_ride"`
 		CostTokenExpiryTime      string `json:"cost_token_expiry_time"`
 		PriceChanged             bool   `json:"price_changed"`
@@ -50,461 +50,461 @@ type OfferingsInfoOffer struct {
 			Amount      string `json:"amount"`
 			Currency    string `json:"currency"`
 		} `json:"line_items"`
-		StopsAdjustmentThreshold struct {
-			Origin struct {
-				Lat           float64 `json:"lat"`
-				Lng           float64 `json:"lng"`
-				RangeInMeters int     `json:"range_in_meters"`
-			} `json:"origin"`
-		} `json:"stops_adjustment_threshold"`
+		// StopsAdjustmentThreshold struct {
+		// 	Origin struct {
+		// 		Lat           float64 `json:"lat"`
+		// 		Lng           float64 `json:"lng"`
+		// 		RangeInMeters int     `json:"range_in_meters"`
+		// 	} `json:"origin"`
+		// } `json:"stops_adjustment_threshold"`
 		EstimatedDistanceInMiles float64 `json:"estimated_distance_in_miles"`
 	} `json:"cost_estimate,omitempty"`
-	RideTypeDetails struct {
-		RideType       string `json:"ride_type"`
-		Seats          int    `json:"seats"`
-		PricingDetails struct {
-			BaseChargeV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"base_charge_v2"`
-			CostMinimumV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_minimum_v2"`
-			CostPerDistanceUnit struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_distance_unit"`
-			DistanceUnits   string `json:"distance_units"`
-			CostPerMinuteV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_minute_v2"`
-			ServiceFeeDescription string `json:"service_fee_description"`
-		} `json:"pricing_details"`
-		Features          []string `json:"features"`
-		DisplayProperties struct {
-			Name                 string `json:"name"`
-			Description          string `json:"description"`
-			MapMarkerImage       string `json:"map_marker_image"`
-			SmallImage           string `json:"small_image"`
-			LargeBackgroundImage string `json:"large_background_image"`
-			LargeForegroundImage string `json:"large_foreground_image"`
-			HiddenByDefault      bool   `json:"hidden_by_default"`
-		} `json:"display_properties"`
-		ScheduledPricingDetails struct {
-			BaseChargeV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"base_charge_v2"`
-			CostMinimumV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_minimum_v2"`
-			CostPerDistanceUnit struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_distance_unit"`
-			DistanceUnits   string `json:"distance_units"`
-			CostPerMinuteV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_minute_v2"`
-			ServiceFeeDescription string `json:"service_fee_description"`
-		} `json:"scheduled_pricing_details"`
-	} `json:"ride_type_details,omitempty"`
-	RidePickupDetails struct {
-	} `json:"ride_pickup_details,omitempty"`
-	RideTravelDetails struct {
-		PickupEstimate struct {
-			TimeRange struct {
-				TimestampMs string `json:"timestamp_ms"`
-			} `json:"time_range"`
-			DurationRange struct {
-				DurationMs string `json:"duration_ms"`
-			} `json:"duration_range"`
-			Timezone string `json:"timezone"`
-		} `json:"pickup_estimate"`
-		DropoffEstimate struct {
-			TimeRange struct {
-				TimestampMs string `json:"timestamp_ms"`
-			} `json:"time_range"`
-			DurationRange struct {
-				DurationMs string `json:"duration_ms"`
-			} `json:"duration_range"`
-			Timezone string `json:"timezone"`
-		} `json:"dropoff_estimate"`
-	} `json:"ride_travel_details,omitempty"`
-	AvailabilityDetails struct {
-		Display int `json:"display"`
-		Latest  int `json:"latest"`
-	} `json:"availability_details"`
-	CostEstimate0 struct {
-		PriceQuoteID             string  `json:"price_quote_id"`
-		CostToken                string  `json:"cost_token"`
-		RideType                 string  `json:"ride_type"`
-		EstimatedCostCentsMax    string  `json:"estimated_cost_cents_max"`
-		EstimatedCostCentsMin    string  `json:"estimated_cost_cents_min"`
-		UpfrontCostCents         string  `json:"upfront_cost_cents"`
-		Currency                 string  `json:"currency"`
-		ApplePayPreAuthCents     string  `json:"apple_pay_pre_auth_cents"`
-		PrimetimePercentage      string  `json:"primetime_percentage"`
-		PrimetimeMultiplier      float64 `json:"primetime_multiplier"`
-		IsScheduledRide          bool    `json:"is_scheduled_ride"`
-		CostTokenExpiryTime      string  `json:"cost_token_expiry_time"`
-		PriceChanged             bool    `json:"price_changed"`
-		EstimatedDurationSeconds string  `json:"estimated_duration_seconds"`
-		LineItems                []struct {
-			Description string `json:"description"`
-			Amount      string `json:"amount"`
-			Currency    string `json:"currency"`
-		} `json:"line_items"`
-		StopsAdjustmentThreshold struct {
-			Origin struct {
-				Lat           float64 `json:"lat"`
-				Lng           float64 `json:"lng"`
-				RangeInMeters int     `json:"range_in_meters"`
-			} `json:"origin"`
-		} `json:"stops_adjustment_threshold"`
-		EstimatedDistanceInMiles float64 `json:"estimated_distance_in_miles"`
-	} `json:"cost_estimate,omitempty"`
-	RideTypeDetails0 struct {
-		RideType       string `json:"ride_type"`
-		Seats          int    `json:"seats"`
-		PricingDetails struct {
-			BaseChargeV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"base_charge_v2"`
-			CostMinimumV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_minimum_v2"`
-			CostPerDistanceUnit struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_distance_unit"`
-			DistanceUnits   string `json:"distance_units"`
-			CostPerMinuteV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_minute_v2"`
-			ServiceFeeDescription string `json:"service_fee_description"`
-		} `json:"pricing_details"`
-		Features          []string `json:"features"`
-		DisplayProperties struct {
-			Name                 string `json:"name"`
-			Description          string `json:"description"`
-			MapMarkerImage       string `json:"map_marker_image"`
-			SmallImage           string `json:"small_image"`
-			LargeBackgroundImage string `json:"large_background_image"`
-			LargeForegroundImage string `json:"large_foreground_image"`
-			HiddenByDefault      bool   `json:"hidden_by_default"`
-		} `json:"display_properties"`
-	} `json:"ride_type_details,omitempty"`
-	RideTypeDetails1 struct {
-		RideType       string `json:"ride_type"`
-		Seats          int    `json:"seats"`
-		PricingDetails struct {
-			BaseChargeV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"base_charge_v2"`
-			CostMinimumV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_minimum_v2"`
-			CostPerDistanceUnit struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_distance_unit"`
-			DistanceUnits   string `json:"distance_units"`
-			CostPerMinuteV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_minute_v2"`
-			ServiceFeeDescription string `json:"service_fee_description"`
-		} `json:"pricing_details"`
-		Features          []string `json:"features"`
-		DisplayProperties struct {
-			Name                 string `json:"name"`
-			Description          string `json:"description"`
-			MapMarkerImage       string `json:"map_marker_image"`
-			SmallImage           string `json:"small_image"`
-			LargeBackgroundImage string `json:"large_background_image"`
-			LargeForegroundImage string `json:"large_foreground_image"`
-			HiddenByDefault      bool   `json:"hidden_by_default"`
-		} `json:"display_properties"`
-	} `json:"ride_type_details,omitempty"`
-	RidePickupDetails0 struct {
-		MaxMatchingWindowMs string `json:"max_matching_window_ms"`
-	} `json:"ride_pickup_details,omitempty"`
-	PaxSavings struct {
-		ComparisonProductDisplayName string `json:"comparison_product_display_name"`
-		CurrentSavings               struct {
-			Currency string `json:"currency"`
-			Amount   string `json:"amount"`
-			Exponent string `json:"exponent"`
-		} `json:"current_savings"`
-	} `json:"pax_savings,omitempty"`
-	CostEstimate1 struct {
-		PriceQuoteID          string  `json:"price_quote_id"`
-		CostToken             string  `json:"cost_token"`
-		RideType              string  `json:"ride_type"`
-		EstimatedCostCentsMax string  `json:"estimated_cost_cents_max"`
-		EstimatedCostCentsMin string  `json:"estimated_cost_cents_min"`
-		UpfrontCostCents      string  `json:"upfront_cost_cents"`
-		Currency              string  `json:"currency"`
-		ApplePayPreAuthCents  string  `json:"apple_pay_pre_auth_cents"`
-		PrimetimePercentage   string  `json:"primetime_percentage"`
-		PrimetimeMultiplier   float64 `json:"primetime_multiplier"`
-		ApplicableCoupons     []struct {
-			ID                string `json:"id"`
-			Name              string `json:"name"`
-			DiscountType      string `json:"discount_type"`
-			Currency          string `json:"currency"`
-			DiscountAmountMin string `json:"discount_amount_min"`
-			DiscountAmountMax string `json:"discount_amount_max"`
-			ExplanationText   string `json:"explanation_text"`
-			IsMembership      bool   `json:"is_membership"`
-			DetailText        string `json:"detail_text"`
-			LineItems         []struct {
-				Name   string `json:"name"`
-				Amount struct {
-					Currency string `json:"currency"`
-					Amount   string `json:"amount"`
-					Exponent string `json:"exponent"`
-				} `json:"amount"`
-			} `json:"line_items"`
-		} `json:"applicable_coupons"`
-		IsScheduledRide          bool   `json:"is_scheduled_ride"`
-		CostTokenExpiryTime      string `json:"cost_token_expiry_time"`
-		PriceChanged             bool   `json:"price_changed"`
-		EstimatedDurationSeconds string `json:"estimated_duration_seconds"`
-		LineItems                []struct {
-			Description string `json:"description"`
-			Amount      string `json:"amount"`
-			Currency    string `json:"currency"`
-		} `json:"line_items"`
-		StopsAdjustmentThreshold struct {
-			Origin struct {
-				Lat           float64 `json:"lat"`
-				Lng           float64 `json:"lng"`
-				RangeInMeters int     `json:"range_in_meters"`
-			} `json:"origin"`
-		} `json:"stops_adjustment_threshold"`
-		EstimatedDistanceInMiles float64 `json:"estimated_distance_in_miles"`
-	} `json:"cost_estimate,omitempty"`
-	CostEstimate2 struct {
-		RideType              string `json:"ride_type"`
-		EstimatedCostCentsMax string `json:"estimated_cost_cents_max"`
-		EstimatedCostCentsMin string `json:"estimated_cost_cents_min"`
-		Currency              string `json:"currency"`
-		ApplePayPreAuthCents  string `json:"apple_pay_pre_auth_cents"`
-		ApplePayCountry       string `json:"apple_pay_country"`
-		ComparisonCents       string `json:"comparison_cents"`
-		ApplicableCoupons     []struct {
-			ID              string `json:"id"`
-			Currency        string `json:"currency"`
-			ExplanationText string `json:"explanation_text"`
-			IsMembership    bool   `json:"is_membership"`
-			LineItems       []struct {
-				Name string `json:"name"`
-			} `json:"line_items"`
-		} `json:"applicable_coupons"`
-		IsScheduledRide          bool    `json:"is_scheduled_ride"`
-		PriceChanged             bool    `json:"price_changed"`
-		EstimatedDurationSeconds string  `json:"estimated_duration_seconds"`
-		PriceSummary             string  `json:"price_summary"`
-		PriceDescription         string  `json:"price_description"`
-		EstimatedDistanceInMiles float64 `json:"estimated_distance_in_miles"`
-	} `json:"cost_estimate,omitempty"`
-	RideTypeDetails2 struct {
-		RideType       string `json:"ride_type"`
-		PricingDetails struct {
-			BaseChargeV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"base_charge_v2"`
-			CostMinimumV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_minimum_v2"`
-			CostPerDistanceUnit struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_distance_unit"`
-			DistanceUnits   string `json:"distance_units"`
-			CostPerMinuteV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_minute_v2"`
-			AdditionalCharge struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"additional_charge"`
-			BaseChargeThresholdMinutesV3       string `json:"base_charge_threshold_minutes_v3"`
-			AdditionalChargeThresholdMinutesV3 string `json:"additional_charge_threshold_minutes_v3"`
-		} `json:"pricing_details"`
-		Features          []string `json:"features"`
-		DisplayProperties struct {
-			Name                 string `json:"name"`
-			Description          string `json:"description"`
-			MapMarkerImage       string `json:"map_marker_image"`
-			SmallImage           string `json:"small_image"`
-			LargeBackgroundImage string `json:"large_background_image"`
-			LargeForegroundImage string `json:"large_foreground_image"`
-			HiddenByDefault      bool   `json:"hidden_by_default"`
-		} `json:"display_properties"`
-		ScheduledPricingDetails struct {
-		} `json:"scheduled_pricing_details"`
-	} `json:"ride_type_details,omitempty"`
-	RideableDetails struct {
-		RideableID     string `json:"rideable_id"`
-		StartStationID string `json:"start_station_id"`
-		EndStationID   string `json:"end_station_id"`
-	} `json:"rideable_details,omitempty"`
-	CostEstimate3 struct {
-		RideType              string `json:"ride_type"`
-		EstimatedCostCentsMax string `json:"estimated_cost_cents_max"`
-		EstimatedCostCentsMin string `json:"estimated_cost_cents_min"`
-		Currency              string `json:"currency"`
-		ApplePayPreAuthCents  string `json:"apple_pay_pre_auth_cents"`
-		ApplePayCountry       string `json:"apple_pay_country"`
-		ComparisonCents       string `json:"comparison_cents"`
-		ApplicableCoupons     []struct {
-			ID              string `json:"id"`
-			Currency        string `json:"currency"`
-			ExplanationText string `json:"explanation_text"`
-			IsMembership    bool   `json:"is_membership"`
-			LineItems       []struct {
-				Name string `json:"name"`
-			} `json:"line_items"`
-		} `json:"applicable_coupons"`
-		IsScheduledRide          bool    `json:"is_scheduled_ride"`
-		PriceChanged             bool    `json:"price_changed"`
-		EstimatedDurationSeconds string  `json:"estimated_duration_seconds"`
-		PriceSummary             string  `json:"price_summary"`
-		PriceDescription         string  `json:"price_description"`
-		EstimatedDistanceInMiles float64 `json:"estimated_distance_in_miles"`
-	} `json:"cost_estimate,omitempty"`
-	RideTypeDetails3 struct {
-		RideType       string `json:"ride_type"`
-		PricingDetails struct {
-			BaseChargeV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"base_charge_v2"`
-			CostMinimumV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_minimum_v2"`
-			CostPerDistanceUnit struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_distance_unit"`
-			DistanceUnits   string `json:"distance_units"`
-			CostPerMinuteV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_minute_v2"`
-			AdditionalCharge struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"additional_charge"`
-			BaseChargeThresholdMinutesV3       string `json:"base_charge_threshold_minutes_v3"`
-			AdditionalChargeThresholdMinutesV3 string `json:"additional_charge_threshold_minutes_v3"`
-		} `json:"pricing_details"`
-		Features          []string `json:"features"`
-		DisplayProperties struct {
-			Name                 string `json:"name"`
-			Description          string `json:"description"`
-			MapMarkerImage       string `json:"map_marker_image"`
-			SmallImage           string `json:"small_image"`
-			LargeBackgroundImage string `json:"large_background_image"`
-			LargeForegroundImage string `json:"large_foreground_image"`
-			HiddenByDefault      bool   `json:"hidden_by_default"`
-		} `json:"display_properties"`
-		ScheduledPricingDetails struct {
-		} `json:"scheduled_pricing_details"`
-	} `json:"ride_type_details,omitempty"`
-	RideableDetails0 struct {
-		StartStationID string `json:"start_station_id"`
-		EndStationID   string `json:"end_station_id"`
-	} `json:"rideable_details,omitempty"`
-	CostEstimate4 struct {
-		UpfrontCostCents     string `json:"upfront_cost_cents"`
-		ApplePayPreAuthCents string `json:"apple_pay_pre_auth_cents"`
-		ApplePayCountry      string `json:"apple_pay_country"`
-		LineItems            []struct {
-			Description string `json:"description"`
-			Amount      string `json:"amount"`
-			Currency    string `json:"currency"`
-		} `json:"line_items"`
-	} `json:"cost_estimate,omitempty"`
-	RideTypeDetails4 struct {
-		RideType       string `json:"ride_type"`
-		PricingDetails struct {
-			BaseChargeV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"base_charge_v2"`
-			CostMinimumV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_minimum_v2"`
-			CostPerDistanceUnit struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_distance_unit"`
-			DistanceUnits   string `json:"distance_units"`
-			CostPerMinuteV2 struct {
-				Currency string `json:"currency"`
-				Amount   string `json:"amount"`
-				Exponent string `json:"exponent"`
-			} `json:"cost_per_minute_v2"`
-			ServiceFeeDescription string `json:"service_fee_description"`
-		} `json:"pricing_details"`
-		Features          []string `json:"features"`
-		DisplayProperties struct {
-			Name                 string `json:"name"`
-			Description          string `json:"description"`
-			MapMarkerImage       string `json:"map_marker_image"`
-			SmallImage           string `json:"small_image"`
-			LargeBackgroundImage string `json:"large_background_image"`
-			LargeForegroundImage string `json:"large_foreground_image"`
-			HiddenByDefault      bool   `json:"hidden_by_default"`
-		} `json:"display_properties"`
-	} `json:"ride_type_details,omitempty"`
+	// RideTypeDetails struct {
+	// 	RideType       string `json:"ride_type"`
+	// 	Seats          int    `json:"seats"`
+	// 	PricingDetails struct {
+	// 		BaseChargeV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"base_charge_v2"`
+	// 		CostMinimumV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_minimum_v2"`
+	// 		CostPerDistanceUnit struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_distance_unit"`
+	// 		DistanceUnits   string `json:"distance_units"`
+	// 		CostPerMinuteV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_minute_v2"`
+	// 		ServiceFeeDescription string `json:"service_fee_description"`
+	// 	} `json:"pricing_details"`
+	// 	Features          []string `json:"features"`
+	// 	DisplayProperties struct {
+	// 		Name                 string `json:"name"`
+	// 		Description          string `json:"description"`
+	// 		MapMarkerImage       string `json:"map_marker_image"`
+	// 		SmallImage           string `json:"small_image"`
+	// 		LargeBackgroundImage string `json:"large_background_image"`
+	// 		LargeForegroundImage string `json:"large_foreground_image"`
+	// 		HiddenByDefault      bool   `json:"hidden_by_default"`
+	// 	} `json:"display_properties"`
+	// 	ScheduledPricingDetails struct {
+	// 		BaseChargeV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"base_charge_v2"`
+	// 		CostMinimumV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_minimum_v2"`
+	// 		CostPerDistanceUnit struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_distance_unit"`
+	// 		DistanceUnits   string `json:"distance_units"`
+	// 		CostPerMinuteV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_minute_v2"`
+	// 		ServiceFeeDescription string `json:"service_fee_description"`
+	// 	} `json:"scheduled_pricing_details"`
+	// } `json:"ride_type_details,omitempty"`
+	// RidePickupDetails struct {
+	// } `json:"ride_pickup_details,omitempty"`
+	// RideTravelDetails struct {
+	// 	PickupEstimate struct {
+	// 		TimeRange struct {
+	// 			TimestampMs string `json:"timestamp_ms"`
+	// 		} `json:"time_range"`
+	// 		DurationRange struct {
+	// 			DurationMs string `json:"duration_ms"`
+	// 		} `json:"duration_range"`
+	// 		Timezone string `json:"timezone"`
+	// 	} `json:"pickup_estimate"`
+	// 	DropoffEstimate struct {
+	// 		TimeRange struct {
+	// 			TimestampMs string `json:"timestamp_ms"`
+	// 		} `json:"time_range"`
+	// 		DurationRange struct {
+	// 			DurationMs string `json:"duration_ms"`
+	// 		} `json:"duration_range"`
+	// 		Timezone string `json:"timezone"`
+	// 	} `json:"dropoff_estimate"`
+	// } `json:"ride_travel_details,omitempty"`
+	// AvailabilityDetails struct {
+	// 	Display int `json:"display"`
+	// 	Latest  int `json:"latest"`
+	// } `json:"availability_details"`
+	// CostEstimate0 struct {
+	// 	PriceQuoteID             string  `json:"price_quote_id"`
+	// 	CostToken                string  `json:"cost_token"`
+	// 	RideType                 string  `json:"ride_type"`
+	// 	EstimatedCostCentsMax    string  `json:"estimated_cost_cents_max"`
+	// 	EstimatedCostCentsMin    string  `json:"estimated_cost_cents_min"`
+	// 	UpfrontCostCents         string  `json:"upfront_cost_cents"`
+	// 	Currency                 string  `json:"currency"`
+	// 	ApplePayPreAuthCents     string  `json:"apple_pay_pre_auth_cents"`
+	// 	PrimetimePercentage      string  `json:"primetime_percentage"`
+	// 	PrimetimeMultiplier      float64 `json:"primetime_multiplier"`
+	// 	IsScheduledRide          bool    `json:"is_scheduled_ride"`
+	// 	CostTokenExpiryTime      string  `json:"cost_token_expiry_time"`
+	// 	PriceChanged             bool    `json:"price_changed"`
+	// 	EstimatedDurationSeconds string  `json:"estimated_duration_seconds"`
+	// 	LineItems                []struct {
+	// 		Description string `json:"description"`
+	// 		Amount      string `json:"amount"`
+	// 		Currency    string `json:"currency"`
+	// 	} `json:"line_items"`
+	// 	StopsAdjustmentThreshold struct {
+	// 		Origin struct {
+	// 			Lat           float64 `json:"lat"`
+	// 			Lng           float64 `json:"lng"`
+	// 			RangeInMeters int     `json:"range_in_meters"`
+	// 		} `json:"origin"`
+	// 	} `json:"stops_adjustment_threshold"`
+	// 	EstimatedDistanceInMiles float64 `json:"estimated_distance_in_miles"`
+	// } `json:"cost_estimate,omitempty"`
+	// RideTypeDetails0 struct {
+	// 	RideType       string `json:"ride_type"`
+	// 	Seats          int    `json:"seats"`
+	// 	PricingDetails struct {
+	// 		BaseChargeV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"base_charge_v2"`
+	// 		CostMinimumV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_minimum_v2"`
+	// 		CostPerDistanceUnit struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_distance_unit"`
+	// 		DistanceUnits   string `json:"distance_units"`
+	// 		CostPerMinuteV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_minute_v2"`
+	// 		ServiceFeeDescription string `json:"service_fee_description"`
+	// 	} `json:"pricing_details"`
+	// 	Features          []string `json:"features"`
+	// 	DisplayProperties struct {
+	// 		Name                 string `json:"name"`
+	// 		Description          string `json:"description"`
+	// 		MapMarkerImage       string `json:"map_marker_image"`
+	// 		SmallImage           string `json:"small_image"`
+	// 		LargeBackgroundImage string `json:"large_background_image"`
+	// 		LargeForegroundImage string `json:"large_foreground_image"`
+	// 		HiddenByDefault      bool   `json:"hidden_by_default"`
+	// 	} `json:"display_properties"`
+	// } `json:"ride_type_details,omitempty"`
+	// RideTypeDetails1 struct {
+	// 	RideType       string `json:"ride_type"`
+	// 	Seats          int    `json:"seats"`
+	// 	PricingDetails struct {
+	// 		BaseChargeV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"base_charge_v2"`
+	// 		CostMinimumV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_minimum_v2"`
+	// 		CostPerDistanceUnit struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_distance_unit"`
+	// 		DistanceUnits   string `json:"distance_units"`
+	// 		CostPerMinuteV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_minute_v2"`
+	// 		ServiceFeeDescription string `json:"service_fee_description"`
+	// 	} `json:"pricing_details"`
+	// 	Features          []string `json:"features"`
+	// 	DisplayProperties struct {
+	// 		Name                 string `json:"name"`
+	// 		Description          string `json:"description"`
+	// 		MapMarkerImage       string `json:"map_marker_image"`
+	// 		SmallImage           string `json:"small_image"`
+	// 		LargeBackgroundImage string `json:"large_background_image"`
+	// 		LargeForegroundImage string `json:"large_foreground_image"`
+	// 		HiddenByDefault      bool   `json:"hidden_by_default"`
+	// 	} `json:"display_properties"`
+	// } `json:"ride_type_details,omitempty"`
+	// RidePickupDetails0 struct {
+	// 	MaxMatchingWindowMs string `json:"max_matching_window_ms"`
+	// } `json:"ride_pickup_details,omitempty"`
+	// PaxSavings struct {
+	// 	ComparisonProductDisplayName string `json:"comparison_product_display_name"`
+	// 	CurrentSavings               struct {
+	// 		Currency string `json:"currency"`
+	// 		Amount   string `json:"amount"`
+	// 		Exponent string `json:"exponent"`
+	// 	} `json:"current_savings"`
+	// } `json:"pax_savings,omitempty"`
+	// CostEstimate1 struct {
+	// 	PriceQuoteID          string  `json:"price_quote_id"`
+	// 	CostToken             string  `json:"cost_token"`
+	// 	RideType              string  `json:"ride_type"`
+	// 	EstimatedCostCentsMax string  `json:"estimated_cost_cents_max"`
+	// 	EstimatedCostCentsMin string  `json:"estimated_cost_cents_min"`
+	// 	UpfrontCostCents      string  `json:"upfront_cost_cents"`
+	// 	Currency              string  `json:"currency"`
+	// 	ApplePayPreAuthCents  string  `json:"apple_pay_pre_auth_cents"`
+	// 	PrimetimePercentage   string  `json:"primetime_percentage"`
+	// 	PrimetimeMultiplier   float64 `json:"primetime_multiplier"`
+	// 	ApplicableCoupons     []struct {
+	// 		ID                string `json:"id"`
+	// 		Name              string `json:"name"`
+	// 		DiscountType      string `json:"discount_type"`
+	// 		Currency          string `json:"currency"`
+	// 		DiscountAmountMin string `json:"discount_amount_min"`
+	// 		DiscountAmountMax string `json:"discount_amount_max"`
+	// 		ExplanationText   string `json:"explanation_text"`
+	// 		IsMembership      bool   `json:"is_membership"`
+	// 		DetailText        string `json:"detail_text"`
+	// 		LineItems         []struct {
+	// 			Name   string `json:"name"`
+	// 			Amount struct {
+	// 				Currency string `json:"currency"`
+	// 				Amount   string `json:"amount"`
+	// 				Exponent string `json:"exponent"`
+	// 			} `json:"amount"`
+	// 		} `json:"line_items"`
+	// 	} `json:"applicable_coupons"`
+	// 	IsScheduledRide          bool   `json:"is_scheduled_ride"`
+	// 	CostTokenExpiryTime      string `json:"cost_token_expiry_time"`
+	// 	PriceChanged             bool   `json:"price_changed"`
+	// 	EstimatedDurationSeconds string `json:"estimated_duration_seconds"`
+	// 	LineItems                []struct {
+	// 		Description string `json:"description"`
+	// 		Amount      string `json:"amount"`
+	// 		Currency    string `json:"currency"`
+	// 	} `json:"line_items"`
+	// 	StopsAdjustmentThreshold struct {
+	// 		Origin struct {
+	// 			Lat           float64 `json:"lat"`
+	// 			Lng           float64 `json:"lng"`
+	// 			RangeInMeters int     `json:"range_in_meters"`
+	// 		} `json:"origin"`
+	// 	} `json:"stops_adjustment_threshold"`
+	// 	EstimatedDistanceInMiles float64 `json:"estimated_distance_in_miles"`
+	// } `json:"cost_estimate,omitempty"`
+	// CostEstimate2 struct {
+	// 	RideType              string `json:"ride_type"`
+	// 	EstimatedCostCentsMax string `json:"estimated_cost_cents_max"`
+	// 	EstimatedCostCentsMin string `json:"estimated_cost_cents_min"`
+	// 	Currency              string `json:"currency"`
+	// 	ApplePayPreAuthCents  string `json:"apple_pay_pre_auth_cents"`
+	// 	ApplePayCountry       string `json:"apple_pay_country"`
+	// 	ComparisonCents       string `json:"comparison_cents"`
+	// 	ApplicableCoupons     []struct {
+	// 		ID              string `json:"id"`
+	// 		Currency        string `json:"currency"`
+	// 		ExplanationText string `json:"explanation_text"`
+	// 		IsMembership    bool   `json:"is_membership"`
+	// 		LineItems       []struct {
+	// 			Name string `json:"name"`
+	// 		} `json:"line_items"`
+	// 	} `json:"applicable_coupons"`
+	// 	IsScheduledRide          bool    `json:"is_scheduled_ride"`
+	// 	PriceChanged             bool    `json:"price_changed"`
+	// 	EstimatedDurationSeconds string  `json:"estimated_duration_seconds"`
+	// 	PriceSummary             string  `json:"price_summary"`
+	// 	PriceDescription         string  `json:"price_description"`
+	// 	EstimatedDistanceInMiles float64 `json:"estimated_distance_in_miles"`
+	// } `json:"cost_estimate,omitempty"`
+	// RideTypeDetails2 struct {
+	// 	RideType       string `json:"ride_type"`
+	// 	PricingDetails struct {
+	// 		BaseChargeV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"base_charge_v2"`
+	// 		CostMinimumV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_minimum_v2"`
+	// 		CostPerDistanceUnit struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_distance_unit"`
+	// 		DistanceUnits   string `json:"distance_units"`
+	// 		CostPerMinuteV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_minute_v2"`
+	// 		AdditionalCharge struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"additional_charge"`
+	// 		BaseChargeThresholdMinutesV3       string `json:"base_charge_threshold_minutes_v3"`
+	// 		AdditionalChargeThresholdMinutesV3 string `json:"additional_charge_threshold_minutes_v3"`
+	// 	} `json:"pricing_details"`
+	// 	Features          []string `json:"features"`
+	// 	DisplayProperties struct {
+	// 		Name                 string `json:"name"`
+	// 		Description          string `json:"description"`
+	// 		MapMarkerImage       string `json:"map_marker_image"`
+	// 		SmallImage           string `json:"small_image"`
+	// 		LargeBackgroundImage string `json:"large_background_image"`
+	// 		LargeForegroundImage string `json:"large_foreground_image"`
+	// 		HiddenByDefault      bool   `json:"hidden_by_default"`
+	// 	} `json:"display_properties"`
+	// 	ScheduledPricingDetails struct {
+	// 	} `json:"scheduled_pricing_details"`
+	// } `json:"ride_type_details,omitempty"`
+	// RideableDetails struct {
+	// 	RideableID     string `json:"rideable_id"`
+	// 	StartStationID string `json:"start_station_id"`
+	// 	EndStationID   string `json:"end_station_id"`
+	// } `json:"rideable_details,omitempty"`
+	// CostEstimate3 struct {
+	// 	RideType              string `json:"ride_type"`
+	// 	EstimatedCostCentsMax string `json:"estimated_cost_cents_max"`
+	// 	EstimatedCostCentsMin string `json:"estimated_cost_cents_min"`
+	// 	Currency              string `json:"currency"`
+	// 	ApplePayPreAuthCents  string `json:"apple_pay_pre_auth_cents"`
+	// 	ApplePayCountry       string `json:"apple_pay_country"`
+	// 	ComparisonCents       string `json:"comparison_cents"`
+	// 	ApplicableCoupons     []struct {
+	// 		ID              string `json:"id"`
+	// 		Currency        string `json:"currency"`
+	// 		ExplanationText string `json:"explanation_text"`
+	// 		IsMembership    bool   `json:"is_membership"`
+	// 		LineItems       []struct {
+	// 			Name string `json:"name"`
+	// 		} `json:"line_items"`
+	// 	} `json:"applicable_coupons"`
+	// 	IsScheduledRide          bool    `json:"is_scheduled_ride"`
+	// 	PriceChanged             bool    `json:"price_changed"`
+	// 	EstimatedDurationSeconds string  `json:"estimated_duration_seconds"`
+	// 	PriceSummary             string  `json:"price_summary"`
+	// 	PriceDescription         string  `json:"price_description"`
+	// 	EstimatedDistanceInMiles float64 `json:"estimated_distance_in_miles"`
+	// } `json:"cost_estimate,omitempty"`
+	// RideTypeDetails3 struct {
+	// 	RideType       string `json:"ride_type"`
+	// 	PricingDetails struct {
+	// 		BaseChargeV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"base_charge_v2"`
+	// 		CostMinimumV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_minimum_v2"`
+	// 		CostPerDistanceUnit struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_distance_unit"`
+	// 		DistanceUnits   string `json:"distance_units"`
+	// 		CostPerMinuteV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_minute_v2"`
+	// 		AdditionalCharge struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"additional_charge"`
+	// 		BaseChargeThresholdMinutesV3       string `json:"base_charge_threshold_minutes_v3"`
+	// 		AdditionalChargeThresholdMinutesV3 string `json:"additional_charge_threshold_minutes_v3"`
+	// 	} `json:"pricing_details"`
+	// 	Features          []string `json:"features"`
+	// 	DisplayProperties struct {
+	// 		Name                 string `json:"name"`
+	// 		Description          string `json:"description"`
+	// 		MapMarkerImage       string `json:"map_marker_image"`
+	// 		SmallImage           string `json:"small_image"`
+	// 		LargeBackgroundImage string `json:"large_background_image"`
+	// 		LargeForegroundImage string `json:"large_foreground_image"`
+	// 		HiddenByDefault      bool   `json:"hidden_by_default"`
+	// 	} `json:"display_properties"`
+	// 	ScheduledPricingDetails struct {
+	// 	} `json:"scheduled_pricing_details"`
+	// } `json:"ride_type_details,omitempty"`
+	// RideableDetails0 struct {
+	// 	StartStationID string `json:"start_station_id"`
+	// 	EndStationID   string `json:"end_station_id"`
+	// } `json:"rideable_details,omitempty"`
+	// CostEstimate4 struct {
+	// 	UpfrontCostCents     string `json:"upfront_cost_cents"`
+	// 	ApplePayPreAuthCents string `json:"apple_pay_pre_auth_cents"`
+	// 	ApplePayCountry      string `json:"apple_pay_country"`
+	// 	LineItems            []struct {
+	// 		Description string `json:"description"`
+	// 		Amount      string `json:"amount"`
+	// 		Currency    string `json:"currency"`
+	// 	} `json:"line_items"`
+	// } `json:"cost_estimate,omitempty"`
+	// RideTypeDetails4 struct {
+	// 	RideType       string `json:"ride_type"`
+	// 	PricingDetails struct {
+	// 		BaseChargeV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"base_charge_v2"`
+	// 		CostMinimumV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_minimum_v2"`
+	// 		CostPerDistanceUnit struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_distance_unit"`
+	// 		DistanceUnits   string `json:"distance_units"`
+	// 		CostPerMinuteV2 struct {
+	// 			Currency string `json:"currency"`
+	// 			Amount   string `json:"amount"`
+	// 			Exponent string `json:"exponent"`
+	// 		} `json:"cost_per_minute_v2"`
+	// 		ServiceFeeDescription string `json:"service_fee_description"`
+	// 	} `json:"pricing_details"`
+	// 	Features          []string `json:"features"`
+	// 	DisplayProperties struct {
+	// 		Name                 string `json:"name"`
+	// 		Description          string `json:"description"`
+	// 		MapMarkerImage       string `json:"map_marker_image"`
+	// 		SmallImage           string `json:"small_image"`
+	// 		LargeBackgroundImage string `json:"large_background_image"`
+	// 		LargeForegroundImage string `json:"large_foreground_image"`
+	// 		HiddenByDefault      bool   `json:"hidden_by_default"`
+	// 	} `json:"display_properties"`
+	// } `json:"ride_type_details,omitempty"`
 }
 
 type OfferingsInfoSelectorCellDisplay struct {
