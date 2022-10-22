@@ -8,4 +8,4 @@ SCRIPTS="$(dirname "$0")"
 
 go generate ./...
 
-$SCRIPTS/just_run.sh
+$SCRIPTS/just_run.sh "$@"
