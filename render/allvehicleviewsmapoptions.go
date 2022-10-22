@@ -38,7 +38,7 @@ func AllVehicleViewsMapDeltaE6(deltaE6 int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
 		opts.has_deltaE6 = true
 		opts.deltaE6 = deltaE6
-	}, fmt.Sprintf("render.AllVehicleViewsMapDeltaE6(int %+v)}", deltaE6)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapDeltaE6(int %+v)", deltaE6)}
 }
 func AllVehicleViewsMapDeltaE6Flag(deltaE6 *int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
@@ -47,14 +47,14 @@ func AllVehicleViewsMapDeltaE6Flag(deltaE6 *int) AllVehicleViewsMapOption {
 		}
 		opts.has_deltaE6 = true
 		opts.deltaE6 = *deltaE6
-	}, fmt.Sprintf("render.AllVehicleViewsMapDeltaE6(int %+v)}", deltaE6)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapDeltaE6(int %+v)", deltaE6)}
 }
 
 func AllVehicleViewsMapLatitude(latitude float64) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
 		opts.has_latitude = true
 		opts.latitude = latitude
-	}, fmt.Sprintf("render.AllVehicleViewsMapLatitude(float64 %+v)}", latitude)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapLatitude(float64 %+v)", latitude)}
 }
 func AllVehicleViewsMapLatitudeFlag(latitude *float64) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
@@ -63,14 +63,14 @@ func AllVehicleViewsMapLatitudeFlag(latitude *float64) AllVehicleViewsMapOption 
 		}
 		opts.has_latitude = true
 		opts.latitude = *latitude
-	}, fmt.Sprintf("render.AllVehicleViewsMapLatitude(float64 %+v)}", latitude)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapLatitude(float64 %+v)", latitude)}
 }
 
 func AllVehicleViewsMapLongitude(longitude float64) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
 		opts.has_longitude = true
 		opts.longitude = longitude
-	}, fmt.Sprintf("render.AllVehicleViewsMapLongitude(float64 %+v)}", longitude)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapLongitude(float64 %+v)", longitude)}
 }
 func AllVehicleViewsMapLongitudeFlag(longitude *float64) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
@@ -79,14 +79,14 @@ func AllVehicleViewsMapLongitudeFlag(longitude *float64) AllVehicleViewsMapOptio
 		}
 		opts.has_longitude = true
 		opts.longitude = *longitude
-	}, fmt.Sprintf("render.AllVehicleViewsMapLongitude(float64 %+v)}", longitude)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapLongitude(float64 %+v)", longitude)}
 }
 
 func AllVehicleViewsMapMultiples(multiples int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
 		opts.has_multiples = true
 		opts.multiples = multiples
-	}, fmt.Sprintf("render.AllVehicleViewsMapMultiples(int %+v)}", multiples)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapMultiples(int %+v)", multiples)}
 }
 func AllVehicleViewsMapMultiplesFlag(multiples *int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
@@ -95,14 +95,14 @@ func AllVehicleViewsMapMultiplesFlag(multiples *int) AllVehicleViewsMapOption {
 		}
 		opts.has_multiples = true
 		opts.multiples = *multiples
-	}, fmt.Sprintf("render.AllVehicleViewsMapMultiples(int %+v)}", multiples)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapMultiples(int %+v)", multiples)}
 }
 
 func AllVehicleViewsMapShowCenters(showCenters bool) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
 		opts.has_showCenters = true
 		opts.showCenters = showCenters
-	}, fmt.Sprintf("render.AllVehicleViewsMapShowCenters(bool %+v)}", showCenters)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapShowCenters(bool %+v)", showCenters)}
 }
 func AllVehicleViewsMapShowCentersFlag(showCenters *bool) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
@@ -111,14 +111,14 @@ func AllVehicleViewsMapShowCentersFlag(showCenters *bool) AllVehicleViewsMapOpti
 		}
 		opts.has_showCenters = true
 		opts.showCenters = *showCenters
-	}, fmt.Sprintf("render.AllVehicleViewsMapShowCenters(bool %+v)}", showCenters)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapShowCenters(bool %+v)", showCenters)}
 }
 
 func AllVehicleViewsMapSleepSecs(sleepSecs int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
 		opts.has_sleepSecs = true
 		opts.sleepSecs = sleepSecs
-	}, fmt.Sprintf("render.AllVehicleViewsMapSleepSecs(int %+v)}", sleepSecs)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapSleepSecs(int %+v)", sleepSecs)}
 }
 func AllVehicleViewsMapSleepSecsFlag(sleepSecs *int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
@@ -127,14 +127,14 @@ func AllVehicleViewsMapSleepSecsFlag(sleepSecs *int) AllVehicleViewsMapOption {
 		}
 		opts.has_sleepSecs = true
 		opts.sleepSecs = *sleepSecs
-	}, fmt.Sprintf("render.AllVehicleViewsMapSleepSecs(int %+v)}", sleepSecs)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapSleepSecs(int %+v)", sleepSecs)}
 }
 
 func AllVehicleViewsMapThreads(threads int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
 		opts.has_threads = true
 		opts.threads = threads
-	}, fmt.Sprintf("render.AllVehicleViewsMapThreads(int %+v)}", threads)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapThreads(int %+v)", threads)}
 }
 func AllVehicleViewsMapThreadsFlag(threads *int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
@@ -143,14 +143,14 @@ func AllVehicleViewsMapThreadsFlag(threads *int) AllVehicleViewsMapOption {
 		}
 		opts.has_threads = true
 		opts.threads = *threads
-	}, fmt.Sprintf("render.AllVehicleViewsMapThreads(int %+v)}", threads)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapThreads(int %+v)", threads)}
 }
 
 func AllVehicleViewsMapZoom(zoom int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
 		opts.has_zoom = true
 		opts.zoom = zoom
-	}, fmt.Sprintf("render.AllVehicleViewsMapZoom(int %+v)}", zoom)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapZoom(int %+v)", zoom)}
 }
 func AllVehicleViewsMapZoomFlag(zoom *int) AllVehicleViewsMapOption {
 	return AllVehicleViewsMapOption{func(opts *allVehicleViewsMapOptionImpl) {
@@ -159,7 +159,7 @@ func AllVehicleViewsMapZoomFlag(zoom *int) AllVehicleViewsMapOption {
 		}
 		opts.has_zoom = true
 		opts.zoom = *zoom
-	}, fmt.Sprintf("render.AllVehicleViewsMapZoom(int %+v)}", zoom)}
+	}, fmt.Sprintf("render.AllVehicleViewsMapZoom(int %+v)", zoom)}
 }
 
 type allVehicleViewsMapOptionImpl struct {

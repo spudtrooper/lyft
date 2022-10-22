@@ -32,7 +32,7 @@ func VenuesLatitude(latitude float64) VenuesOption {
 	return VenuesOption{func(opts *venuesOptionImpl) {
 		opts.has_latitude = true
 		opts.latitude = latitude
-	}, fmt.Sprintf("api.VenuesLatitude(float64 %+v)}", latitude)}
+	}, fmt.Sprintf("api.VenuesLatitude(float64 %+v)", latitude)}
 }
 func VenuesLatitudeFlag(latitude *float64) VenuesOption {
 	return VenuesOption{func(opts *venuesOptionImpl) {
@@ -41,14 +41,14 @@ func VenuesLatitudeFlag(latitude *float64) VenuesOption {
 		}
 		opts.has_latitude = true
 		opts.latitude = *latitude
-	}, fmt.Sprintf("api.VenuesLatitude(float64 %+v)}", latitude)}
+	}, fmt.Sprintf("api.VenuesLatitude(float64 %+v)", latitude)}
 }
 
 func VenuesLongitude(longitude float64) VenuesOption {
 	return VenuesOption{func(opts *venuesOptionImpl) {
 		opts.has_longitude = true
 		opts.longitude = longitude
-	}, fmt.Sprintf("api.VenuesLongitude(float64 %+v)}", longitude)}
+	}, fmt.Sprintf("api.VenuesLongitude(float64 %+v)", longitude)}
 }
 func VenuesLongitudeFlag(longitude *float64) VenuesOption {
 	return VenuesOption{func(opts *venuesOptionImpl) {
@@ -57,14 +57,14 @@ func VenuesLongitudeFlag(longitude *float64) VenuesOption {
 		}
 		opts.has_longitude = true
 		opts.longitude = *longitude
-	}, fmt.Sprintf("api.VenuesLongitude(float64 %+v)}", longitude)}
+	}, fmt.Sprintf("api.VenuesLongitude(float64 %+v)", longitude)}
 }
 
 func VenuesNoIncludeLocationV2Info(noIncludeLocationV2Info bool) VenuesOption {
 	return VenuesOption{func(opts *venuesOptionImpl) {
 		opts.has_noIncludeLocationV2Info = true
 		opts.noIncludeLocationV2Info = noIncludeLocationV2Info
-	}, fmt.Sprintf("api.VenuesNoIncludeLocationV2Info(bool %+v)}", noIncludeLocationV2Info)}
+	}, fmt.Sprintf("api.VenuesNoIncludeLocationV2Info(bool %+v)", noIncludeLocationV2Info)}
 }
 func VenuesNoIncludeLocationV2InfoFlag(noIncludeLocationV2Info *bool) VenuesOption {
 	return VenuesOption{func(opts *venuesOptionImpl) {
@@ -73,14 +73,14 @@ func VenuesNoIncludeLocationV2InfoFlag(noIncludeLocationV2Info *bool) VenuesOpti
 		}
 		opts.has_noIncludeLocationV2Info = true
 		opts.noIncludeLocationV2Info = *noIncludeLocationV2Info
-	}, fmt.Sprintf("api.VenuesNoIncludeLocationV2Info(bool %+v)}", noIncludeLocationV2Info)}
+	}, fmt.Sprintf("api.VenuesNoIncludeLocationV2Info(bool %+v)", noIncludeLocationV2Info)}
 }
 
 func VenuesRadiusMiles(radiusMiles int) VenuesOption {
 	return VenuesOption{func(opts *venuesOptionImpl) {
 		opts.has_radiusMiles = true
 		opts.radiusMiles = radiusMiles
-	}, fmt.Sprintf("api.VenuesRadiusMiles(int %+v)}", radiusMiles)}
+	}, fmt.Sprintf("api.VenuesRadiusMiles(int %+v)", radiusMiles)}
 }
 func VenuesRadiusMilesFlag(radiusMiles *int) VenuesOption {
 	return VenuesOption{func(opts *venuesOptionImpl) {
@@ -89,14 +89,14 @@ func VenuesRadiusMilesFlag(radiusMiles *int) VenuesOption {
 		}
 		opts.has_radiusMiles = true
 		opts.radiusMiles = *radiusMiles
-	}, fmt.Sprintf("api.VenuesRadiusMiles(int %+v)}", radiusMiles)}
+	}, fmt.Sprintf("api.VenuesRadiusMiles(int %+v)", radiusMiles)}
 }
 
 func VenuesToken(token string) VenuesOption {
 	return VenuesOption{func(opts *venuesOptionImpl) {
 		opts.has_token = true
 		opts.token = token
-	}, fmt.Sprintf("api.VenuesToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.VenuesToken(string %+v)", token)}
 }
 func VenuesTokenFlag(token *string) VenuesOption {
 	return VenuesOption{func(opts *venuesOptionImpl) {
@@ -105,7 +105,7 @@ func VenuesTokenFlag(token *string) VenuesOption {
 		}
 		opts.has_token = true
 		opts.token = *token
-	}, fmt.Sprintf("api.VenuesToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.VenuesToken(string %+v)", token)}
 }
 
 type venuesOptionImpl struct {

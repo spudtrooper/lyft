@@ -19,7 +19,7 @@ func BaseToken(token string) BaseOption {
 	return BaseOption{func(opts *baseOptionImpl) {
 		opts.has_token = true
 		opts.token = token
-	}, fmt.Sprintf("api.BaseToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.BaseToken(string %+v)", token)}
 }
 func BaseTokenFlag(token *string) BaseOption {
 	return BaseOption{func(opts *baseOptionImpl) {
@@ -28,7 +28,7 @@ func BaseTokenFlag(token *string) BaseOption {
 		}
 		opts.has_token = true
 		opts.token = *token
-	}, fmt.Sprintf("api.BaseToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.BaseToken(string %+v)", token)}
 }
 
 type baseOptionImpl struct {

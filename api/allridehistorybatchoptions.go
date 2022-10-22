@@ -39,7 +39,7 @@ func AllRideHistoryBatchDebug(debug bool) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
 		opts.has_debug = true
 		opts.debug = debug
-	}, fmt.Sprintf("api.AllRideHistoryBatchDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchDebug(bool %+v)", debug)}
 }
 func AllRideHistoryBatchDebugFlag(debug *bool) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
@@ -48,14 +48,14 @@ func AllRideHistoryBatchDebugFlag(debug *bool) AllRideHistoryBatchOption {
 		}
 		opts.has_debug = true
 		opts.debug = *debug
-	}, fmt.Sprintf("api.AllRideHistoryBatchDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchDebug(bool %+v)", debug)}
 }
 
 func AllRideHistoryBatchLimit(limit int) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
 		opts.has_limit = true
 		opts.limit = limit
-	}, fmt.Sprintf("api.AllRideHistoryBatchLimit(int %+v)}", limit)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchLimit(int %+v)", limit)}
 }
 func AllRideHistoryBatchLimitFlag(limit *int) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
@@ -64,14 +64,14 @@ func AllRideHistoryBatchLimitFlag(limit *int) AllRideHistoryBatchOption {
 		}
 		opts.has_limit = true
 		opts.limit = *limit
-	}, fmt.Sprintf("api.AllRideHistoryBatchLimit(int %+v)}", limit)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchLimit(int %+v)", limit)}
 }
 
 func AllRideHistoryBatchSource(source string) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
 		opts.has_source = true
 		opts.source = source
-	}, fmt.Sprintf("api.AllRideHistoryBatchSource(string %+v)}", source)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchSource(string %+v)", source)}
 }
 func AllRideHistoryBatchSourceFlag(source *string) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
@@ -80,14 +80,14 @@ func AllRideHistoryBatchSourceFlag(source *string) AllRideHistoryBatchOption {
 		}
 		opts.has_source = true
 		opts.source = *source
-	}, fmt.Sprintf("api.AllRideHistoryBatchSource(string %+v)}", source)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchSource(string %+v)", source)}
 }
 
 func AllRideHistoryBatchStartTime(startTime time.Time) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
 		opts.has_startTime = true
 		opts.startTime = startTime
-	}, fmt.Sprintf("api.AllRideHistoryBatchStartTime(time.Time %+v)}", startTime)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchStartTime(time.Time %+v)", startTime)}
 }
 func AllRideHistoryBatchStartTimeFlag(startTime *time.Time) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
@@ -96,14 +96,14 @@ func AllRideHistoryBatchStartTimeFlag(startTime *time.Time) AllRideHistoryBatchO
 		}
 		opts.has_startTime = true
 		opts.startTime = *startTime
-	}, fmt.Sprintf("api.AllRideHistoryBatchStartTime(time.Time %+v)}", startTime)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchStartTime(time.Time %+v)", startTime)}
 }
 
 func AllRideHistoryBatchTimeout(timeout time.Duration) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
 		opts.has_timeout = true
 		opts.timeout = timeout
-	}, fmt.Sprintf("api.AllRideHistoryBatchTimeout(time.Duration %+v)}", timeout)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchTimeout(time.Duration %+v)", timeout)}
 }
 func AllRideHistoryBatchTimeoutFlag(timeout *time.Duration) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
@@ -112,14 +112,14 @@ func AllRideHistoryBatchTimeoutFlag(timeout *time.Duration) AllRideHistoryBatchO
 		}
 		opts.has_timeout = true
 		opts.timeout = *timeout
-	}, fmt.Sprintf("api.AllRideHistoryBatchTimeout(time.Duration %+v)}", timeout)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchTimeout(time.Duration %+v)", timeout)}
 }
 
 func AllRideHistoryBatchToken(token string) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
 		opts.has_token = true
 		opts.token = token
-	}, fmt.Sprintf("api.AllRideHistoryBatchToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchToken(string %+v)", token)}
 }
 func AllRideHistoryBatchTokenFlag(token *string) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
@@ -128,14 +128,14 @@ func AllRideHistoryBatchTokenFlag(token *string) AllRideHistoryBatchOption {
 		}
 		opts.has_token = true
 		opts.token = *token
-	}, fmt.Sprintf("api.AllRideHistoryBatchToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchToken(string %+v)", token)}
 }
 
 func AllRideHistoryBatchTotalLimit(totalLimit int) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
 		opts.has_totalLimit = true
 		opts.totalLimit = totalLimit
-	}, fmt.Sprintf("api.AllRideHistoryBatchTotalLimit(int %+v)}", totalLimit)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchTotalLimit(int %+v)", totalLimit)}
 }
 func AllRideHistoryBatchTotalLimitFlag(totalLimit *int) AllRideHistoryBatchOption {
 	return AllRideHistoryBatchOption{func(opts *allRideHistoryBatchOptionImpl) {
@@ -144,7 +144,7 @@ func AllRideHistoryBatchTotalLimitFlag(totalLimit *int) AllRideHistoryBatchOptio
 		}
 		opts.has_totalLimit = true
 		opts.totalLimit = *totalLimit
-	}, fmt.Sprintf("api.AllRideHistoryBatchTotalLimit(int %+v)}", totalLimit)}
+	}, fmt.Sprintf("api.AllRideHistoryBatchTotalLimit(int %+v)", totalLimit)}
 }
 
 type allRideHistoryBatchOptionImpl struct {

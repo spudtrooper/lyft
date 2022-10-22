@@ -38,7 +38,7 @@ func AllRideHistoryDebug(debug bool) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
 		opts.has_debug = true
 		opts.debug = debug
-	}, fmt.Sprintf("api.AllRideHistoryDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllRideHistoryDebug(bool %+v)", debug)}
 }
 func AllRideHistoryDebugFlag(debug *bool) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
@@ -47,14 +47,14 @@ func AllRideHistoryDebugFlag(debug *bool) AllRideHistoryOption {
 		}
 		opts.has_debug = true
 		opts.debug = *debug
-	}, fmt.Sprintf("api.AllRideHistoryDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllRideHistoryDebug(bool %+v)", debug)}
 }
 
 func AllRideHistoryLimit(limit int) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
 		opts.has_limit = true
 		opts.limit = limit
-	}, fmt.Sprintf("api.AllRideHistoryLimit(int %+v)}", limit)}
+	}, fmt.Sprintf("api.AllRideHistoryLimit(int %+v)", limit)}
 }
 func AllRideHistoryLimitFlag(limit *int) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
@@ -63,14 +63,14 @@ func AllRideHistoryLimitFlag(limit *int) AllRideHistoryOption {
 		}
 		opts.has_limit = true
 		opts.limit = *limit
-	}, fmt.Sprintf("api.AllRideHistoryLimit(int %+v)}", limit)}
+	}, fmt.Sprintf("api.AllRideHistoryLimit(int %+v)", limit)}
 }
 
 func AllRideHistorySource(source string) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
 		opts.has_source = true
 		opts.source = source
-	}, fmt.Sprintf("api.AllRideHistorySource(string %+v)}", source)}
+	}, fmt.Sprintf("api.AllRideHistorySource(string %+v)", source)}
 }
 func AllRideHistorySourceFlag(source *string) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
@@ -79,14 +79,14 @@ func AllRideHistorySourceFlag(source *string) AllRideHistoryOption {
 		}
 		opts.has_source = true
 		opts.source = *source
-	}, fmt.Sprintf("api.AllRideHistorySource(string %+v)}", source)}
+	}, fmt.Sprintf("api.AllRideHistorySource(string %+v)", source)}
 }
 
 func AllRideHistoryStartTime(startTime time.Time) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
 		opts.has_startTime = true
 		opts.startTime = startTime
-	}, fmt.Sprintf("api.AllRideHistoryStartTime(time.Time %+v)}", startTime)}
+	}, fmt.Sprintf("api.AllRideHistoryStartTime(time.Time %+v)", startTime)}
 }
 func AllRideHistoryStartTimeFlag(startTime *time.Time) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
@@ -95,14 +95,14 @@ func AllRideHistoryStartTimeFlag(startTime *time.Time) AllRideHistoryOption {
 		}
 		opts.has_startTime = true
 		opts.startTime = *startTime
-	}, fmt.Sprintf("api.AllRideHistoryStartTime(time.Time %+v)}", startTime)}
+	}, fmt.Sprintf("api.AllRideHistoryStartTime(time.Time %+v)", startTime)}
 }
 
 func AllRideHistoryTimeout(timeout time.Duration) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
 		opts.has_timeout = true
 		opts.timeout = timeout
-	}, fmt.Sprintf("api.AllRideHistoryTimeout(time.Duration %+v)}", timeout)}
+	}, fmt.Sprintf("api.AllRideHistoryTimeout(time.Duration %+v)", timeout)}
 }
 func AllRideHistoryTimeoutFlag(timeout *time.Duration) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
@@ -111,14 +111,14 @@ func AllRideHistoryTimeoutFlag(timeout *time.Duration) AllRideHistoryOption {
 		}
 		opts.has_timeout = true
 		opts.timeout = *timeout
-	}, fmt.Sprintf("api.AllRideHistoryTimeout(time.Duration %+v)}", timeout)}
+	}, fmt.Sprintf("api.AllRideHistoryTimeout(time.Duration %+v)", timeout)}
 }
 
 func AllRideHistoryToken(token string) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
 		opts.has_token = true
 		opts.token = token
-	}, fmt.Sprintf("api.AllRideHistoryToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.AllRideHistoryToken(string %+v)", token)}
 }
 func AllRideHistoryTokenFlag(token *string) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
@@ -127,14 +127,14 @@ func AllRideHistoryTokenFlag(token *string) AllRideHistoryOption {
 		}
 		opts.has_token = true
 		opts.token = *token
-	}, fmt.Sprintf("api.AllRideHistoryToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.AllRideHistoryToken(string %+v)", token)}
 }
 
 func AllRideHistoryTotalLimit(totalLimit int) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
 		opts.has_totalLimit = true
 		opts.totalLimit = totalLimit
-	}, fmt.Sprintf("api.AllRideHistoryTotalLimit(int %+v)}", totalLimit)}
+	}, fmt.Sprintf("api.AllRideHistoryTotalLimit(int %+v)", totalLimit)}
 }
 func AllRideHistoryTotalLimitFlag(totalLimit *int) AllRideHistoryOption {
 	return AllRideHistoryOption{func(opts *allRideHistoryOptionImpl) {
@@ -143,7 +143,7 @@ func AllRideHistoryTotalLimitFlag(totalLimit *int) AllRideHistoryOption {
 		}
 		opts.has_totalLimit = true
 		opts.totalLimit = *totalLimit
-	}, fmt.Sprintf("api.AllRideHistoryTotalLimit(int %+v)}", totalLimit)}
+	}, fmt.Sprintf("api.AllRideHistoryTotalLimit(int %+v)", totalLimit)}
 }
 
 type allRideHistoryOptionImpl struct {

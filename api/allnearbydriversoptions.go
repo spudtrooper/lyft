@@ -45,7 +45,7 @@ func AllNearbyDriversDebug(debug bool) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
 		opts.has_debug = true
 		opts.debug = debug
-	}, fmt.Sprintf("api.AllNearbyDriversDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllNearbyDriversDebug(bool %+v)", debug)}
 }
 func AllNearbyDriversDebugFlag(debug *bool) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
@@ -54,14 +54,14 @@ func AllNearbyDriversDebugFlag(debug *bool) AllNearbyDriversOption {
 		}
 		opts.has_debug = true
 		opts.debug = *debug
-	}, fmt.Sprintf("api.AllNearbyDriversDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllNearbyDriversDebug(bool %+v)", debug)}
 }
 
 func AllNearbyDriversDeltaE6(deltaE6 int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
 		opts.has_deltaE6 = true
 		opts.deltaE6 = deltaE6
-	}, fmt.Sprintf("api.AllNearbyDriversDeltaE6(int %+v)}", deltaE6)}
+	}, fmt.Sprintf("api.AllNearbyDriversDeltaE6(int %+v)", deltaE6)}
 }
 func AllNearbyDriversDeltaE6Flag(deltaE6 *int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
@@ -70,14 +70,14 @@ func AllNearbyDriversDeltaE6Flag(deltaE6 *int) AllNearbyDriversOption {
 		}
 		opts.has_deltaE6 = true
 		opts.deltaE6 = *deltaE6
-	}, fmt.Sprintf("api.AllNearbyDriversDeltaE6(int %+v)}", deltaE6)}
+	}, fmt.Sprintf("api.AllNearbyDriversDeltaE6(int %+v)", deltaE6)}
 }
 
 func AllNearbyDriversDestinationLatitudeE6(destinationLatitudeE6 int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
 		opts.has_destinationLatitudeE6 = true
 		opts.destinationLatitudeE6 = destinationLatitudeE6
-	}, fmt.Sprintf("api.AllNearbyDriversDestinationLatitudeE6(int %+v)}", destinationLatitudeE6)}
+	}, fmt.Sprintf("api.AllNearbyDriversDestinationLatitudeE6(int %+v)", destinationLatitudeE6)}
 }
 func AllNearbyDriversDestinationLatitudeE6Flag(destinationLatitudeE6 *int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
@@ -86,14 +86,14 @@ func AllNearbyDriversDestinationLatitudeE6Flag(destinationLatitudeE6 *int) AllNe
 		}
 		opts.has_destinationLatitudeE6 = true
 		opts.destinationLatitudeE6 = *destinationLatitudeE6
-	}, fmt.Sprintf("api.AllNearbyDriversDestinationLatitudeE6(int %+v)}", destinationLatitudeE6)}
+	}, fmt.Sprintf("api.AllNearbyDriversDestinationLatitudeE6(int %+v)", destinationLatitudeE6)}
 }
 
 func AllNearbyDriversDestinationLongitudeE6(destinationLongitudeE6 int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
 		opts.has_destinationLongitudeE6 = true
 		opts.destinationLongitudeE6 = destinationLongitudeE6
-	}, fmt.Sprintf("api.AllNearbyDriversDestinationLongitudeE6(int %+v)}", destinationLongitudeE6)}
+	}, fmt.Sprintf("api.AllNearbyDriversDestinationLongitudeE6(int %+v)", destinationLongitudeE6)}
 }
 func AllNearbyDriversDestinationLongitudeE6Flag(destinationLongitudeE6 *int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
@@ -102,14 +102,14 @@ func AllNearbyDriversDestinationLongitudeE6Flag(destinationLongitudeE6 *int) All
 		}
 		opts.has_destinationLongitudeE6 = true
 		opts.destinationLongitudeE6 = *destinationLongitudeE6
-	}, fmt.Sprintf("api.AllNearbyDriversDestinationLongitudeE6(int %+v)}", destinationLongitudeE6)}
+	}, fmt.Sprintf("api.AllNearbyDriversDestinationLongitudeE6(int %+v)", destinationLongitudeE6)}
 }
 
 func AllNearbyDriversMultiples(multiples int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
 		opts.has_multiples = true
 		opts.multiples = multiples
-	}, fmt.Sprintf("api.AllNearbyDriversMultiples(int %+v)}", multiples)}
+	}, fmt.Sprintf("api.AllNearbyDriversMultiples(int %+v)", multiples)}
 }
 func AllNearbyDriversMultiplesFlag(multiples *int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
@@ -118,14 +118,14 @@ func AllNearbyDriversMultiplesFlag(multiples *int) AllNearbyDriversOption {
 		}
 		opts.has_multiples = true
 		opts.multiples = *multiples
-	}, fmt.Sprintf("api.AllNearbyDriversMultiples(int %+v)}", multiples)}
+	}, fmt.Sprintf("api.AllNearbyDriversMultiples(int %+v)", multiples)}
 }
 
 func AllNearbyDriversOrginPlaceID(orginPlaceID string) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
 		opts.has_orginPlaceID = true
 		opts.orginPlaceID = orginPlaceID
-	}, fmt.Sprintf("api.AllNearbyDriversOrginPlaceID(string %+v)}", orginPlaceID)}
+	}, fmt.Sprintf("api.AllNearbyDriversOrginPlaceID(string %+v)", orginPlaceID)}
 }
 func AllNearbyDriversOrginPlaceIDFlag(orginPlaceID *string) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
@@ -134,14 +134,14 @@ func AllNearbyDriversOrginPlaceIDFlag(orginPlaceID *string) AllNearbyDriversOpti
 		}
 		opts.has_orginPlaceID = true
 		opts.orginPlaceID = *orginPlaceID
-	}, fmt.Sprintf("api.AllNearbyDriversOrginPlaceID(string %+v)}", orginPlaceID)}
+	}, fmt.Sprintf("api.AllNearbyDriversOrginPlaceID(string %+v)", orginPlaceID)}
 }
 
 func AllNearbyDriversOriginLatitudeE6(originLatitudeE6 int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
 		opts.has_originLatitudeE6 = true
 		opts.originLatitudeE6 = originLatitudeE6
-	}, fmt.Sprintf("api.AllNearbyDriversOriginLatitudeE6(int %+v)}", originLatitudeE6)}
+	}, fmt.Sprintf("api.AllNearbyDriversOriginLatitudeE6(int %+v)", originLatitudeE6)}
 }
 func AllNearbyDriversOriginLatitudeE6Flag(originLatitudeE6 *int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
@@ -150,14 +150,14 @@ func AllNearbyDriversOriginLatitudeE6Flag(originLatitudeE6 *int) AllNearbyDriver
 		}
 		opts.has_originLatitudeE6 = true
 		opts.originLatitudeE6 = *originLatitudeE6
-	}, fmt.Sprintf("api.AllNearbyDriversOriginLatitudeE6(int %+v)}", originLatitudeE6)}
+	}, fmt.Sprintf("api.AllNearbyDriversOriginLatitudeE6(int %+v)", originLatitudeE6)}
 }
 
 func AllNearbyDriversOriginLongitudeE6(originLongitudeE6 int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
 		opts.has_originLongitudeE6 = true
 		opts.originLongitudeE6 = originLongitudeE6
-	}, fmt.Sprintf("api.AllNearbyDriversOriginLongitudeE6(int %+v)}", originLongitudeE6)}
+	}, fmt.Sprintf("api.AllNearbyDriversOriginLongitudeE6(int %+v)", originLongitudeE6)}
 }
 func AllNearbyDriversOriginLongitudeE6Flag(originLongitudeE6 *int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
@@ -166,14 +166,14 @@ func AllNearbyDriversOriginLongitudeE6Flag(originLongitudeE6 *int) AllNearbyDriv
 		}
 		opts.has_originLongitudeE6 = true
 		opts.originLongitudeE6 = *originLongitudeE6
-	}, fmt.Sprintf("api.AllNearbyDriversOriginLongitudeE6(int %+v)}", originLongitudeE6)}
+	}, fmt.Sprintf("api.AllNearbyDriversOriginLongitudeE6(int %+v)", originLongitudeE6)}
 }
 
 func AllNearbyDriversThreads(threads int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
 		opts.has_threads = true
 		opts.threads = threads
-	}, fmt.Sprintf("api.AllNearbyDriversThreads(int %+v)}", threads)}
+	}, fmt.Sprintf("api.AllNearbyDriversThreads(int %+v)", threads)}
 }
 func AllNearbyDriversThreadsFlag(threads *int) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
@@ -182,14 +182,14 @@ func AllNearbyDriversThreadsFlag(threads *int) AllNearbyDriversOption {
 		}
 		opts.has_threads = true
 		opts.threads = *threads
-	}, fmt.Sprintf("api.AllNearbyDriversThreads(int %+v)}", threads)}
+	}, fmt.Sprintf("api.AllNearbyDriversThreads(int %+v)", threads)}
 }
 
 func AllNearbyDriversToken(token string) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
 		opts.has_token = true
 		opts.token = token
-	}, fmt.Sprintf("api.AllNearbyDriversToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.AllNearbyDriversToken(string %+v)", token)}
 }
 func AllNearbyDriversTokenFlag(token *string) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
@@ -198,14 +198,14 @@ func AllNearbyDriversTokenFlag(token *string) AllNearbyDriversOption {
 		}
 		opts.has_token = true
 		opts.token = *token
-	}, fmt.Sprintf("api.AllNearbyDriversToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.AllNearbyDriversToken(string %+v)", token)}
 }
 
 func AllNearbyDriversUsingCommuterPayment(usingCommuterPayment bool) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
 		opts.has_usingCommuterPayment = true
 		opts.usingCommuterPayment = usingCommuterPayment
-	}, fmt.Sprintf("api.AllNearbyDriversUsingCommuterPayment(bool %+v)}", usingCommuterPayment)}
+	}, fmt.Sprintf("api.AllNearbyDriversUsingCommuterPayment(bool %+v)", usingCommuterPayment)}
 }
 func AllNearbyDriversUsingCommuterPaymentFlag(usingCommuterPayment *bool) AllNearbyDriversOption {
 	return AllNearbyDriversOption{func(opts *allNearbyDriversOptionImpl) {
@@ -214,7 +214,7 @@ func AllNearbyDriversUsingCommuterPaymentFlag(usingCommuterPayment *bool) AllNea
 		}
 		opts.has_usingCommuterPayment = true
 		opts.usingCommuterPayment = *usingCommuterPayment
-	}, fmt.Sprintf("api.AllNearbyDriversUsingCommuterPayment(bool %+v)}", usingCommuterPayment)}
+	}, fmt.Sprintf("api.AllNearbyDriversUsingCommuterPayment(bool %+v)", usingCommuterPayment)}
 }
 
 type allNearbyDriversOptionImpl struct {

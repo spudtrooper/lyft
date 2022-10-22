@@ -30,7 +30,7 @@ func PlaceRecommendationsAccuracy(accuracy int) PlaceRecommendationsOption {
 	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
 		opts.has_accuracy = true
 		opts.accuracy = accuracy
-	}, fmt.Sprintf("api.PlaceRecommendationsAccuracy(int %+v)}", accuracy)}
+	}, fmt.Sprintf("api.PlaceRecommendationsAccuracy(int %+v)", accuracy)}
 }
 func PlaceRecommendationsAccuracyFlag(accuracy *int) PlaceRecommendationsOption {
 	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
@@ -39,14 +39,14 @@ func PlaceRecommendationsAccuracyFlag(accuracy *int) PlaceRecommendationsOption 
 		}
 		opts.has_accuracy = true
 		opts.accuracy = *accuracy
-	}, fmt.Sprintf("api.PlaceRecommendationsAccuracy(int %+v)}", accuracy)}
+	}, fmt.Sprintf("api.PlaceRecommendationsAccuracy(int %+v)", accuracy)}
 }
 
 func PlaceRecommendationsLat(lat float64) PlaceRecommendationsOption {
 	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
 		opts.has_lat = true
 		opts.lat = lat
-	}, fmt.Sprintf("api.PlaceRecommendationsLat(float64 %+v)}", lat)}
+	}, fmt.Sprintf("api.PlaceRecommendationsLat(float64 %+v)", lat)}
 }
 func PlaceRecommendationsLatFlag(lat *float64) PlaceRecommendationsOption {
 	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
@@ -55,14 +55,14 @@ func PlaceRecommendationsLatFlag(lat *float64) PlaceRecommendationsOption {
 		}
 		opts.has_lat = true
 		opts.lat = *lat
-	}, fmt.Sprintf("api.PlaceRecommendationsLat(float64 %+v)}", lat)}
+	}, fmt.Sprintf("api.PlaceRecommendationsLat(float64 %+v)", lat)}
 }
 
 func PlaceRecommendationsLng(lng float64) PlaceRecommendationsOption {
 	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
 		opts.has_lng = true
 		opts.lng = lng
-	}, fmt.Sprintf("api.PlaceRecommendationsLng(float64 %+v)}", lng)}
+	}, fmt.Sprintf("api.PlaceRecommendationsLng(float64 %+v)", lng)}
 }
 func PlaceRecommendationsLngFlag(lng *float64) PlaceRecommendationsOption {
 	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
@@ -71,14 +71,14 @@ func PlaceRecommendationsLngFlag(lng *float64) PlaceRecommendationsOption {
 		}
 		opts.has_lng = true
 		opts.lng = *lng
-	}, fmt.Sprintf("api.PlaceRecommendationsLng(float64 %+v)}", lng)}
+	}, fmt.Sprintf("api.PlaceRecommendationsLng(float64 %+v)", lng)}
 }
 
 func PlaceRecommendationsToken(token string) PlaceRecommendationsOption {
 	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
 		opts.has_token = true
 		opts.token = token
-	}, fmt.Sprintf("api.PlaceRecommendationsToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.PlaceRecommendationsToken(string %+v)", token)}
 }
 func PlaceRecommendationsTokenFlag(token *string) PlaceRecommendationsOption {
 	return PlaceRecommendationsOption{func(opts *placeRecommendationsOptionImpl) {
@@ -87,7 +87,7 @@ func PlaceRecommendationsTokenFlag(token *string) PlaceRecommendationsOption {
 		}
 		opts.has_token = true
 		opts.token = *token
-	}, fmt.Sprintf("api.PlaceRecommendationsToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.PlaceRecommendationsToken(string %+v)", token)}
 }
 
 type placeRecommendationsOptionImpl struct {

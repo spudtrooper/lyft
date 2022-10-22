@@ -9,7 +9,7 @@ import (
 // TODO: Make this something.
 type OfferingsInfo interface{}
 
-//go:generate genopts --params --function Offerings --extends Base originLatitudeE6:int:40770010 originLongitudeE6:int:-73982839 destinationLatitudeE6:int:40756160 destinationLongitudeE6:int:-73971610 noSupportsSelectableOfferCell noSupportsAccordionOfferCell: noSupportsOfferSelector lastOffersID:string:9ceeb6ef-7023-44ea-9821-acb063780607 offerSelectorSessionID:string:45825ecc-6344-45fc-a433-3dafcbcb8665 requestSource:int:1
+//go:generate genopts --params --function Offerings --extends Base originLatitudeE6:int:40770010 originLongitudeE6:int:-73982839 destinationLatitudeE6:int:40756160 destinationLongitudeE6:int:-73971610 noSupportsSelectableOfferCell noSupportsAccordionOfferCell noSupportsOfferSelector lastOffersID:string:9ceeb6ef-7023-44ea-9821-acb063780607 offerSelectorSessionID:string:45825ecc-6344-45fc-a433-3dafcbcb8665 requestSource:int:1
 func (c *Client) Offerings(optss ...OfferingsOption) (OfferingsInfo, error) {
 	opts := MakeOfferingsOptions(optss...)
 

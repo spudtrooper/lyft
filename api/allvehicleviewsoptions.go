@@ -46,7 +46,7 @@ func AllVehicleViewsDebug(debug bool) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
 		opts.has_debug = true
 		opts.debug = debug
-	}, fmt.Sprintf("api.AllVehicleViewsDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllVehicleViewsDebug(bool %+v)", debug)}
 }
 func AllVehicleViewsDebugFlag(debug *bool) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
@@ -55,14 +55,14 @@ func AllVehicleViewsDebugFlag(debug *bool) AllVehicleViewsOption {
 		}
 		opts.has_debug = true
 		opts.debug = *debug
-	}, fmt.Sprintf("api.AllVehicleViewsDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllVehicleViewsDebug(bool %+v)", debug)}
 }
 
 func AllVehicleViewsDeltaE6(deltaE6 int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
 		opts.has_deltaE6 = true
 		opts.deltaE6 = deltaE6
-	}, fmt.Sprintf("api.AllVehicleViewsDeltaE6(int %+v)}", deltaE6)}
+	}, fmt.Sprintf("api.AllVehicleViewsDeltaE6(int %+v)", deltaE6)}
 }
 func AllVehicleViewsDeltaE6Flag(deltaE6 *int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
@@ -71,14 +71,14 @@ func AllVehicleViewsDeltaE6Flag(deltaE6 *int) AllVehicleViewsOption {
 		}
 		opts.has_deltaE6 = true
 		opts.deltaE6 = *deltaE6
-	}, fmt.Sprintf("api.AllVehicleViewsDeltaE6(int %+v)}", deltaE6)}
+	}, fmt.Sprintf("api.AllVehicleViewsDeltaE6(int %+v)", deltaE6)}
 }
 
 func AllVehicleViewsDestinationLatitudeE6(destinationLatitudeE6 int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
 		opts.has_destinationLatitudeE6 = true
 		opts.destinationLatitudeE6 = destinationLatitudeE6
-	}, fmt.Sprintf("api.AllVehicleViewsDestinationLatitudeE6(int %+v)}", destinationLatitudeE6)}
+	}, fmt.Sprintf("api.AllVehicleViewsDestinationLatitudeE6(int %+v)", destinationLatitudeE6)}
 }
 func AllVehicleViewsDestinationLatitudeE6Flag(destinationLatitudeE6 *int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
@@ -87,14 +87,14 @@ func AllVehicleViewsDestinationLatitudeE6Flag(destinationLatitudeE6 *int) AllVeh
 		}
 		opts.has_destinationLatitudeE6 = true
 		opts.destinationLatitudeE6 = *destinationLatitudeE6
-	}, fmt.Sprintf("api.AllVehicleViewsDestinationLatitudeE6(int %+v)}", destinationLatitudeE6)}
+	}, fmt.Sprintf("api.AllVehicleViewsDestinationLatitudeE6(int %+v)", destinationLatitudeE6)}
 }
 
 func AllVehicleViewsDestinationLongitudeE6(destinationLongitudeE6 int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
 		opts.has_destinationLongitudeE6 = true
 		opts.destinationLongitudeE6 = destinationLongitudeE6
-	}, fmt.Sprintf("api.AllVehicleViewsDestinationLongitudeE6(int %+v)}", destinationLongitudeE6)}
+	}, fmt.Sprintf("api.AllVehicleViewsDestinationLongitudeE6(int %+v)", destinationLongitudeE6)}
 }
 func AllVehicleViewsDestinationLongitudeE6Flag(destinationLongitudeE6 *int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
@@ -103,14 +103,14 @@ func AllVehicleViewsDestinationLongitudeE6Flag(destinationLongitudeE6 *int) AllV
 		}
 		opts.has_destinationLongitudeE6 = true
 		opts.destinationLongitudeE6 = *destinationLongitudeE6
-	}, fmt.Sprintf("api.AllVehicleViewsDestinationLongitudeE6(int %+v)}", destinationLongitudeE6)}
+	}, fmt.Sprintf("api.AllVehicleViewsDestinationLongitudeE6(int %+v)", destinationLongitudeE6)}
 }
 
 func AllVehicleViewsMultiples(multiples int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
 		opts.has_multiples = true
 		opts.multiples = multiples
-	}, fmt.Sprintf("api.AllVehicleViewsMultiples(int %+v)}", multiples)}
+	}, fmt.Sprintf("api.AllVehicleViewsMultiples(int %+v)", multiples)}
 }
 func AllVehicleViewsMultiplesFlag(multiples *int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
@@ -119,14 +119,14 @@ func AllVehicleViewsMultiplesFlag(multiples *int) AllVehicleViewsOption {
 		}
 		opts.has_multiples = true
 		opts.multiples = *multiples
-	}, fmt.Sprintf("api.AllVehicleViewsMultiples(int %+v)}", multiples)}
+	}, fmt.Sprintf("api.AllVehicleViewsMultiples(int %+v)", multiples)}
 }
 
 func AllVehicleViewsOrginPlaceID(orginPlaceID string) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
 		opts.has_orginPlaceID = true
 		opts.orginPlaceID = orginPlaceID
-	}, fmt.Sprintf("api.AllVehicleViewsOrginPlaceID(string %+v)}", orginPlaceID)}
+	}, fmt.Sprintf("api.AllVehicleViewsOrginPlaceID(string %+v)", orginPlaceID)}
 }
 func AllVehicleViewsOrginPlaceIDFlag(orginPlaceID *string) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
@@ -135,14 +135,14 @@ func AllVehicleViewsOrginPlaceIDFlag(orginPlaceID *string) AllVehicleViewsOption
 		}
 		opts.has_orginPlaceID = true
 		opts.orginPlaceID = *orginPlaceID
-	}, fmt.Sprintf("api.AllVehicleViewsOrginPlaceID(string %+v)}", orginPlaceID)}
+	}, fmt.Sprintf("api.AllVehicleViewsOrginPlaceID(string %+v)", orginPlaceID)}
 }
 
 func AllVehicleViewsOriginLatitudeE6(originLatitudeE6 int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
 		opts.has_originLatitudeE6 = true
 		opts.originLatitudeE6 = originLatitudeE6
-	}, fmt.Sprintf("api.AllVehicleViewsOriginLatitudeE6(int %+v)}", originLatitudeE6)}
+	}, fmt.Sprintf("api.AllVehicleViewsOriginLatitudeE6(int %+v)", originLatitudeE6)}
 }
 func AllVehicleViewsOriginLatitudeE6Flag(originLatitudeE6 *int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
@@ -151,14 +151,14 @@ func AllVehicleViewsOriginLatitudeE6Flag(originLatitudeE6 *int) AllVehicleViewsO
 		}
 		opts.has_originLatitudeE6 = true
 		opts.originLatitudeE6 = *originLatitudeE6
-	}, fmt.Sprintf("api.AllVehicleViewsOriginLatitudeE6(int %+v)}", originLatitudeE6)}
+	}, fmt.Sprintf("api.AllVehicleViewsOriginLatitudeE6(int %+v)", originLatitudeE6)}
 }
 
 func AllVehicleViewsOriginLongitudeE6(originLongitudeE6 int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
 		opts.has_originLongitudeE6 = true
 		opts.originLongitudeE6 = originLongitudeE6
-	}, fmt.Sprintf("api.AllVehicleViewsOriginLongitudeE6(int %+v)}", originLongitudeE6)}
+	}, fmt.Sprintf("api.AllVehicleViewsOriginLongitudeE6(int %+v)", originLongitudeE6)}
 }
 func AllVehicleViewsOriginLongitudeE6Flag(originLongitudeE6 *int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
@@ -167,14 +167,14 @@ func AllVehicleViewsOriginLongitudeE6Flag(originLongitudeE6 *int) AllVehicleView
 		}
 		opts.has_originLongitudeE6 = true
 		opts.originLongitudeE6 = *originLongitudeE6
-	}, fmt.Sprintf("api.AllVehicleViewsOriginLongitudeE6(int %+v)}", originLongitudeE6)}
+	}, fmt.Sprintf("api.AllVehicleViewsOriginLongitudeE6(int %+v)", originLongitudeE6)}
 }
 
 func AllVehicleViewsThreads(threads int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
 		opts.has_threads = true
 		opts.threads = threads
-	}, fmt.Sprintf("api.AllVehicleViewsThreads(int %+v)}", threads)}
+	}, fmt.Sprintf("api.AllVehicleViewsThreads(int %+v)", threads)}
 }
 func AllVehicleViewsThreadsFlag(threads *int) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
@@ -183,14 +183,14 @@ func AllVehicleViewsThreadsFlag(threads *int) AllVehicleViewsOption {
 		}
 		opts.has_threads = true
 		opts.threads = *threads
-	}, fmt.Sprintf("api.AllVehicleViewsThreads(int %+v)}", threads)}
+	}, fmt.Sprintf("api.AllVehicleViewsThreads(int %+v)", threads)}
 }
 
 func AllVehicleViewsToken(token string) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
 		opts.has_token = true
 		opts.token = token
-	}, fmt.Sprintf("api.AllVehicleViewsToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.AllVehicleViewsToken(string %+v)", token)}
 }
 func AllVehicleViewsTokenFlag(token *string) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
@@ -199,14 +199,14 @@ func AllVehicleViewsTokenFlag(token *string) AllVehicleViewsOption {
 		}
 		opts.has_token = true
 		opts.token = *token
-	}, fmt.Sprintf("api.AllVehicleViewsToken(string %+v)}", token)}
+	}, fmt.Sprintf("api.AllVehicleViewsToken(string %+v)", token)}
 }
 
 func AllVehicleViewsUsingCommuterPayment(usingCommuterPayment bool) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
 		opts.has_usingCommuterPayment = true
 		opts.usingCommuterPayment = usingCommuterPayment
-	}, fmt.Sprintf("api.AllVehicleViewsUsingCommuterPayment(bool %+v)}", usingCommuterPayment)}
+	}, fmt.Sprintf("api.AllVehicleViewsUsingCommuterPayment(bool %+v)", usingCommuterPayment)}
 }
 func AllVehicleViewsUsingCommuterPaymentFlag(usingCommuterPayment *bool) AllVehicleViewsOption {
 	return AllVehicleViewsOption{func(opts *allVehicleViewsOptionImpl) {
@@ -215,7 +215,7 @@ func AllVehicleViewsUsingCommuterPaymentFlag(usingCommuterPayment *bool) AllVehi
 		}
 		opts.has_usingCommuterPayment = true
 		opts.usingCommuterPayment = *usingCommuterPayment
-	}, fmt.Sprintf("api.AllVehicleViewsUsingCommuterPayment(bool %+v)}", usingCommuterPayment)}
+	}, fmt.Sprintf("api.AllVehicleViewsUsingCommuterPayment(bool %+v)", usingCommuterPayment)}
 }
 
 type allVehicleViewsOptionImpl struct {
